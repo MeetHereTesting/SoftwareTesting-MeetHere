@@ -20,4 +20,9 @@ public class IndexController {
     public String login(Model model){
         return "login";
     }
+
+    @RequestMapping("/notify")
+    public String notify(Model model){
+        return "notify";
+    }
 }
