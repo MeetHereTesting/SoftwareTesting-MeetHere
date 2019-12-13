@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <style type="text/css">
+        body{
+            background-color: #f5f5f5;
+        }
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" th:href="@{index}" style="font-weight: bold">Meet Here</a>
+    </div>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navbar" class="collapse navbar-collapse">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{index}">首页</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown">预约管理</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">发起预约</a>
+                    <a class="dropdown-item" href="#">查看预约</a>
+                    <a class="dropdown-item" href="#">修改预约</a>
+                </div>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{notify}"><span class="glyphicon glyphicon-bell"></span> 通知</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" th:href="@{login}"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{signup}"><span class="glyphicon glyphicon-user"></span> 注册</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container col-4" style="padding-top: 10%">
+    <form role="form" class="form-login" action="/login" method="post">
+        <div class="text-center mb-5">
+            <h1>用户登录</h1>
+        </div>
+        <div class="form-group mb-4">
+            <label for="id" class="sr-only">User Name</label>
+            <input type="text" name="id" class="form-control form-control-lg" id="id" placeholder="用户名" required autofocus>
+        </div>
+
+        <div class="form-group mb-4">
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="密码" required>
+        </div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> 记住密码
+            </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+    </form>
+
+</div>
+<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019</footer>
+
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
