@@ -12,42 +12,9 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" th:href="@{index}" style="font-weight: bold">Meet Here</a>
-    </div>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="navbar" class="collapse navbar-collapse">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{index}">首页</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown">预约管理</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">发起预约</a>
-                    <a class="dropdown-item" href="#">查看预约</a>
-                    <a class="dropdown-item" href="#">修改预约</a>
-                </div>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{notify}"><span class="glyphicon glyphicon-bell"></span> 通知</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{login}"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{signup}"><span class="glyphicon glyphicon-user"></span> 注册</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div th:include="header :: Header"></div>
 
-<div class="container col-4" style="padding-top: 8%">
+<main class="container col-4" style="padding-top: 8%">
     <form role="form" class="form-login" action="/signup" method="post">
         <div class="text-center mb-5">
             <h1>注 册</h1>
@@ -108,9 +75,9 @@
         </div>
         <button class="btn btn-lg btn-danger btn-block col-4 m-auto" type="submit">注 册</button>
     </form>
-</div>
+</main>
 
-<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019</footer>
+<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019 MeetHere</footer>
 
 <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
 <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

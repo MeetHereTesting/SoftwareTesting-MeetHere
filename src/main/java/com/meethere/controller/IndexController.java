@@ -21,8 +21,13 @@ public class IndexController {
         return "login";
     }
 
-    @RequestMapping("/notify")
-    public String notify(Model model){
-        return "notify";
+    @RequestMapping("/news")
+    public String news(Model model){
+        return "news";
+    }
+
+    @RequestMapping("/news_list")
+    public String news_list(Model model){
+        return "news_list";
     }
 }
