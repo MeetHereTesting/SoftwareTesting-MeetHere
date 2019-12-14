@@ -30,4 +30,19 @@ public class IndexController {
     public String news_list(Model model){
         return "news_list";
     }
+
+    @RequestMapping("/venue")
+    public String venue(Model model){
+        return "venue";
+    }
+
+    @RequestMapping("/venue_list")
+    public String venue_list(Model model){
+        return "venue_list";
+    }
+
+    @RequestMapping("/message_list")
+    public String message_list(Model model){
+        return "message_list";
+    }
 }

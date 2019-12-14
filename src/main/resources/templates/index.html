@@ -2,13 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>MeetHere</title>
+    <title>MeetHere-首页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <style type="text/css">
         body{
             background-color: #f5f5f5;
-            padding-top: 100px;
+            padding-top: 80px;
         }
     </style>
 </head>
@@ -27,74 +27,71 @@
                 </div>
                 <ul class="list-group pt-2">
                     <li class="list-group-item px-3 pt-3 border-0">
-                        <div class="media border-bottom border-gray">
+                        <div class="media border-bottom border-gray pb-3">
                             <div class="media-left mr-3">
                                 <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading font-weight-bold"><a href="#">场馆A</a></h5>
-                                <p>
-                                    场馆A是位于上海的一家场馆,设有十一个专馆，三个展览厅，陈列面积2,800平方米。馆藏文物近百万件，
-                                    其中精品文物12万件，其中尤其是以青铜器、陶瓷器、书法、绘画为特色。收藏了来自宝鸡及河南、湖南等地的青铜器，
-                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。
-                                </p>
-                                <p>
+                                <h5 class="media-heading font-weight-bold pb-3"><a th:href="@{venue}">场馆A</a></h5>
+                                <h6 class="">
                                     <strong>场馆位置：</strong>
                                     上海市中心人民广场的南侧黄浦区人民大道201号
-                                </p>
-                                <p>
+                                </h6>
+                                <h6>
                                     <strong>开放时间：</strong>
                                     09:00 a.m. ~ 17:00 p.m.
-                                </p>
+                                </h6>
+                                <h6>
+                                    <strong>租金：</strong>
+                                    ￥300/h
+                                </h6>
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item px-3 pt-3 border-0">
-                        <div class="media border-bottom border-gray">
+                        <div class="media border-bottom border-gray pb-3">
                             <div class="media-left mr-3">
                                 <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading font-weight-bold"><a href="#">场馆B</a></h5>
-                                <p>
-                                    场馆B是位于上海的一家场馆,设有十一个专馆，三个展览厅，陈列面积2,800平方米。馆藏文物近百万件，
-                                    其中精品文物12万件，其中尤其是以青铜器、陶瓷器、书法、绘画为特色。收藏了来自宝鸡及河南、湖南等地的青铜器，
-                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。
-                                </p>
-                                <p>
+                                <h5 class="media-heading font-weight-bold pb-3"><a th:href="@{venue}">场馆B</a></h5>
+                                <h6 class="">
                                     <strong>场馆位置：</strong>
                                     上海市中心人民广场的南侧黄浦区人民大道201号
-                                </p>
-                                <p>
+                                </h6>
+                                <h6>
                                     <strong>开放时间：</strong>
                                     09:00 a.m. ~ 17:00 p.m.
-                                </p>
+                                </h6>
+                                <h6>
+                                    <strong>租金：</strong>
+                                    ￥300/h
+                                </h6>
                             </div>
                         </div>
                     </li>
                     <li class="list-group-item px-3 pt-3 border-0">
-                        <div class="media border-bottom border-gray">
+                        <div class="media border-bottom border-gray pb-3">
                             <div class="media-left mr-3">
                                 <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading font-weight-bold"><a href="#">场馆C</a></h5>
-                                <p>
-                                    场馆C是位于上海的一家场馆,设有十一个专馆，三个展览厅，陈列面积2,800平方米。馆藏文物近百万件，
-                                    其中精品文物12万件，其中尤其是以青铜器、陶瓷器、书法、绘画为特色。收藏了来自宝鸡及河南、湖南等地的青铜器，
-                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。
-                                </p>
-                                <p>
+                                <h5 class="media-heading font-weight-bold pb-3"><a th:href="@{venue}">场馆C</a></h5>
+                                <h6 class="">
                                     <strong>场馆位置：</strong>
                                     上海市中心人民广场的南侧黄浦区人民大道201号
-                                </p>
-                                <p>
+                                </h6>
+                                <h6>
                                     <strong>开放时间：</strong>
                                     09:00 a.m. ~ 17:00 p.m.
-                                </p>
+                                </h6>
+                                <h6>
+                                    <strong>租金：</strong>
+                                    ￥300/h
+                                </h6>
                             </div>
                         </div>
                     </li>
@@ -151,10 +148,13 @@
                 <ul class="list-group pt-2">
                     <li class="list-group-item px-3 border-0">
                         <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                <rect width="100%" height="100%" fill="#007bff"/>
+                            </svg>
                             <p class="media-body pb-3 mb-0 small">
                                 <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                                 <br>
                                 <small class="float-right">2019-12-10</small>
                             </p>
@@ -162,10 +162,27 @@
                     </li>
                     <li class="list-group-item px-3 border-0">
                         <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                <rect width="100%" height="100%" fill="#e83e8c"/>
+                            </svg>
                             <p class="media-body pb-3 mb-0 small">
                                 <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                <br>
+                                <small class="float-right">2019-12-10</small>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-3 border-0">
+                        <div class="media border-bottom border-gray">
+                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                <rect width="100%" height="100%" fill="#6f42c1"/>
+                            </svg>
+                            <p class="media-body pb-3 mb-0 small">
+                                <strong class="d-block">@username</strong>
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                                 <br>
                                 <small class="float-right">2019-12-10</small>
                             </p>
