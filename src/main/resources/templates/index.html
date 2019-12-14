@@ -14,152 +14,175 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark" role="navigation">
-    <div class="navbar-header">
-        <a class="navbar-brand" th:href="@{index}" style="font-weight: bold">Meet Here</a>
-    </div>
-    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{index}">首页</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown">预约管理</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">发起预约</a>
-                    <a class="dropdown-item" href="#">查看预约</a>
-                    <a class="dropdown-item" href="#">修改预约</a>
-                </div>
-            </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{notify}"><span class="glyphicon glyphicon-bell"></span> 通知</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{login}"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{signup}"><span class="glyphicon glyphicon-user"></span> 注册</a>
-            </li>
-        </ul>
-    </div>
-</nav>
+<div th:include="header :: Header"></div>
 
-<div class="container-fluid">
+
+<main class="container-fluid">
     <div class="row">
         <div class="col-8">
             <!--场馆信息-->
             <div class="card shadow">
-                <div class="card-header bg-info text-white">
-                    <h5 class="card-title mb-0">场馆信息</h5>
+                <div class="card-header py-2 bg-info text-white">
+                    <h6 class="card-title mb-0">场馆信息</h6>
                 </div>
-
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item p-3">
-                        <div class="media">
+                <ul class="list-group pt-2">
+                    <li class="list-group-item px-3 pt-3 border-0">
+                        <div class="media border-bottom border-gray">
                             <div class="media-left mr-3">
                                 <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
                                      alt="" height="100px" width="100px">
                             </div>
-
                             <div class="media-body">
-                                <h4 class="media-heading" style="font-weight: bold"><a href="#">场馆A</a></h4>
-                                <p class="mb-0">
+                                <h5 class="media-heading font-weight-bold"><a href="#">场馆A</a></h5>
+                                <p>
                                     场馆A是位于上海的一家场馆,设有十一个专馆，三个展览厅，陈列面积2,800平方米。馆藏文物近百万件，
                                     其中精品文物12万件，其中尤其是以青铜器、陶瓷器、书法、绘画为特色。收藏了来自宝鸡及河南、湖南等地的青铜器，
-                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。<br><br>
-                                    场馆位置：上海市中心人民广场的南侧黄浦区人民大道201号<br>
-                                    开放时间：09:00 a.m. ~ 17:00 p.m.
+                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。
+                                </p>
+                                <p>
+                                    <strong>场馆位置：</strong>
+                                    上海市中心人民广场的南侧黄浦区人民大道201号
+                                </p>
+                                <p>
+                                    <strong>开放时间：</strong>
+                                    09:00 a.m. ~ 17:00 p.m.
                                 </p>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item p-3">
-                        <div class="media">
+                    <li class="list-group-item px-3 pt-3 border-0">
+                        <div class="media border-bottom border-gray">
                             <div class="media-left mr-3">
                                 <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
                                      alt="" height="100px" width="100px">
                             </div>
-
                             <div class="media-body">
-                                <h4 class="media-heading" style="font-weight: bold"><a href="#">场馆B</a></h4>
-                                <p class="mb-0">
+                                <h5 class="media-heading font-weight-bold"><a href="#">场馆B</a></h5>
+                                <p>
                                     场馆B是位于上海的一家场馆,设有十一个专馆，三个展览厅，陈列面积2,800平方米。馆藏文物近百万件，
                                     其中精品文物12万件，其中尤其是以青铜器、陶瓷器、书法、绘画为特色。收藏了来自宝鸡及河南、湖南等地的青铜器，
-                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。<br><br>
-                                    场馆位置：上海市中心人民广场的南侧黄浦区人民大道201号<br>
-                                    开放时间：09:00 a.m. ~ 17:00 p.m.
+                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。
+                                </p>
+                                <p>
+                                    <strong>场馆位置：</strong>
+                                    上海市中心人民广场的南侧黄浦区人民大道201号
+                                </p>
+                                <p>
+                                    <strong>开放时间：</strong>
+                                    09:00 a.m. ~ 17:00 p.m.
                                 </p>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item p-3">
-                        <div class="media">
+                    <li class="list-group-item px-3 pt-3 border-0">
+                        <div class="media border-bottom border-gray">
                             <div class="media-left mr-3">
                                 <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
                                      alt="" height="100px" width="100px">
                             </div>
-
                             <div class="media-body">
-                                <h4 class="media-heading" style="font-weight: bold"><a href="#">场馆C</a></h4>
-                                <p class="mb-0">
+                                <h5 class="media-heading font-weight-bold"><a href="#">场馆C</a></h5>
+                                <p>
                                     场馆C是位于上海的一家场馆,设有十一个专馆，三个展览厅，陈列面积2,800平方米。馆藏文物近百万件，
                                     其中精品文物12万件，其中尤其是以青铜器、陶瓷器、书法、绘画为特色。收藏了来自宝鸡及河南、湖南等地的青铜器，
-                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。<br><br>
-                                    场馆位置：上海市中心人民广场的南侧黄浦区人民大道201号<br>
-                                    开放时间：09:00 a.m. ~ 17:00 p.m.
+                                    有文物界“半壁江山”之誉，是一座大型的中国古代艺术博物馆。
+                                </p>
+                                <p>
+                                    <strong>场馆位置：</strong>
+                                    上海市中心人民广场的南侧黄浦区人民大道201号
+                                </p>
+                                <p>
+                                    <strong>开放时间：</strong>
+                                    09:00 a.m. ~ 17:00 p.m.
                                 </p>
                             </div>
                         </div>
                     </li>
                 </ul>
-                <div class="card-body text-right py-2">
-                   <h5 class="m-0"><a href="#"><span class="badge">MORE</span></a></h5>
+                <div class="card-body text-right pt-0 pb-2">
+                    <h6 class="m-0"><a th:href="@{venue_list}"><span class="badge">MORE</span></a></h6>
                 </div>
 
             </div>
         </div>
 
         <div class="col-4">
-            <!--场馆通知-->
-            <div class="card shadow">
-                <div class="card-header bg-danger text-white">
-                    <h5 class="card-title mb-0">场馆通知</h5>
+            <!--新闻-->
+            <div class="bg-white rounded shadow">
+                <div class="card-header py-2 bg-danger text-white">
+                    <h6 class="card-title mb-0">新闻</h6>
                 </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <div class="row mx-0">
-                            <b>[场馆A]</b>
-                            <a class="ml-1" href="#">2019年12月24日场馆暂时关闭通知</a>
+                <ul class="list-group pt-2">
+                    <li class="list-group-item border-0 px-3 py-2">
+                        <div class="row mx-0 pb-2 border-bottom border-gray">
+                            <a class="ml-1" th:href="@{news}">2019年12月24日场馆暂时关闭通知</a>
                             <div class="ml-auto">
                                 <span class="badge badge-secondary">2019-12-10</span>
                             </div>
                         </div>
                     </li>
-                    <li class="list-group-item">
-                        <div class="row mx-0">
-                            <b>[场馆B]</b>
-                            <a class="ml-1" href="#">2019年12月31日场馆装修通知</a>
+                    <li class="list-group-item border-0 px-3 py-2">
+                        <div class="row mx-0 pb-2 border-bottom border-gray">
+                            <a class="ml-1" th:href="@{news}">2019年12月31日场馆装修通知</a>
                             <div class="ml-auto">
                                 <span class="badge badge-secondary">2019-12-10</span>
                             </div>
                         </div>
                     </li>
-
+                    <li class="list-group-item border-0 px-3 py-2">
+                        <div class="row mx-0 pb-2 border-bottom border-gray">
+                            <a class="ml-1" th:href="@{news}">2019年12月31日场馆装修通知</a>
+                            <div class="ml-auto">
+                                <span class="badge badge-secondary">2019-12-10</span>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
-                <div class="card-body text-right py-2">
-                    <h5 class="m-0"><a href="#"><span class="badge">MORE</span></a></h5>
+                <div class="card-body text-right pt-0 pb-2">
+                    <h6 class="m-0"><a th:href="@{news_list}"><span class="badge">MORE</span></a></h6>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
 
-<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019</footer>
+            <!--留言板-->
+            <div class="mt-4 bg-white rounded shadow">
+                <div class="card-header py-2 bg-success text-white">
+                    <h6 class="card-title mb-0">留言板</h6>
+                </div>
+                <ul class="list-group pt-2">
+                    <li class="list-group-item px-3 border-0">
+                        <div class="media border-bottom border-gray">
+                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+                            <p class="media-body pb-3 mb-0 small">
+                                <strong class="d-block">@username</strong>
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                <br>
+                                <small class="float-right">2019-12-10</small>
+                            </p>
+                        </div>
+                    </li>
+                    <li class="list-group-item px-3 border-0">
+                        <div class="media border-bottom border-gray">
+                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32"><title>Placeholder</title><rect width="100%" height="100%" fill="#e83e8c"/><text x="50%" y="50%" fill="#e83e8c" dy=".3em">32x32</text></svg>
+                            <p class="media-body pb-3 mb-0 small">
+                                <strong class="d-block">@username</strong>
+                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                <br>
+                                <small class="float-right">2019-12-10</small>
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="card-body text-right pt-0 pb-2">
+                    <h6 class="m-0"><a th:href="@{message_list}"><span class="badge">MORE</span></a></h6>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019 MeetHere</footer>
 
 
 <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
