@@ -5,6 +5,8 @@
     <title>场馆信息</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <style type="text/css">
         body{
             background-color: #f5f5f5;
@@ -18,7 +20,7 @@
 
 <main role="main" class="container-fluid">
     <div class="row">
-        <div class="col-8 m-auto">
+        <div class="col-8 mx-auto">
             <div class="mb-3 p-4 bg-white rounded shadow-sm">
                 <div class="media border-bottom border-gray pb-3">
                     <div class="media-body">
@@ -61,7 +63,7 @@
                         四楼为中国古代玉器馆、中国历代钱币馆、中国明清家具馆、中国少数民族工艺馆和展览厅
                     </p>
                 </div>
-                <button class="btn btn-danger btn-block col-2 ml-auto" type="submit">预约</button>
+                <a class="btn btn-warning btn-block col-2 ml-auto" th:href="@{order_place}" type="submit">预约</a>
             </div>
         </div>
 
@@ -153,9 +155,8 @@
 
 </main>
 
-<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019 MeetHere</footer>
+<div th:include="footer :: Footer"></div>
 
-<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+
 </body>
 </html>

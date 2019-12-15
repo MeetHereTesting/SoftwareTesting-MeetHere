@@ -5,6 +5,8 @@
     <title>留言板</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <style type="text/css">
         body{
             background-color: #f5f5f5;
@@ -18,214 +20,234 @@
 
 <main role="main" class="container">
 
-    <h4 style="margin-top: -20px">
-        <a data-toggle="collapse" href="#postMessage">
-            <span class="badge badge-warning col-12"><span class="glyphicon glyphicon-edit"></span> 发布留言</span>
-        </a>
-    </h4>
-    <div class="collapse" id="postMessage">
-        <div class="bg-white rounded shadow p-3 mb-3">
-            <form role="form">
-                <div class="form-group">
-                    <label for="message" class="font-weight-bold sr-only">发布留言</label>
-                    <textarea class="form-control" id="message" rows="3"></textarea>
-                </div>
-            </form>
-            <button class="btn btn-danger btn-block col-2 ml-auto" type="submit">发布</button>
-        </div>
+    <div class="card bg-white rounded shadow p-3 mb-3">
+        <form role="form">
+            <div class="form-group">
+                <label for="message" class="font-weight-bold sr-only">发布留言</label>
+                <textarea class="form-control" id="message" rows="3" placeholder="有什么想和大家分享的？"></textarea>
+            </div>
+        </form>
+        <button class="btn btn-danger btn-block col-2 ml-auto" type="submit">发布</button>
     </div>
 
-    <h4>
-        <a data-toggle="collapse" href="#myMessage">
-            <span class="badge badge-info col-12"><span class="glyphicon glyphicon-bookmark"></span> 我的留言</span>
-        </a>
-    </h4>
-    <div class="collapse" id="myMessage">
-        <div class="bg-white rounded shadow p-3 mb-3">
-            <ul class="list-group">
-                <li class="list-group-item px-3 border-0">
-                    <div class="dropdown float-right">
-                        <a class="text-dark" href="#" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-menu-down"></span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">修改</a>
-                            <a class="dropdown-item" href="#">删除</a>
-                        </div>
-                    </div>
-                    <div class="media border-bottom border-gray">
-                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                            <rect width="100%" height="100%" fill="#007bff"/></svg>
-                        <p class="media-body pb-3 mb-0">
-                            <strong class="d-block">@username</strong>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs
-                            sfadf sfse sfs.
-                            <br>
-                            <small class="float-right">2019-12-10</small>
-                        </p>
-                    </div>
+
+    <div class="card bg-white rounded shadow">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#tab1" data-toggle="tab">全部留言</a>
                 </li>
-                <li class="list-group-item px-3 border-0">
-                    <div class="dropdown float-right">
-                        <a class="text-dark" href="#" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-menu-down"></span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">修改</a>
-                            <a class="dropdown-item" href="#">删除</a>
-                        </div>
-                    </div>
-                    <div class="media border-bottom border-gray">
-                        <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                            <rect width="100%" height="100%" fill="#007bff"/>
-                        </svg>
-                        <p class="media-body pb-3 mb-0">
-                            <strong class="d-block">@username</strong>
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                            tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus elit non mi porta gravida
-                            elit non mi porta gravida elit non mi porta gravida.
-                            <br>
-                            <small class="float-right">2019-12-10</small>
-                        </p>
-                    </div>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tab2" data-toggle="tab">我的留言</a>
                 </li>
             </ul>
-            <div class="p-2">
-                <nav class="">
-                    <ul class="pagination mb-0 justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
+        </div>
+        <div class="card-body">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab1">
+                    <ul class="list-group pt-2 px-3">
+                        <li class="list-group-item px-3 border-0">
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#007bff"/></svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs
+                                    sfadf sfse sfs.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
+                        <li class="list-group-item px-3 border-0">
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#e83e8c"/>
+                                </svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus elit non mi porta gravida
+                                    elit non mi porta gravida elit non mi porta gravida.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-3 border-0">
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#6f42c1"/>
+                                </svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-3 border-0">
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#20c997"/>
+                                </svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-3 border-0">
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#ed969e"/></svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
+                        </li>
+                        <li class="list-group-item px-3 border-0">
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#ffdf7e"/>
+                                </svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
                         </li>
                     </ul>
-                </nav>
+                    <div class="p-2 pb-3">
+                        <nav class="">
+                            <ul class="pagination mb-0 justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab2">
+                    <ul class="list-group">
+                        <li class="list-group-item px-3 border-0">
+                            <div class="dropdown float-right">
+                                <a class="text-dark" href="#" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-menu-down"></span>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage">修改</a>
+                                    <a class="dropdown-item" href="#">删除</a>
+                                </div>
+                            </div>
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#007bff"/></svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs
+                                    sfadf sfse sfs.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
+
+                            <div class="collapse" id="modifyMessage">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="myMessage" class="font-weight-bold sr-only">发布留言</label>
+                                        <textarea class="form-control" id="myMessage" rows="3"></textarea>
+                                    </div>
+                                </form>
+                                <a class="btn btn-danger btn-block col-2 ml-auto" data-toggle="collapse" href="#modifyMessage">完成</a>
+                            </div>
+
+                        </li>
+                        <li class="list-group-item px-3 border-0">
+                            <div class="dropdown float-right">
+                                <a class="text-dark" href="#" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-menu-down"></span>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage2">修改</a>
+                                    <a class="dropdown-item" href="#">删除</a>
+                                </div>
+                            </div>
+                            <div class="media border-bottom border-gray">
+                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
+                                    <rect width="100%" height="100%" fill="#007bff"/>
+                                </svg>
+                                <p class="media-body pb-3 mb-0">
+                                    <strong class="d-block">@username</strong>
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus elit non mi porta gravida
+                                    elit non mi porta gravida elit non mi porta gravida.
+                                    <br>
+                                    <small class="float-right">2019-12-10</small>
+                                </p>
+                            </div>
+                            <div class="collapse" id="modifyMessage2">
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="myMessage2" class="font-weight-bold sr-only">发布留言</label>
+                                        <textarea class="form-control" id="myMessage2" rows="3"></textarea>
+                                    </div>
+                                </form>
+                                <a class="btn btn-danger btn-block col-2 ml-auto" data-toggle="collapse" href="#modifyMessage2">完成</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="p-2">
+                        <nav class="">
+                            <ul class="pagination mb-0 justify-content-center">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="bg-white rounded shadow">
-        <div class="card-header py-3 text-center bg-success text-light">
-            <h5 class="card-title mb-0">留言板</h5>
-        </div>
-        <ul class="list-group pt-2 px-3">
-            <li class="list-group-item px-3 border-0">
-                <div class="media border-bottom border-gray">
-                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                        <rect width="100%" height="100%" fill="#007bff"/></svg>
-                    <p class="media-body pb-3 mb-0">
-                        <strong class="d-block">@username</strong>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs
-                        sfadf sfse sfs.
-                        <br>
-                        <small class="float-right">2019-12-10</small>
-                    </p>
-                </div>
-            </li>
-            <li class="list-group-item px-3 border-0">
-                <div class="media border-bottom border-gray">
-                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                        <rect width="100%" height="100%" fill="#e83e8c"/>
-                    </svg>
-                    <p class="media-body pb-3 mb-0">
-                        <strong class="d-block">@username</strong>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus elit non mi porta gravida
-                        elit non mi porta gravida elit non mi porta gravida.
-                        <br>
-                        <small class="float-right">2019-12-10</small>
-                    </p>
-                </div>
-            </li>
-            <li class="list-group-item px-3 border-0">
-                <div class="media border-bottom border-gray">
-                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                        <rect width="100%" height="100%" fill="#6f42c1"/>
-                    </svg>
-                    <p class="media-body pb-3 mb-0">
-                        <strong class="d-block">@username</strong>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                        <br>
-                        <small class="float-right">2019-12-10</small>
-                    </p>
-                </div>
-            </li>
-            <li class="list-group-item px-3 border-0">
-                <div class="media border-bottom border-gray">
-                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                        <rect width="100%" height="100%" fill="#20c997"/>
-                    </svg>
-                    <p class="media-body pb-3 mb-0">
-                        <strong class="d-block">@username</strong>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                        <br>
-                        <small class="float-right">2019-12-10</small>
-                    </p>
-                </div>
-            </li>
-            <li class="list-group-item px-3 border-0">
-                <div class="media border-bottom border-gray">
-                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                        <rect width="100%" height="100%" fill="#ed969e"/></svg>
-                    <p class="media-body pb-3 mb-0">
-                        <strong class="d-block">@username</strong>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                        <br>
-                        <small class="float-right">2019-12-10</small>
-                    </p>
-                </div>
-            </li>
-            <li class="list-group-item px-3 border-0">
-                <div class="media border-bottom border-gray">
-                    <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                        <rect width="100%" height="100%" fill="#ffdf7e"/>
-                    </svg>
-                    <p class="media-body pb-3 mb-0">
-                        <strong class="d-block">@username</strong>
-                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                        <br>
-                        <small class="float-right">2019-12-10</small>
-                    </p>
-                </div>
-            </li>
-        </ul>
-        <div class="p-2 pb-3">
-            <nav class="">
-                <ul class="pagination mb-0 justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
     </div>
 
 </main>
-<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019 MeetHere</footer>
-<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+<div th:include="footer :: Footer"></div>
+
 </body>
 </html>

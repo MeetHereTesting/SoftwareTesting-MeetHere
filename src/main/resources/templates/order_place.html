@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>场馆预约</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <style type="text/css">
+        body{
+            background-color: #f5f5f5;
+        }
+    </style>
+
+</head>
+<body>
+<div th:include="header :: Header"></div>
+
+<main class="container col-4" style="padding-top: 10%">
+    <form role="form">
+        <div class="text-center mb-5">
+            <h1>场 馆 预 约</h1>
+        </div>
+        <div class="form-group mb-4 row">
+            <div class="media col-3 pr-0">
+                <h5 class="align-self-center">场馆名称</h5>
+            </div>
+            <div class="col-9 pl-0">
+                <label for="venueName" class="sr-only">场馆名称</label>
+                <input type="text" name="venueName" class="form-control form-control-lg" id="venueName" value="场馆A" required>
+            </div>
+        </div>
+        <div class="form-group mb-4 row">
+            <div class="media col-3 pr-0">
+                <h5 class="align-self-center">预约日期</h5>
+            </div>
+            <div class="input-group date col-9 pl-0">
+                <div class="input-group-prepend">
+                    <div class="input-group-text"><span class="glyphicon glyphicon-calendar"></span></div>
+                </div>
+                <label for="date" class="sr-only">预约日期</label>
+                <input type="text" id="date" class="form-control form-control-lg" required/>
+            </div>
+        </div>
+        <div class="form-group mb-4 row">
+            <div class="media col-3 pr-0">
+                <h5 class="align-self-center">预约时间</h5>
+            </div>
+            <div class="date col-4 pl-0">
+                <label for="startTime" class="sr-only">开始时间</label>
+                <input type="text" id="startTime" class="form-control form-control-lg" required/>
+            </div>
+            <h1 class="align-self-center font-weight-light">~</h1>
+            <div class="date col-4 pl-0 ml-auto">
+                <label for="endTime" class="sr-only">结束时间</label>
+                <input type="text" id="endTime" class="form-control form-control-lg" required/>
+            </div>
+        </div>
+
+        <button class="btn btn-lg btn-danger btn-block col-4 mx-auto mt-5" type="submit">提交订单</button>
+    </form>
+
+</main>
+<div th:include="footer :: Footer"></div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#date').datetimepicker({
+            format: 'YYYY-MM-DD',
+            locale: moment.locale('zh-cn'),
+            minDate: new Date(),
+        });
+        const picker1 = $('#startTime').datetimepicker({
+            format: 'HH:mm ',
+            locale: moment.locale('zh-cn'),
+
+        });
+        const picker2 = $('#endTime').datetimepicker({
+            format: 'HH:mm',
+            locale: moment.locale('zh-cn'),
+            useCurrent: false
+        });
+        picker1.on('dp.change', function (e) {
+            picker2.data('DateTimePicker').minDate(e.date);
+        });
+        picker2.on('dp.change', function (e) {
+            picker1.data('DateTimePicker').maxDate(e.date);
+        });
+    });
+</script>
+
+</body>
+</html>
