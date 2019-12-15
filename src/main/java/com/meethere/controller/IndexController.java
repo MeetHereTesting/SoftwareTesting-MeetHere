@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @RequestMapping("/index")
     public String index(Model model){
+        model.addAttribute("ifLogin", true);
         return "index";
     }
 
@@ -54,5 +55,10 @@ public class IndexController {
     @RequestMapping("/order_manage")
     public String order_manage(Model model){
         return "order_manage";
+    }
+
+    @RequestMapping("/user_info")
+    public String user_info(Model model){
+        return "user_info";
     }
 }

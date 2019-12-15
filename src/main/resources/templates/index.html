@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div th:include="header :: Header"></div>
+<div th:include="layout/header :: header(flag=${ifLogin},page='index')"></div>
 
 
 <main class="container-fluid">
@@ -201,7 +201,7 @@
     </div>
 </main>
 
-<div th:include="footer :: Footer"></div>
+<div th:include="layout/footer :: Footer"></div>
 
 
 </body>

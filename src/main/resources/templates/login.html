@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<div th:include="header :: Header"></div>
+<div th:include="layout/header :: header(flag=false,page='login')"></div>
 
 <main class="container col-4" style="padding-top: 10%">
     <form role="form">
@@ -41,7 +41,7 @@
     </form>
 
 </main>
-<div th:include="footer :: Footer"></div>
+<div th:include="layout/footer :: Footer"></div>
 
 
 </body>

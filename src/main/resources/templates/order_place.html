@@ -20,8 +20,7 @@
 
 </head>
 <body>
-<div th:include="header :: Header"></div>
-
+<div th:include="layout/header :: header(flag=${ifLogin},page='order_place')"></div>
 <main class="container col-4" style="padding-top: 10%">
     <form role="form">
         <div class="text-center mb-5">
@@ -67,7 +66,7 @@
     </form>
 
 </main>
-<div th:include="footer :: Footer"></div>
+<div th:include="layout/footer :: Footer"></div>
 
 <script type="text/javascript">
     $(function () {

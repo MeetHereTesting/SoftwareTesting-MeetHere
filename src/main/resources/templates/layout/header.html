@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Header</title>
+</head>
+<body>
+<div th:fragment="header(flag,page)">
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{index}" style="font-weight: bold">Meet Here</a>
+        </div>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" th:classappend="${page}=='index'?'active':''">
+                    <a class="nav-link" th:href="@{index}">首页</a>
+                </li>
+                <li class="nav-item" th:classappend="${page}=='venue_list'?'active':''">
+                    <a class="nav-link" th:href="@{venue_list}">场馆信息</a>
+                </li>
+                <li class="nav-item dropdown" th:classappend="${page}=='order_place' or ${page}=='order_manage'?'active':''">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown">预约管理</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" th:href="@{order_place}">场馆预约</a>
+                        <a class="dropdown-item" th:href="@{order_manage}">订单管理</a>
+                    </div>
+                </li>
+                <li class="nav-item" th:classappend="${page}=='news_list'?'active':''">
+                    <a class="nav-link" th:href="@{news_list}">新闻</a>
+                </li>
+                <li class="nav-item" th:classappend="${page}=='message_list'?'active':''">
+                    <a class="nav-link" th:href="@{message_list}">留言板</a>
+                </li>
+            </ul>
+            <div th:if="${flag}">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" th:classappend="${page}=='user_info'?'active':''">
+                        <a class="nav-link pb-0" th:href="@{user_info}">
+                            <svg width="24px" height="24px">
+                                <circle cx=50% cy="50%" r="12px" fill="#007bff"></circle>
+                            </svg>
+                            Username
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{${page}}" ><span class="glyphicon glyphicon-log-out"></span> 注销</a>
+                    </li>
+                </ul>
+            </div>
+            <div th:unless="${flag}">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" th:classappend="${page}=='login'?'active':''">
+                        <a class="nav-link" th:href="@{login}"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
+                    </li>
+                    <li class="nav-item" th:classappend="${page}=='signup'?'active':''">
+                        <a class="nav-link" th:href="@{signup}"><span class="glyphicon glyphicon-user"></span> 注册</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+</div>
+</body>
+</html>

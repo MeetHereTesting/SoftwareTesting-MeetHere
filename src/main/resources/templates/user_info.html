@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>我的信息</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <style type="text/css">
+        body{
+            background-color: #f5f5f5;
+            padding-top: 80px;
+        }
+    </style>
+
+</head>
+<body>
+<div th:include="layout/header :: header(flag=true,page='user_info')"></div>
+
+<div th:include="layout/footer :: Footer"></div>
+</body>
+</html>

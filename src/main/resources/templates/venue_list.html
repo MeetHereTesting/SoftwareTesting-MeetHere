@@ -15,8 +15,17 @@
     </style>
 </head>
 <body>
+<script type="text/javascript">
 
-<div th:include="header :: Header"></div>
+    $(function (){
+        $.getUrlParam = function(ifLogin) {
+            var flag = ifLogin;
+            console.log(flag);
+            console.log('ok');
+        }
+    });
+</script>
+<div th:include="layout/header :: header(flag=${ifLogin},page='venue_list')"></div>
 
 <main role="main" class="container">
     <div class="card bg-white rounded shadow">
@@ -163,7 +172,7 @@
 
 </main>
 
-<div th:include="footer :: Footer"></div>
+<div th:include="layout/footer :: Footer"></div>
 
 </body>
 </html>
