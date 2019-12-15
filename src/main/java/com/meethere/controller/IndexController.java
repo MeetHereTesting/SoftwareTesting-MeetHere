@@ -45,4 +45,14 @@ public class IndexController {
     public String message_list(Model model){
         return "message_list";
     }
+
+    @RequestMapping("/order_place")
+    public String order_place(Model model){
+        return "order_place";
+    }
+
+    @RequestMapping("/order_manage")
+    public String order_manage(Model model){
+        return "order_manage";
+    }
 }

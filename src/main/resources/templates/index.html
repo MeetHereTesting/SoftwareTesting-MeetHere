@@ -11,6 +11,8 @@
             padding-top: 80px;
         }
     </style>
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </head>
 <body>
 
@@ -199,11 +201,8 @@
     </div>
 </main>
 
-<footer class="mt-5 mb-3 text-muted text-center">&copy; 2019 MeetHere</footer>
+<div th:include="footer :: Footer"></div>
 
-
-<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 </html>
