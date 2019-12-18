@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   thymeleaf:
     cache: false
@@ -10,3 +10,14 @@ spring:
     mode: HTML5
     prefix: classpath:/templates/
     suffix: .html
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/meethere_db?useSSL=false&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_To_NULL&serverTimezone=Asia/Shanghai
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+       ddl-auto: update
+    database: mysql
+    show-sql: true
