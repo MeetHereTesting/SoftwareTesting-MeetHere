@@ -80,7 +80,12 @@
 </main>
 
 <div th:include="layout/footer :: Footer"></div>
-
+<script type="text/javascript">
+    $("form").submit(function(){
+        window.history.back();
+        return false;
+    });
+</script>
 
 </body>
 </html>

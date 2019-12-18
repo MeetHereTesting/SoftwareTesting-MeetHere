@@ -18,6 +18,98 @@
 <body>
 <div th:include="layout/header :: header(flag=true,page='user_info')"></div>
 
+<main class="container">
+    <div class="card bg-white rounded col-8 mx-auto p-0">
+        <div class="card-header py-3 text-center bg-primary text-light">
+            <h5 class="card-title mb-0">我的信息</h5>
+        </div>
+        <form class="my-5 col-8 mx-auto" role="form">
+            <div class="form-group mb-4 row">
+                <div class="media col-3">
+                    <h6 class="align-self-center ml-auto">昵称：</h6>
+                </div>
+                <div class="col-8">
+                    <label for="nickname" class="sr-only">昵称</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" name="nickname" class="form-control" id="nickname" value="username">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-4 row">
+                <div class="media col-3">
+                    <h6 class="align-self-center ml-auto">用户名：</h6>
+                </div>
+                <div class="col-8">
+                    <h6 class="text-muted font-weight-normal" th:text="abddef"></h6>
+                </div>
+            </div>
+            <div class="form-group mb-4 row">
+                <div class="media col-3">
+                    <h6 class="align-self-center ml-auto">邮箱：</h6>
+                </div>
+                <div class="col-8">
+                    <label for="email" class="sr-only">邮箱</label>
+                    <input type="text" name="email" class="form-control" id="email" value="707864430@qq.com">
+                </div>
+            </div>
+            <div class="form-group mb-4 row">
+                <div class="media col-3">
+                    <h6 class="align-self-center ml-auto">手机号：</h6>
+                </div>
+                <div class="col-8">
+                    <label for="phone" class="sr-only">手机号</label>
+                    <input type="text" name="phone" class="form-control" id="phone" value="13918826786">
+                </div>
+            </div>
+            <div class="col-3 mx-auto mb-4">
+                <a class="badge" data-toggle="collapse" href="#collapseExample" id="pwdSwitch"><h6>修改密码</h6></a>
+            </div>
+            <div class="collapse" id="collapseExample">
+                <div class="form-group mb-4 row">
+                    <div class="media col-3">
+                        <h6 class="align-self-center ml-auto">原密码：</h6>
+                    </div>
+                    <div class="col-8">
+                        <label for="passwordOld" class="sr-only">原密码</label>
+                        <input type="password" name="password" class="form-control" id="passwordOld">
+                    </div>
+                </div>
+                <div class="form-group mb-4 row">
+                    <div class="media col-3">
+                        <h6 class="align-self-center ml-auto">新密码：</h6>
+                    </div>
+                    <div class="col-8">
+                        <label for="passwordNew" class="sr-only">新密码</label>
+                        <input type="password" name="password" class="form-control" id="passwordNew">
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-lg btn-primary btn-block col-4 m-auto" type="submit" id="save">保 存</button>
+            </div>
+
+        </form>
+    </div>
+
+</main>
+<script type="text/javascript">
+    let showPWD = false;
+    $("#pwdSwitch").click(function(){
+        $("#passwordOld").attr("required", "required");
+        $("#passwordNew").attr("required", "required");
+        showPWD = !showPWD;
+        if(!showPWD){
+            $("#passwordOld").attr("value", "").attr("form", "another");
+            $("#passwordNew").attr("value", "").attr("form", "another");
+        }
+    });
+    // $("form").submit(function(){
+    //     console.log("success");
+    // });
+</script>
 <div th:include="layout/footer :: Footer"></div>
 </body>
 </html>

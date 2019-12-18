@@ -15,16 +15,6 @@
     </style>
 </head>
 <body>
-<script type="text/javascript">
-
-    $(function (){
-        $.getUrlParam = function(ifLogin) {
-            var flag = ifLogin;
-            console.log(flag);
-            console.log('ok');
-        }
-    });
-</script>
 <div th:include="layout/header :: header(flag=${ifLogin},page='venue_list')"></div>
 
 <main role="main" class="container">
