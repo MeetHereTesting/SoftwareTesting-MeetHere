@@ -91,4 +91,19 @@ public class IndexController {
     public String message_manage(Model model){
         return "admin/message_manage";
     }
+
+    @RequestMapping("/news_edit")
+    public String news_edit(Model model){
+        return "admin/news_edit";
+    }
+
+    @RequestMapping("/venue_edit")
+    public String venue_edit(Model model){
+        return "admin/venue_edit";
+    }
+
+    @RequestMapping("/table")
+    public String table(Model model){
+        return "admin/table";
+    }
 }

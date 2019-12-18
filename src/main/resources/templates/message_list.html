@@ -24,10 +24,10 @@
         <form role="form">
             <div class="form-group">
                 <label for="message" class="font-weight-bold sr-only">发布留言</label>
-                <textarea class="form-control" id="message" rows="3" placeholder="有什么想和大家分享的？"></textarea>
+                <textarea class="form-control" id="message" rows="3" placeholder="有什么想和大家分享的？" required></textarea>
             </div>
+            <button class="btn btn-danger btn-block col-2 ml-auto" type="submit">发布</button>
         </form>
-        <button class="btn btn-danger btn-block col-2 ml-auto" type="submit">发布</button>
     </div>
 
 
@@ -181,10 +181,19 @@
                                 <form role="form">
                                     <div class="form-group">
                                         <label for="myMessage" class="font-weight-bold sr-only">发布留言</label>
-                                        <textarea class="form-control" id="myMessage" rows="3"></textarea>
+                                        <textarea class="form-control" id="myMessage" rows="3" required></textarea>
                                     </div>
+                                    <div class="col-3 ml-auto d-flex justify-content-end">
+                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage">
+                                            完成
+                                        </a>
+                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage">
+                                            取消
+                                        </a>
+                                    </div>
+
                                 </form>
-                                <a class="btn btn-danger btn-block col-2 ml-auto" data-toggle="collapse" href="#modifyMessage">完成</a>
+
                             </div>
 
                         </li>
@@ -215,10 +224,18 @@
                                 <form role="form">
                                     <div class="form-group">
                                         <label for="myMessage2" class="font-weight-bold sr-only">发布留言</label>
-                                        <textarea class="form-control" id="myMessage2" rows="3"></textarea>
+                                        <textarea class="form-control" id="myMessage2" rows="3" required></textarea>
+                                    </div>
+                                    <div class="col-3 ml-auto d-flex justify-content-end">
+                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage2">
+                                            完成
+                                        </a>
+                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage2">
+                                            取消
+                                        </a>
                                     </div>
                                 </form>
-                                <a class="btn btn-danger btn-block col-2 ml-auto" data-toggle="collapse" href="#modifyMessage2">完成</a>
+
                             </div>
                         </li>
                     </ul>

@@ -19,10 +19,12 @@
 <div class="container-fluid">
     <div class="row">
         <div th:include="layout/left :: left(page='admin_index')"></div>
-        <main class="col-10 ml-auto px-3 mt-4">
+        <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
                 <h2>Dashboard</h2>
             </div>
+
+            <div th:include="layout/footer :: Footer"></div>
         </main>
     </div>
 </div>
