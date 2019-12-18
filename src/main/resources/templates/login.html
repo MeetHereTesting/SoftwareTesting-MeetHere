@@ -15,7 +15,7 @@
 
 </head>
 <body>
-<div th:include="header :: Header"></div>
+<div th:include="layout/header :: header(flag=false,page='login')"></div>
 
 <main class="container col-4" style="padding-top: 10%">
     <form role="form">
@@ -34,15 +34,27 @@
 
         <div class="checkbox mb-3">
             <label>
-                <input type="checkbox" value="remember-me"> 记住密码
+                <input type="checkbox" value="remember-me" name="remember"> 记住密码
             </label>
         </div>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
     </form>
 
 </main>
-<div th:include="footer :: Footer"></div>
+<div th:include="layout/footer :: Footer"></div>
+<script type="text/javascript">
+    // $(document).ready(function(){
+    //     let url = document.referrer;
+    //     let lastPage = url.substring(url.lastIndexOf("\/") + 1,url.length);
+    //     console.log("@{"+lastPage+"}");
+    //     $("form").attr("th:action", "@{index}");
+    // });
+    $("form").submit(function(){
+        window.history.back();
+        return false;
+    });
 
+</script>
 
 </body>
 </html>

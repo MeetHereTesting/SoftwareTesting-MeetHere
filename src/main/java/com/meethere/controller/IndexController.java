@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class IndexController {
     @RequestMapping("/index")
     public String index(Model model){
+        model.addAttribute("ifLogin", true);
         return "index";
     }
 
@@ -54,5 +55,40 @@ public class IndexController {
     @RequestMapping("/order_manage")
     public String order_manage(Model model){
         return "order_manage";
+    }
+
+    @RequestMapping("/user_info")
+    public String user_info(Model model){
+        return "user_info";
+    }
+
+    @RequestMapping("/admin_index")
+    public String admin_index(Model model){
+        return "admin/admin_index";
+    }
+
+    @RequestMapping("/user_manage")
+    public String user_manage(Model model){
+        return "admin/user_manage";
+    }
+
+    @RequestMapping("/venue_manage")
+    public String venue_manage(Model model){
+        return "admin/venue_manage";
+    }
+
+    @RequestMapping("/reservation_manage")
+    public String reservation_manage(Model model){
+        return "admin/reservation_manage";
+    }
+
+    @RequestMapping("/news_manage")
+    public String news_manage(Model model){
+        return "admin/news_manage";
+    }
+
+    @RequestMapping("/message_manage")
+    public String message_manage(Model model){
+        return "admin/message_manage";
     }
 }

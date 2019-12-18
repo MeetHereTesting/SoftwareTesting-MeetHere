@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-<div th:include="header :: Header"></div>
+<div th:include="layout/header :: header(flag=${ifLogin},page='signup')"></div>
 
 <main class="container col-4" style="padding-top: 8%">
     <form role="form">
@@ -79,8 +79,13 @@
     </form>
 </main>
 
-<div th:include="footer :: Footer"></div>
-
+<div th:include="layout/footer :: Footer"></div>
+<script type="text/javascript">
+    $("form").submit(function(){
+        window.history.back();
+        return false;
+    });
+</script>
 
 </body>
 </html>

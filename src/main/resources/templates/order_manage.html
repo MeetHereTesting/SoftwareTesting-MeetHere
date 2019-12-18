@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<div th:include="header :: Header"></div>
+<div th:include="layout/header :: header(flag=${ifLogin},page='order_manage')"></div>
 
 <main class="container">
     <div class="card bg-white rounded shadow">
@@ -32,7 +32,7 @@
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" th:href="@{order_place}">修改</a>
-                            <a class="dropdown-item" href="#">删除</a>
+                            <a class="dropdown-item" href="#">取消</a>
                         </div>
                     </div>
                     <div class="media border-bottom border-gray pb-3">
@@ -128,7 +128,7 @@
     </div>
 
 </main>
-<div th:include="footer :: Footer"></div>
+<div th:include="layout/footer :: Footer"></div>
 
 
 </body>

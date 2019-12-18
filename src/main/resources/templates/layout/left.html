@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="left(page)">
+
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark shadow" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand" th:href="@{admin_index}" style="font-weight: bold">Meet Here 场馆预约管理系统</a>
+        </div>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" th:classappend="${page}=='user_info'?'active':''">
+                <a class="nav-link pb-0" th:href="@{user_info}">
+                    <svg width="24px" height="24px">
+                        <circle cx=50% cy="50%" r="12px" fill="#007bff"></circle>
+                    </svg>
+                    Username
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{index}" ><span class="glyphicon glyphicon-log-out"></span> 注销</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <nav class="col-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky mt-3 ml-3">
+            <ul class="nav flex-column">
+                <li class="nav-item" >
+                    <a class="nav-link side-link" th:href="@{admin_index}" th:classappend="${page}=='admin_index'?'active':''">
+                        <span class="glyphicon glyphicon-home"></span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link side-link" th:href="@{user_manage}" th:classappend="${page}=='user_manage'?'active':''">
+                        <span class="glyphicon glyphicon-user"></span>
+                        用户管理
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link side-link" th:href="@{venue_manage}" th:classappend="${page}=='venue_manage'?'active':''">
+                        <span class="glyphicon glyphicon-th-large"></span>
+                        场馆信息管理
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link side-link" th:href="@{reservation_manage}" th:classappend="${page}=='reservation_manage'?'active':''">
+                        <span class="glyphicon glyphicon-list-alt"></span>
+                        预约订单管理
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link side-link" th:href="@{news_manage}" th:classappend="${page}=='news_manage'?'active':''">
+                        <span class="glyphicon glyphicon-bullhorn"></span>
+                        新闻动态管理
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link side-link" th:href="@{message_manage}" th:classappend="${page}=='message_manage'?'active':''">
+                        <span class="glyphicon glyphicon-comment"></span>
+                        留言审核
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <script type="text/javascript">
+        $(".side-link").mouseover(function () {
+            $(this).addClass("text-primary");
+        }).mouseleave(function () {
+            $(this).removeClass("text-primary");
+        })
+    </script>
+</div>
+</body>
+</html>
