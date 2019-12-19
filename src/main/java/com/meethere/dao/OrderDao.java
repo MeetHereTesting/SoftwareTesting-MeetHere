@@ -11,6 +11,8 @@ import java.util.List;
 public interface OrderDao extends JpaRepository<Order,Integer> {
     List<Order> findByUserID(String userID);
 
+    Order findByOrderID(int orderID);
+
     @Transactional
     @Modifying
     @Query(value="update Order o set o.state=?1 where o.orderID=?2",nativeQuery =true)

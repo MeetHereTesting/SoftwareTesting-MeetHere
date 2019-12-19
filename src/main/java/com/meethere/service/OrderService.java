@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
@@ -13,7 +15,7 @@ public interface OrderService {
     int STATE_NO_AUDIT=1;
     int STATE_WAIT=2;
     int STATE_FINISH=3;
-    int STATE_FAIL=4;
+    int STATE_REJECT=4;
     /**
      * 根据orderID查看订单
      *
@@ -51,11 +53,29 @@ public interface OrderService {
      * @param startTime
      * @param hours
      */
-    void submit( int gymID,Date startTime,int hours,HttpServletRequest request);
+    void submit(int gymID, Date startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
     /**
      * 删除订单
      * @param orderID
      */
     void delOrder(int orderID);
+
+    /**
+     * 通过订单
+     * @param orderID
+     */
+    void confirmOrder(int orderID);
+
+    /**
+     * 完成订单
+     * @param orderID
+     */
+    void finishOrder(int orderID);
+
+    /**
+     *拒绝预定
+     * @param orderID
+     */
+    void rejectOrder(int orderID);
 }

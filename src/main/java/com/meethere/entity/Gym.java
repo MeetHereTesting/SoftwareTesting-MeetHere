@@ -18,6 +18,7 @@ public class Gym{
     @GeneratedValue
     private int gymID;
 
+    @Column(name="gym_name")
     private String gymName;
 
     private String description;

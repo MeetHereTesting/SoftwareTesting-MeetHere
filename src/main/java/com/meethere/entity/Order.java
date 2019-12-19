@@ -4,9 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -18,10 +20,8 @@ public class Order {
     @GeneratedValue
     private int orderID;
 
-    @Id
     private String userID;
 
-    @Id
     private int gymID;
 
     /**
@@ -29,10 +29,14 @@ public class Order {
      */
     private int state;
 
+    @Column(name="order_time")
     private Date orderTime;
 
+    @Column(name="start_time")
     private Date startTime;
 
     private int hours;
+
+    private int total;
 
 }

@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface MessageService {
 
+    int STATE_NO_AUDIT=1;
+    int STATE_PASS=2;
+    int STATE_REJECT=3;
+
     Message findById(int messageID);
 
     /**
@@ -41,4 +45,10 @@ public interface MessageService {
      * @param messageID
      */
     void delById(int messageID);
+
+    void update(Message message);
+
+    void confirmMessage(int messageID);
+
+    void rejectMessage(int messageID);
 }
