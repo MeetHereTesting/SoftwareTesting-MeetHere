@@ -1,16 +1,18 @@
 package com.meethere.service.impl;
 
+import com.meethere.dao.GymDao;
 import com.meethere.dao.OrderDao;
+import com.meethere.entity.Gym;
 import com.meethere.entity.Order;
 import com.meethere.entity.User;
 import com.meethere.service.OrderService;
 import com.meethere.service.exception.LoginException;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,9 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderDao orderDao;
+
+    @Autowired
+    private GymDao gymDao;
 
     @Override
     public Order findById(int OrderID) {
@@ -49,25 +54,52 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void submit(int gymID, Date startTime, int hours,HttpServletRequest request) {
+    public void submit(int gymID, Date startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Object user = request.getSession().getAttribute("user");
         if (user == null)
             throw new LoginException("请登录！");
+        Gym gym=gymDao.findByGymID(gymID);
+
         User loginUser = (User) user;
         Order order=new Order();
-        order.setState(1);
+        order.setState(STATE_NO_AUDIT);
         order.setHours(hours);
         order.setGymID(gymID);
         order.setOrderTime(new Date());
         order.setStartTime(startTime);
         order.setUserID(loginUser.getUserID());
+        order.setTotal(hours*gym.getPrice());
+
         orderDao.save(order);
+        response.sendRedirect("order.html");
     }
-
-
 
     @Override
     public void delOrder(int orderID) {
         orderDao.deleteById(orderID);
+    }
+
+    @Override
+    public void confirmOrder(int orderID) {
+        Order order=orderDao.findByOrderID(orderID);
+        if(order == null)
+            throw new RuntimeException("订单不存在");
+        orderDao.updateState(STATE_WAIT,order.getOrderID());
+    }
+
+    @Override
+    public void finishOrder(int orderID) {
+        Order order=orderDao.findByOrderID(orderID);
+        if(order == null)
+            throw new RuntimeException("订单不存在");
+        orderDao.updateState(STATE_FINISH,order.getOrderID());
+    }
+
+    @Override
+    public void rejectOrder(int orderID) {
+        Order order=orderDao.findByOrderID(orderID);
+        if(order == null)
+            throw new RuntimeException("订单不存在");
+        orderDao.updateState(STATE_REJECT,order.getOrderID());
     }
 }

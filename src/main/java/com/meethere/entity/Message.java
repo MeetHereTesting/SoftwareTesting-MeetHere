@@ -14,16 +14,21 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message {
-    @Id
-    private String userID;
 
     @Id
     @GeneratedValue
     private int messageID;
+
+    private String userID;
 
     private String userName;
 
     private String content;
 
     private Date time;
+
+    /**
+     * 1未审核 2审核通过 3拒绝留言发表
+     */
+    private int state;
 }
