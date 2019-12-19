@@ -19,11 +19,73 @@
 <div class="container-fluid">
     <div class="row">
         <div th:include="layout/left :: left(page='venue_manage')"></div>
-        <main class="col-10 ml-auto px-3 mt-4">
+        <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
                 <h2>场馆信息管理</h2>
             </div>
-
+            <div class="col-4 mb-4">
+                <a class="btn-sm btn-primary" th:href="@{venue_edit}">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    新增场馆
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>场馆名称</th>
+                        <th>地址</th>
+                        <th>租金（/h）</th>
+                        <th>开馆时间</th>
+                        <th>闭馆时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>101</td>
+                        <td>场馆A</td>
+                        <td>上海市中心人民广场的南侧黄浦区人民大道201号</td>
+                        <td>300</td>
+                        <td>09:00</td>
+                        <td>17:00</td>
+                        <td>
+                            <div>
+                                <a class="btn-sm btn-info mr-2" th:href="@{venue_edit}">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    修改
+                                </a>
+                                <a class="btn-sm btn-danger" th:href="@{venue_manage}">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    删除
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>场馆B</td>
+                        <td>上海市中心人民广场的南侧黄浦区人民大道205号</td>
+                        <td>280</td>
+                        <td>08:00</td>
+                        <td>17:00</td>
+                        <td>
+                            <div>
+                                <a class="btn-sm btn-info mr-2" th:href="@{venue_edit}">
+                                    <span class="glyphicon glyphicon-edit"></span>
+                                    修改
+                                </a>
+                                <a class="btn-sm btn-danger" th:href="@{venue_manage}">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    删除
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div th:include="layout/footer :: Footer"></div>
         </main>
     </div>
 </div>
