@@ -101,9 +101,4 @@ public class IndexController {
     public String venue_edit(Model model){
         return "admin/venue_edit";
     }
-
-    @RequestMapping("/table")
-    public String table(Model model){
-        return "admin/table";
-    }
 }

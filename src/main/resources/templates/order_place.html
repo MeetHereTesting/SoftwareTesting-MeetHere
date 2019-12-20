@@ -16,28 +16,58 @@
         body{
             background-color: #f5f5f5;
         }
+        .timebar{
+            width:750px;
+            height:auto;
+            margin:0;
+            padding:0;
+            font-size: 0;
+            /*需设置定位*/
+            position:relative;
+        }
+        .time-item{
+            width:50px;
+            height:50px;
+            margin:0;
+            padding:0;
+            display:inline-block;
+            vertical-align: top;
+            font-size: 13px;
+            border:1px solid #d9d9d9;
+            user-select: none;
+        }
+        #moveSelected{
+            position:absolute;
+            background-color: blue;
+            opacity:0.3;
+            top:0;
+            left:0;
+        }
+        .selected{
+            background-color: pink;
+        }
     </style>
 
 </head>
 <body>
 <div th:include="layout/header :: header(flag=${ifLogin},page='order_place')"></div>
-<main class="container col-4" style="padding-top: 10%">
+<main class="container-fluid" style="padding-top: 10%">
     <form role="form">
         <div class="text-center mb-5">
             <h1>场 馆 预 约</h1>
         </div>
-        <div class="form-group mb-4 row">
+        <div class="form-group mx-auto col-6 mb-4 row">
             <div class="media col-3 pr-0">
-                <h5 class="align-self-center">场馆名称</h5>
+                <h5 class="align-self-center">场馆名称：</h5>
             </div>
             <div class="col-9 pl-0">
                 <label for="venueName" class="sr-only">场馆名称</label>
                 <input type="text" name="venueName" class="form-control form-control-lg" id="venueName" value="场馆A" required>
             </div>
         </div>
-        <div class="form-group mb-4 row">
+        <div class="form-group mx-auto col-6 mb-4 row">
             <div class="media col-3 pr-0">
-                <h5 class="align-self-center">预约日期</h5>
+                <h5 class="align-self-center">预约日期：</h5>
             </div>
             <div class="input-group date col-9 pl-0">
                 <div class="input-group-prepend">
@@ -47,19 +77,25 @@
                 <input type="text" id="date" class="form-control form-control-lg" required/>
             </div>
         </div>
-        <div class="form-group mb-4 row">
-            <div class="media col-3 pr-0">
-                <h5 class="align-self-center">预约时间</h5>
-            </div>
-            <div class="date col-4 pl-0">
-                <label for="startTime" class="sr-only">开始时间</label>
-                <input type="text" id="startTime" class="form-control form-control-lg" required/>
-            </div>
-            <h1 class="align-self-center font-weight-light">~</h1>
-            <div class="date col-4 pl-0 ml-auto">
-                <label for="endTime" class="sr-only">结束时间</label>
-                <input type="text" id="endTime" class="form-control form-control-lg" required/>
-            </div>
+        <div class="form-group mx-auto mb-4 d-flex justify-content-center">
+            <ul class="timebar">
+                <li class="time-item">8:00</li>
+                <li class="time-item">9:00</li>
+                <li class="time-item">10:00</li>
+                <li class="time-item">11:00</li>
+                <li class="time-item">12:00</li>
+                <li class="time-item">13:00</li>
+                <li class="time-item">14:00</li>
+                <li class="time-item">15:00</li>
+                <li class="time-item">16:00</li>
+                <li class="time-item">17:00</li>
+                <li class="time-item">18:00</li>
+                <li class="time-item">19:00</li>
+                <li class="time-item">20:00</li>
+                <li class="time-item">21:00</li>
+                <li class="time-item">22:00</li>
+                <div id="moveSelected"></div>
+            </ul>
         </div>
 
         <button class="btn btn-lg btn-danger btn-block col-4 mx-auto mt-5" type="submit">提交订单</button>
@@ -92,6 +128,77 @@
             picker1.data('DateTimePicker').maxDate(e.date);
         });
     });
+
+    $(document).ready(function(){
+        let moveSelected=$('#moveSelected')[0];
+        let ifDrag=false;//是搜开启拖拽的标志
+        let oldLeft=0;//鼠标按下时的left,top
+        let oldTop=0;
+        let selectedList=[];//拖拽多选选中的块集合
+
+        function init(){
+
+        }
+
+        // 鼠标按下时开启拖拽多选，将遮罩定位并展现
+        $(".timebar").mousedown(function(event) {
+            if(selectedList.length>0) return;
+            ifDrag=true;
+            moveSelected.style.left=event.pageX-$(this).offset().left +'px';
+            moveSelected.style.height=50+'px';
+            oldLeft=event.pageX;
+            oldTop=event.pageY;
+            event.preventDefault();  // 阻止默认行为
+            event.stopPropagation(); // 阻止事件冒泡
+        });
+        // 鼠标移动时计算遮罩的位置，宽 高
+        $(".timebar").mousemove(function(event) {
+            if(!ifDrag) return;//只有开启了拖拽，才进行mouseover操作
+            if(event.pageX>oldLeft){//向右拖
+                moveSelected.style.width=(event.pageX-oldLeft)+'px';
+            }
+            event.preventDefault();  // 阻止默认行为
+            event.stopPropagation(); // 阻止事件冒泡
+        });
+        //鼠标抬起时计算遮罩的right 和 bottom，找出遮罩覆盖的块，关闭拖拽选中开关，清除遮罩数据
+        $(".timebar").mouseup(function(event) {
+            if(!ifDrag) return;
+            moveSelected.style.right=Number(moveSelected.style.left.split('px')[0])+Number(moveSelected.style.width.split('px')[0])+'px';
+            findSelected();
+            ifDrag=false;
+            clearDragData();
+            event.preventDefault();  // 阻止默认行为
+            event.stopPropagation(); // 阻止事件冒泡
+        });
+        function findSelected(){
+            let blockList=$('.timebar').find('.time-item');
+            for(let i=0;i<blockList.length;i++){
+                //计算每个块的定位信息
+                let left=$(blockList[i]).offset().left - $(".timebar").offset().left;
+                let right=$(blockList[i]).width()+left;
+                let top=$(blockList[i]).offset().top - $(".timebar").offset().top;
+                let bottom=$(blockList[i]).height()+top;
+                //判断每个块是否被遮罩盖住（即选中）
+
+                console.log(left);
+
+                if(moveSelected.style.left.split('px')[0]<=right && moveSelected.style.right.split('px')[0]>=left){
+                    selectedList.push(blockList[i]);
+                    $(blockList[i]).addClass('selected');
+                }
+            }
+            console.log(selectedList);
+        }
+        function clearDragData(){
+            moveSelected.style.width=0;
+            moveSelected.style.height=0;
+            moveSelected.style.top=0;
+            moveSelected.style.left=0;
+            moveSelected.style.bottom=0;
+            moveSelected.style.right=0;
+        }
+    });
+
 </script>
 
 </body>
