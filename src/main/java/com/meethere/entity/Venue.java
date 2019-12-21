@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import java.util.Date;
 
 @Data
 @Entity
@@ -26,4 +27,10 @@ public class Venue {
     private int price;
 
     private String picture;
+
+    private String address;
+
+    private String open_time;
+
+    private String close_time;
 }

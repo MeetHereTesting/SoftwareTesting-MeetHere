@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class VenueServiceImpl implements VenueService {
     @Autowired
@@ -21,6 +23,11 @@ public class VenueServiceImpl implements VenueService {
     @Override
     public Page<Venue> findAll(Pageable pageable) {
         return venueDao.findAll(pageable);
+    }
+
+    @Override
+    public List<Venue> findAll() {
+        return venueDao.findAll();
     }
 
     @Override

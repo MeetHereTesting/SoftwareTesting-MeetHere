@@ -23,7 +23,7 @@
         <div class="card-header py-3 text-center bg-primary text-light">
             <h5 class="card-title mb-0">我的信息</h5>
         </div>
-        <form class="my-5 col-8 mx-auto" role="form">
+        <form class="my-5 col-8 mx-auto" role="form" th:action="@{modifyUser}" method="post">
             <div class="form-group mb-4 row">
                 <div class="media col-3">
                     <h6 class="align-self-center ml-auto">昵称：</h6>
@@ -34,7 +34,7 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" name="nickname" class="form-control" id="nickname" value="username">
+                        <input type="text" name="nickname" class="form-control" id="nickname" th:value="${user.userName}">
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <h6 class="align-self-center ml-auto">用户名：</h6>
                 </div>
                 <div class="col-8">
-                    <h6 class="text-muted font-weight-normal" th:text="abddef"></h6>
+                    <h6 class="text-muted font-weight-normal" th:text="${user.userID}"></h6>
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-8">
                     <label for="email" class="sr-only">邮箱</label>
-                    <input type="text" name="email" class="form-control" id="email" value="707864430@qq.com">
+                    <input type="text" name="email" class="form-control" id="email" th:value="${user.email}">
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-8">
                     <label for="phone" class="sr-only">手机</label>
-                    <input type="text" name="phone" class="form-control" id="phone" value="13918826786">
+                    <input type="text" name="phone" class="form-control" id="phone" th:value="${user.phone}">
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -69,7 +69,7 @@
                     <h6 class="align-self-start ml-auto pt-1">头像：</h6>
                 </div>
                 <div class="col-8">
-                    <img src="image.JPG" alt="" style="height: 100px; width: 100px">
+                    <img th:src="${user.picture}" alt="" style="height: 100px; width: 100px">
                     <label for="formControlFile" class="sr-only">Example file input</label>
                     <input type="file" class="form-control-file mt-2" id="formControlFile">
                 </div>

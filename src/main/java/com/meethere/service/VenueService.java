@@ -4,6 +4,8 @@ import com.meethere.entity.Venue;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface VenueService {
     /**
      * 根据体育馆id查看
@@ -20,6 +22,7 @@ public interface VenueService {
      */
     Page<Venue> findAll(Pageable pageable);
 
+    List<Venue> findAll();
     /**
      * 创建新的场馆
      *
@@ -41,4 +44,5 @@ public interface VenueService {
      * @param id
      */
     void delById(int id);
+
 }

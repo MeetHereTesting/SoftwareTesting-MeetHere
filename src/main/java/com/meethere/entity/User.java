@@ -29,4 +29,6 @@ public class User {
     private String phone;
 
     private int isadmin;
+
+    private String picture;
 }

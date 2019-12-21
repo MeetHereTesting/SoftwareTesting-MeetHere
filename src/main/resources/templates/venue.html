@@ -24,43 +24,28 @@
             <div class="mb-3 p-4 bg-white rounded shadow-sm">
                 <div class="media border-bottom border-gray pb-3">
                     <div class="media-body">
-                        <h4 class="media-heading font-weight-bold pb-3">场馆A</h4>
-                        <h6>
-                            <strong>场馆位置：</strong>
-                            上海市中心人民广场的南侧黄浦区人民大道201号
+                        <h4 class="media-heading font-weight-bold pb-3"  th:text="${venue.venueName}">场馆A</h4>
+                        <h6 class="d-flex">
+                            <p class="font-weight-bold mb-0">场馆位置：</p>
+                            <p class="mb-0" th:text="${venue.address}">上海市中心人民广场的南侧黄浦区人民大道201号</p>
                         </h6>
-                        <h6>
-                            <strong>开放时间：</strong>
-                            09:00 a.m. ~ 17:00 p.m.
+                        <h6 class="d-flex">
+                            <p class="font-weight-bold mb-0">开放时间：</p>
+                            <p class="mb-0" th:text="${venue.openTime}+'~'+${venue.closeTime}">09:00 a.m. ~ 17:00 p.m.</p>
                         </h6>
-                        <h6>
-                            <strong>租金：</strong>
-                            ￥300/h
+                        <h6 class="d-flex">
+                            <p class="font-weight-bold mb-0">租金：</p>
+                            <p class="mb-0" th:text="${venue.price}">￥300/h</p>
                         </h6>
                     </div>
                     <div class="media-left mr-3">
-                        <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
-                             alt="" height="150px" width="150px">
+                        <img th:src="${venue.picture}"
+                             alt="" height="150" width="150">
                     </div>
                 </div>
                 <div class="my-3">
-                    <p style="text-indent: 2em">上海博物馆创建于1952年，原址在南京西路325号旧跑马总会，1959年10月迁入河南南路16号中汇大楼，
+                    <p style="text-indent: 2em" th:text="${venue.description}">上海博物馆创建于1952年，原址在南京西路325号旧跑马总会，1959年10月迁入河南南路16号中汇大楼，
                         现位于上海市中心人民广场的南侧黄浦区人民大道201号。
-                    </p>
-                    <p style="text-indent: 2em">
-                        1993年8月，上海博物馆新馆开工建设，1996年10月12日全面建成开放。上海博物馆建筑总面积39200平方米，
-                        占地面积1.1万平方米，地下二层，地上五层，高29.5米，总投资5.7亿元。新馆是方体基座与圆形出挑相结合的建筑造型，
-                        具有中国“天圆地方”的寓意。馆名“上海博物馆”系建国后上海第一任市长陈毅所书。 [2]
-                    </p>
-                    <p style="text-indent: 2em">
-                        上海博物馆设有十一个专馆，三个展览厅，陈列面积2,800平方米。馆藏文物近百万件，其中精品文物12万件，
-                        其中尤其是以青铜器、陶瓷器、书法、绘画为特色。收藏了来自宝鸡及河南、湖南等地的青铜器，有文物界“半壁江山”之誉，
-                        是一座大型的中国古代艺术博物馆。
-                    </p>
-                    <p style="text-indent: 2em">
-                        上海博物馆陈列面积共计12000平方米，一楼为中国古代青铜馆、中国古代雕塑馆和展览大厅；
-                        二楼为中国古代陶瓷馆、暂得楼陶瓷馆和展览厅；三楼为中国历代书法馆、中国历代绘画馆、中国历代查印馆；
-                        四楼为中国古代玉器馆、中国历代钱币馆、中国明清家具馆、中国少数民族工艺馆和展览厅
                     </p>
                 </div>
                 <a class="btn btn-warning btn-block col-2 ml-auto" th:href="@{order_place}" type="submit">预约</a>
@@ -103,19 +88,21 @@
                                      alt="" height="50px" width="50px">
                             </div>
                             <div class="media-body">
-                                <h6 class="media-heading font-weight-bold"><a th:href="@{venue}">场馆B</a></h6>
-                                <small class="">
-                                    <strong>场馆位置：</strong>
-                                    上海市中心人民广场的南侧黄浦区人民大道201号
-                                </small><br>
-                                <small>
-                                    <strong>开放时间：</strong>
-                                    09:00 a.m. ~ 17:00 p.m.
-                                </small><br>
-                                <small>
-                                    <strong>租金：</strong>
-                                    ￥300/h
-                                </small>
+                                <h5 class="media-heading font-weight-bold pb-3">
+                                    <a th:href="@{venue}" th:method="post" th:text="${venue.venueName}">场馆A</a>
+                                </h5>
+                                <h6 class="d-flex">
+                                    <p class="font-weight-bold mb-0">场馆位置：</p>
+                                    <p class="mb-0" th:text="${venue.address}">上海市中心人民广场的南侧黄浦区人民大道201号</p>
+                                </h6>
+                                <h6 class="d-flex">
+                                    <p class="font-weight-bold mb-0">开放时间：</p>
+                                    <p class="mb-0" th:text="${venue.openTime}+'~'+${venue.closeTime}">09:00 a.m. ~ 17:00 p.m.</p>
+                                </h6>
+                                <h6 class="d-flex">
+                                    <p class="font-weight-bold mb-0">租金：</p>
+                                    <p class="mb-0" th:text="${venue.price}">￥300/h</p>
+                                </h6>
                             </div>
                         </div>
                     </li>

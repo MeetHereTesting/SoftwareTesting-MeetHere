@@ -62,4 +62,14 @@ public class MessageServiceImpl implements MessageService {
             throw new RuntimeException("留言不存在");
         messageDao.updateState(STATE_REJECT,message.getMessageID());
     }
+
+    @Override
+    public List<Message> findWaitState(int state) {
+        return messageDao.findState(STATE_NO_AUDIT);
+    }
+
+    @Override
+    public List<Message> findPassState(int state) {
+        return messageDao.findState(STATE_PASS);
+    }
 }

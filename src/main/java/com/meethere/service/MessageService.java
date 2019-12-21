@@ -51,4 +51,8 @@ public interface MessageService {
     void confirmMessage(int messageID);
 
     void rejectMessage(int messageID);
+
+    List<Message> findWaitState(int state);
+
+    List<Message> findPassState(int state);
 }

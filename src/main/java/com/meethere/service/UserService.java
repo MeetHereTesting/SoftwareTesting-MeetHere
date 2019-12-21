@@ -44,4 +44,6 @@ public interface UserService {
      * @param userID
      */
     void delByUserID(String userID);
+
+    void updateUser(User user);
 }

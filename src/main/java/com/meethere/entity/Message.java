@@ -21,8 +21,6 @@ public class Message {
 
     private String userID;
 
-    private String userName;
-
     private String content;
 
     private Date time;

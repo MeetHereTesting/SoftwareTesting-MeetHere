@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class AdminGymController {
+public class AdminVenueController {
     @Autowired
     private VenueService venueService;
 

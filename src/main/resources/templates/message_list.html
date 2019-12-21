@@ -8,7 +8,7 @@
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
-<!--    <script th:src="@{/js/jquery-bootstrap4-pagination.js}"></script>-->
+    <script th:src="@{/js/jquery-bootstrap4-pagination.js}"></script>
     <style type="text/css">
         body{
             background-color: #f5f5f5;
@@ -23,7 +23,7 @@
 <main role="main" class="container">
 
     <div class="card bg-white rounded shadow p-3 mb-3">
-        <form role="form">
+        <form role="form" th:action="@{sendMessage}" method="post">
             <div class="form-group">
                 <label for="message" class="font-weight-bold sr-only">发布留言</label>
                 <textarea class="form-control" id="message" rows="3" placeholder="有什么想和大家分享的？" required></textarea>
@@ -50,18 +50,16 @@
                     <ul class="list-group pt-2 px-3">
                         <li class="list-group-item px-3 border-0" th:each="message : ${message_list}">
                             <div class="media border-bottom border-gray">
-<!--                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">-->
-<!--                                    <rect width="100%" height="100%" fill="#007bff"/></svg>-->
                                 <img class="mr-2" th:src="${message.picture}"
                                      alt="" height="32px" width="32px">
-                                <p class="media-body pb-3 mb-0">
+                                <div class="media-body pb-3 mb-0 small">
                                     <strong class="d-block">@username</strong>
-                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs
-                                    sfadf sfse sfs.
-                                    <br>
-                                    <small class="float-right">2019-12-10</small>
-                                </p>
+                                    <p th:text="${message.content}">
+                                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    </p>
+                                    <small class="float-right" th:text="${message.time}">2019-12-10</small>
+                                </div>
                             </div>
                         </li>
 <!--                        <li class="list-group-item px-3 border-0">-->
@@ -170,26 +168,25 @@
                                 </div>
                             </div>
                             <div class="media border-bottom border-gray">
-                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                    <rect width="100%" height="100%" fill="#007bff"/></svg>
-                                <p class="media-body pb-3 mb-0">
+                                <img class="mr-2" th:src="${message.picture}"
+                                     alt="" height="32px" width="32px">
+                                <div class="media-body pb-3 mb-0 small">
                                     <strong class="d-block">@username</strong>
-                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs
-                                    sfadf sfse sfs.
-                                    <br>
-                                    <small class="float-right">2019-12-10</small>
-                                </p>
+                                    <p  th:text="${message.content}">
+                                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                    </p>
+                                    <small class="float-right" th:text="${message.time}">2019-12-10</small>
+                                </div>
                             </div>
-
                             <div class="collapse" id="modifyMessage">
-                                <form role="form">
+                                <form role="form" th:action="@{modifyMessage}" method="post">
                                     <div class="form-group">
                                         <label for="myMessage" class="font-weight-bold sr-only">发布留言</label>
                                         <textarea class="form-control" id="myMessage" rows="3" required></textarea>
                                     </div>
                                     <div class="col-3 ml-auto d-flex justify-content-end">
-                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage">
+                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage" type="submit">
                                             完成
                                         </a>
                                         <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage">
@@ -202,47 +199,47 @@
                             </div>
 
                         </li>
-                        <li class="list-group-item px-3 border-0">
-                            <div class="dropdown float-right">
-                                <a class="text-dark" href="#" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-menu-down"></span>
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage2">修改</a>
-                                    <a class="dropdown-item" href="#">删除</a>
-                                </div>
-                            </div>
-                            <div class="media border-bottom border-gray">
-                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                    <rect width="100%" height="100%" fill="#007bff"/>
-                                </svg>
-                                <p class="media-body pb-3 mb-0">
-                                    <strong class="d-block">@username</strong>
-                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus elit non mi porta gravida
-                                    elit non mi porta gravida elit non mi porta gravida.
-                                    <br>
-                                    <small class="float-right">2019-12-10</small>
-                                </p>
-                            </div>
-                            <div class="collapse" id="modifyMessage2">
-                                <form role="form">
-                                    <div class="form-group">
-                                        <label for="myMessage2" class="font-weight-bold sr-only">发布留言</label>
-                                        <textarea class="form-control" id="myMessage2" rows="3" required></textarea>
-                                    </div>
-                                    <div class="col-3 ml-auto d-flex justify-content-end">
-                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage2">
-                                            完成
-                                        </a>
-                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage2">
-                                            取消
-                                        </a>
-                                    </div>
-                                </form>
+<!--                        <li class="list-group-item px-3 border-0">-->
+<!--                            <div class="dropdown float-right">-->
+<!--                                <a class="text-dark" href="#" data-toggle="dropdown">-->
+<!--                                    <span class="glyphicon glyphicon-menu-down"></span>-->
+<!--                                </a>-->
+<!--                                <div class="dropdown-menu">-->
+<!--                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage2">修改</a>-->
+<!--                                    <a class="dropdown-item" href="#">删除</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="media border-bottom border-gray">-->
+<!--                                <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">-->
+<!--                                    <rect width="100%" height="100%" fill="#007bff"/>-->
+<!--                                </svg>-->
+<!--                                <p class="media-body pb-3 mb-0">-->
+<!--                                    <strong class="d-block">@username</strong>-->
+<!--                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
+<!--                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus elit non mi porta gravida-->
+<!--                                    elit non mi porta gravida elit non mi porta gravida.-->
+<!--                                    <br>-->
+<!--                                    <small class="float-right">2019-12-10</small>-->
+<!--                                </p>-->
+<!--                            </div>-->
+<!--                            <div class="collapse" id="modifyMessage2">-->
+<!--                                <form role="form">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label for="myMessage2" class="font-weight-bold sr-only">发布留言</label>-->
+<!--                                        <textarea class="form-control" id="myMessage2" rows="3" required></textarea>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-3 ml-auto d-flex justify-content-end">-->
+<!--                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage2">-->
+<!--                                            完成-->
+<!--                                        </a>-->
+<!--                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage2">-->
+<!--                                            取消-->
+<!--                                        </a>-->
+<!--                                    </div>-->
+<!--                                </form>-->
 
-                            </div>
-                        </li>
+<!--                            </div>-->
+<!--                        </li>-->
                     </ul>
                     <div class="d-flex justify-content-center mt-2" id="pagination2"></div>
 <!--                    <div class="p-2">-->

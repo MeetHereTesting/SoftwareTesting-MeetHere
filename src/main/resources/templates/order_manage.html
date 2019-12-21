@@ -7,6 +7,8 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
+
     <style type="text/css">
         body{
             background-color: #f5f5f5;
@@ -25,7 +27,7 @@
         </div>
         <div class="card-body">
             <ul class="list-group">
-                <li class="list-group-item px-3 border-0">
+                <li class="list-group-item px-3 border-0" th:each="order : ${order_list}">
                     <div class="dropdown float-right">
                         <a class="text-dark" href="#" data-toggle="dropdown">
                             <span class="glyphicon glyphicon-menu-down"></span>
@@ -37,91 +39,88 @@
                     </div>
                     <div class="media border-bottom border-gray pb-3">
                         <div class="media-left mr-3">
-                            <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
+                            <img th:src="${order.picture}"
                                  alt="" height="100px" width="100px">
                         </div>
                         <div class="media-body">
                             <h6>
                                 <strong>预约场馆：</strong>
-                                <a th:href="@{venue}">场馆A</a>
+                                <a th:href="@{venue}" th:text="${order.venueName}">场馆A</a>
                             </h6>
-                            <h6>
-                                <strong>预约时间：</strong>
-                                2019年12月28日 10:00
+                            <h6 class="d-flex">
+                                <p class="font-weight-bold mb-0">预约时间：</p>
+                                <p class="mb-0" th:text="${order.startTime}">2019年12月28日 10:00</p>
                             </h6>
-                            <h6>
-                                <strong>预约时长：</strong>
-                                5小时
+                            <h6 class="d-flex">
+                                <p class="font-weight-bold mb-0">预约时长：</p>
+                                <p class="mb-0" th:text="${order.hours}">5小时</p>
                             </h6>
-                            <h6>
-                                <strong>支付租金：</strong>
-                                ￥1500
-                            </h6>
-                            <h6>
-                                <strong>场馆地址：</strong>
-                                上海市中心人民广场的南侧黄浦区人民大道201号
+                            <h6 class="d-flex">
+                                <p class="font-weight-bold mb-0">支付租金：</p>
+                                <p class="mb-0" th:text="${order.total}">￥1500</p>
                             </h6>
                         </div>
                     </div>
                 </li>
-                <li class="list-group-item px-3 border-0">
-                    <div class="dropdown float-right">
-                        <a class="text-dark" href="#" data-toggle="dropdown">
-                            <span class="glyphicon glyphicon-menu-down"></span>
-                        </a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" th:href="@{order_place}">修改</a>
-                            <a class="dropdown-item" href="#">删除</a>
-                        </div>
-                    </div>
-                    <div class="media border-bottom border-gray pb-3">
-                        <div class="media-left mr-3">
-                            <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
-                                 alt="" height="100px" width="100px">
-                        </div>
-                        <div class="media-body">
-                            <h6>
-                                <strong>预约场馆：</strong>
-                                <a th:href="@{venue}">场馆B</a>
-                            </h6>
-                            <h6>
-                                <strong>预约时间：</strong>
-                                2019年12月28日 10:00
-                            </h6>
-                            <h6>
-                                <strong>预约时长：</strong>
-                                5小时
-                            </h6>
-                            <h6>
-                                <strong>支付租金：</strong>
-                                ￥2100
-                            </h6>
-                            <h6>
-                                <strong>场馆地址：</strong>
-                                上海市中心人民广场的南侧黄浦区人民大道201号
-                            </h6>
-                        </div>
-                    </div>
-                </li>
+<!--                <li class="list-group-item px-3 border-0">-->
+<!--                    <div class="dropdown float-right">-->
+<!--                        <a class="text-dark" href="#" data-toggle="dropdown">-->
+<!--                            <span class="glyphicon glyphicon-menu-down"></span>-->
+<!--                        </a>-->
+<!--                        <div class="dropdown-menu">-->
+<!--                            <a class="dropdown-item" th:href="@{order_place}">修改</a>-->
+<!--                            <a class="dropdown-item" href="#">删除</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="media border-bottom border-gray pb-3">-->
+<!--                        <div class="media-left mr-3">-->
+<!--                            <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"-->
+<!--                                 alt="" height="100px" width="100px">-->
+<!--                        </div>-->
+<!--                        <div class="media-body">-->
+<!--                            <h6>-->
+<!--                                <strong>预约场馆：</strong>-->
+<!--                                <a th:href="@{venue}">场馆B</a>-->
+<!--                            </h6>-->
+<!--                            <h6>-->
+<!--                                <strong>预约时间：</strong>-->
+<!--                                2019年12月28日 10:00-->
+<!--                            </h6>-->
+<!--                            <h6>-->
+<!--                                <strong>预约时长：</strong>-->
+<!--                                5小时-->
+<!--                            </h6>-->
+<!--                            <h6>-->
+<!--                                <strong>支付租金：</strong>-->
+<!--                                ￥2100-->
+<!--                            </h6>-->
+<!--                            <h6>-->
+<!--                                <strong>场馆地址：</strong>-->
+<!--                                上海市中心人民广场的南侧黄浦区人民大道201号-->
+<!--                            </h6>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
             </ul>
-            <div class="p-2">
-                <nav class="">
-                    <ul class="pagination mb-0 justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <div class="d-flex justify-content-center mt-2" id="pagination"></div>
+<!--            <div class="p-2">-->
+<!--                <nav class="">-->
+<!--                    <ul class="pagination mb-0 justify-content-center">-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                <span aria-hidden="true">&laquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#" aria-label="Next">-->
+<!--                                <span aria-hidden="true">&raquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </div>-->
 
         </div>
 
@@ -129,7 +128,20 @@
 
 </main>
 <div th:include="layout/footer :: Footer"></div>
+<script type="text/javascript">
+    $('#pagination').pagination({
+        pageSize: 10,                            // 一页数据的数量默认5个
+        page: 1,                                 // 当前第几页默认第1页
+        totalRows: 50,                           // 数据总条数默认10条
+        pageLength: 5,                          // 最多显示分页按钮数量默认5个
+        previous: '&laquo;',                      // 上一页按钮显示名称量默上一页
+        next: '&raquo;',                          // 下一页按钮显示名称量默下一页
+        debug: false,                           // 调试模式量默false
+        onClickPage: function(event, num){
 
+        }     // 点击回掉函数量默null
+    });
+</script>
 
 </body>
 </html>
