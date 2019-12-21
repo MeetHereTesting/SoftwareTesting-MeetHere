@@ -154,13 +154,15 @@
                         <div class="media border-bottom border-gray">
                             <img class="mr-2" th:src="${message.picture}"
                                  alt="" height="100px" width="100px">
-                            <p class="media-body pb-3 mb-0 small" th:text="${message.content}">
+                            <div class="media-body pb-3 mb-0 small">
                                 <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                <br>
+                                <p  th:text="${message.content}">
+                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
+                                    tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+                                </p>
                                 <small class="float-right" th:text="${message.time}">2019-12-10</small>
-                            </p>
+                            </div>
+
                         </div>
                     </li>
 <!--                    <li class="list-group-item px-3 border-0">-->
