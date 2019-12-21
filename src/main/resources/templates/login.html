@@ -18,7 +18,7 @@
 <div th:include="layout/header :: header(flag=false,page='login')"></div>
 
 <main class="container col-4" style="padding-top: 10%">
-    <form role="form" action="#" th:action="@{/loginCheck}" th:object="${user}" method="post">
+    <form role="form" action="#" th:action="@{loginCheck}" th:object="${user}" method="post">
         <div class="text-center mb-5">
             <h1>用 户 登 录</h1>
         </div>

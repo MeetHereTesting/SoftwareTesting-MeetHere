@@ -35,7 +35,9 @@
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">
-                                <h5 class="media-heading font-weight-bold pb-3"><a th:href="@{venue}">场馆A</a></h5>
+                                <h5 class="media-heading font-weight-bold pb-3">
+                                    <a th:href="@{venue}" th:method="post" th:object="${venue_select}">场馆A</a>
+                                </h5>
                                 <h6 th:text="${venue.address}">
                                     <strong>场馆位置：</strong>
                                     上海市中心人民广场的南侧黄浦区人民大道201号
@@ -115,8 +117,8 @@
                     <li class="list-group-item border-0 px-3 py-2" th:each="news : ${news_list}">
                         <div class="row mx-0 pb-2 border-bottom border-gray">
                             <a class="ml-1" th:href="@{news}" th:text="${news.title}">2019年12月24日场馆暂时关闭通知</a>
-                            <div class="ml-auto" th:text="${news.time}">
-                                <span class="badge badge-secondary">2019-12-10</span>
+                            <div class="ml-auto">
+                                <span class="badge badge-secondary" th:text="${news.time}">2019-12-10</span>
                             </div>
                         </div>
                     </li>
@@ -161,34 +163,34 @@
                             </p>
                         </div>
                     </li>
-                    <li class="list-group-item px-3 border-0">
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#e83e8c"/>
-                            </svg>
-                            <p class="media-body pb-3 mb-0 small">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-3 border-0">
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#6f42c1"/>
-                            </svg>
-                            <p class="media-body pb-3 mb-0 small">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-                    </li>
+<!--                    <li class="list-group-item px-3 border-0">-->
+<!--                        <div class="media border-bottom border-gray">-->
+<!--                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">-->
+<!--                                <rect width="100%" height="100%" fill="#e83e8c"/>-->
+<!--                            </svg>-->
+<!--                            <p class="media-body pb-3 mb-0 small">-->
+<!--                                <strong class="d-block">@username</strong>-->
+<!--                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
+<!--                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.-->
+<!--                                <br>-->
+<!--                                <small class="float-right">2019-12-10</small>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="list-group-item px-3 border-0">-->
+<!--                        <div class="media border-bottom border-gray">-->
+<!--                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">-->
+<!--                                <rect width="100%" height="100%" fill="#6f42c1"/>-->
+<!--                            </svg>-->
+<!--                            <p class="media-body pb-3 mb-0 small">-->
+<!--                                <strong class="d-block">@username</strong>-->
+<!--                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
+<!--                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.-->
+<!--                                <br>-->
+<!--                                <small class="float-right">2019-12-10</small>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </li>-->
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
                     <h6 class="m-0"><a th:href="@{message_list}"><span class="badge">MORE</span></a></h6>
