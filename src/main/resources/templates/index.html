@@ -28,23 +28,23 @@
                     <h6 class="card-title mb-0">场馆信息</h6>
                 </div>
                 <ul class="list-group pt-2">
-                    <li class="list-group-item px-3 pt-3 border-0">
+                    <li class="list-group-item px-3 pt-3 border-0" th:each="venue : ${venue_list}">
                         <div class="media border-bottom border-gray pb-3">
                             <div class="media-left mr-3">
-                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
+                                <img th:src="${venue.picture}"
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">
                                 <h5 class="media-heading font-weight-bold pb-3"><a th:href="@{venue}">场馆A</a></h5>
-                                <h6 class="">
+                                <h6 th:text="${venue.address}">
                                     <strong>场馆位置：</strong>
                                     上海市中心人民广场的南侧黄浦区人民大道201号
                                 </h6>
-                                <h6>
+                                <h6 th:text="${venue.openTime}+'~'+${venue.closeTime}">
                                     <strong>开放时间：</strong>
                                     09:00 a.m. ~ 17:00 p.m.
                                 </h6>
-                                <h6>
+                                <h6 th:text="${venue.price}">
                                     <strong>租金：</strong>
                                     ￥300/h
                                 </h6>
@@ -112,10 +112,10 @@
                     <h6 class="card-title mb-0">新闻</h6>
                 </div>
                 <ul class="list-group pt-2">
-                    <li class="list-group-item border-0 px-3 py-2">
+                    <li class="list-group-item border-0 px-3 py-2" th:each="news : ${news_list}">
                         <div class="row mx-0 pb-2 border-bottom border-gray">
-                            <a class="ml-1" th:href="@{news}">2019年12月24日场馆暂时关闭通知</a>
-                            <div class="ml-auto">
+                            <a class="ml-1" th:href="@{news}" th:text="${news.title}">2019年12月24日场馆暂时关闭通知</a>
+                            <div class="ml-auto" th:text="${news.time}">
                                 <span class="badge badge-secondary">2019-12-10</span>
                             </div>
                         </div>
@@ -148,17 +148,16 @@
                     <h6 class="card-title mb-0">留言板</h6>
                 </div>
                 <ul class="list-group pt-2">
-                    <li class="list-group-item px-3 border-0">
+                    <li class="list-group-item px-3 border-0" th:each="message : ${message_list}">
                         <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#007bff"/>
-                            </svg>
-                            <p class="media-body pb-3 mb-0 small">
+                            <img class="mr-2" th:src="${message.picture}"
+                                 alt="" height="100px" width="100px">
+                            <p class="media-body pb-3 mb-0 small" th:text="${message.content}">
                                 <strong class="d-block">@username</strong>
                                 Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
                                 tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                                 <br>
-                                <small class="float-right">2019-12-10</small>
+                                <small class="float-right" th:text="${message.time}">2019-12-10</small>
                             </p>
                         </div>
                     </li>
