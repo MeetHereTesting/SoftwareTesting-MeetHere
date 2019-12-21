@@ -1,8 +1,8 @@
 package com.meethere.service.impl;
 
-import com.meethere.dao.GymDao;
 import com.meethere.dao.OrderDao;
-import com.meethere.entity.Gym;
+import com.meethere.dao.VenueDao;
+import com.meethere.entity.Venue;
 import com.meethere.entity.Order;
 import com.meethere.entity.User;
 import com.meethere.service.OrderService;
@@ -25,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderDao orderDao;
 
     @Autowired
-    private GymDao gymDao;
+    private VenueDao venueDao;
 
     @Override
     public Order findById(int OrderID) {
@@ -58,17 +58,17 @@ public class OrderServiceImpl implements OrderService {
         Object user = request.getSession().getAttribute("user");
         if (user == null)
             throw new LoginException("请登录！");
-        Gym gym=gymDao.findByGymID(gymID);
+        Venue venue =venueDao.findByVenueID(gymID);
 
         User loginUser = (User) user;
         Order order=new Order();
         order.setState(STATE_NO_AUDIT);
         order.setHours(hours);
-        order.setGymID(gymID);
+        order.setVenueID(gymID);
         order.setOrderTime(new Date());
         order.setStartTime(startTime);
         order.setUserID(loginUser.getUserID());
-        order.setTotal(hours*gym.getPrice());
+        order.setTotal(hours* venue.getPrice());
 
         orderDao.save(order);
         response.sendRedirect("order.html");

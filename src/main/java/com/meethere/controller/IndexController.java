@@ -1,7 +1,9 @@
 package com.meethere.controller;
 
+import com.meethere.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,8 +19,10 @@ public class IndexController {
         return "signup";
     }
 
-    @RequestMapping("/login")
-    public String login(Model model){
+    @GetMapping("/login")
+    public String login(Model model) {
+
+        model.addAttribute("user", new User());
         return "login";
     }
 
@@ -100,10 +104,5 @@ public class IndexController {
     @RequestMapping("/venue_edit")
     public String venue_edit(Model model){
         return "admin/venue_edit";
-    }
-
-    @RequestMapping("/table")
-    public String table(Model model){
-        return "admin/table";
     }
 }

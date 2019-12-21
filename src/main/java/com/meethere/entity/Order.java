@@ -22,7 +22,7 @@ public class Order {
 
     private String userID;
 
-    private int gymID;
+    private int venueID;
 
     /**
      * 1未审核 2已审核 3已完成 4失效

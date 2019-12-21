@@ -45,15 +45,15 @@ public interface OrderService {
      * @param orderID
      * @param state
      */
-    void updateStates(int orderID,int state);
+    void updateStates(int orderID, int state);
 
     /**
      * 新建订单
-     * @param gymID
+     * @param venueID
      * @param startTime
      * @param hours
      */
-    void submit(int gymID, Date startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
+    void submit(int venueID, Date startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
     /**
      * 删除订单

@@ -28,7 +28,7 @@ public interface UserService {
      * @param password
      * @return
      */
-    User checkLogin(String userID,String password);
+    User checkLogin(String userID, String password);
 
     /**
      * 创建用户
