@@ -39,12 +39,7 @@ public class MessageServiceImpl implements MessageService {
         if(user==null)
             throw new LoginException("请登录！");
         User loginUser=(User)user;
-        Message message=new Message();
-        message.setUserID(loginUser.getUserID());
-
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching().withMatcher("vendorId",ExampleMatcher.GenericPropertyMatchers.exact());
-        Example<Message> example = Example.of(message,exampleMatcher);
-        Page<Message> page = messageDao.findAll(example,pageable);
+        Page<Message> page=messageDao.findAllByUserID(loginUser.getUserID(),pageable);
         return page;
     }
 

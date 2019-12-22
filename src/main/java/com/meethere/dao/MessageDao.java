@@ -15,6 +15,8 @@ public interface MessageDao extends JpaRepository<Message,Integer> {
     Message findByMessageID(int messageID);
    // Page<Message> findByUserID(Pageable pageable,String userID);
 
+    Page<Message> findAllByUserID(String userID,Pageable pageable);
+
     @Transactional
     @Modifying
     @Query(value="update Message o set o.state=?1 where o.messageID=?2",nativeQuery =true)
