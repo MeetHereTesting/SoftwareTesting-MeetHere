@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
     <style type="text/css">
         body{
             background-color: #f5f5f5;
@@ -24,177 +25,93 @@
                 <h2>留言审核</h2>
             </div>
             <div class="bg-white">
-                <ul class="list-group pt-2 px-3">
-                    <li class="list-group-item px-3 border-0">
-                        <div class="d-flex justify-content-end text-light">
-                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                通过
-                            </a>
-                            <a class="btn-sm btn-danger" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                驳回
-                            </a>
-                        </div>
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#007bff"/></svg>
-                            <p class="media-body pb-3 mb-0">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs
-                                sfadf sfse sfs.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-
-                    </li>
-                    <li class="list-group-item px-3 border-0">
-                        <div class="d-flex justify-content-end text-light">
-                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                通过
-                            </a>
-                            <a class="btn-sm btn-danger" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                驳回
-                            </a>
-                        </div>
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#e83e8c"/>
-                            </svg>
-                            <p class="media-body pb-3 mb-0">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus elit non mi porta gravida
-                                elit non mi porta gravida elit non mi porta gravida.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-3 border-0">
-                        <div class="d-flex justify-content-end text-light">
-                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                通过
-                            </a>
-                            <a class="btn-sm btn-danger" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                驳回
-                            </a>
-                        </div>
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#6f42c1"/>
-                            </svg>
-                            <p class="media-body pb-3 mb-0">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-3 border-0">
-                        <div class="d-flex justify-content-end text-light">
-                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                通过
-                            </a>
-                            <a class="btn-sm btn-danger" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                驳回
-                            </a>
-                        </div>
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#20c997"/>
-                            </svg>
-                            <p class="media-body pb-3 mb-0">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-3 border-0">
-                        <div class="d-flex justify-content-end text-light">
-                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                通过
-                            </a>
-                            <a class="btn-sm btn-danger" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                驳回
-                            </a>
-                        </div>
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#ed969e"/></svg>
-                            <p class="media-body pb-3 mb-0">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-3 border-0">
-                        <div class="d-flex justify-content-end text-light">
-                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-ok"></span>
-                                通过
-                            </a>
-                            <a class="btn-sm btn-danger" data-toggle="collapse" href="#">
-                                <span class="glyphicon glyphicon-remove"></span>
-                                驳回
-                            </a>
-                        </div>
-                        <div class="media border-bottom border-gray">
-                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">
-                                <rect width="100%" height="100%" fill="#ffdf7e"/>
-                            </svg>
-                            <p class="media-body pb-3 mb-0">
-                                <strong class="d-block">@username</strong>
-                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
-                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-                                <br>
-                                <small class="float-right">2019-12-10</small>
-                            </p>
-                        </div>
-                    </li>
+                <ul class="list-group pt-2 px-3" id="content">
+<!--                    <li class="list-group-item px-3 border-0">-->
+<!--                        <div class="d-flex justify-content-end text-light">-->
+<!--                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">-->
+<!--                                <span class="glyphicon glyphicon-ok"></span>-->
+<!--                                通过-->
+<!--                            </a>-->
+<!--                            <a class="btn-sm btn-danger" data-toggle="collapse" href="#">-->
+<!--                                <span class="glyphicon glyphicon-remove"></span>-->
+<!--                                驳回-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <div class="media border-bottom border-gray">-->
+<!--                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">-->
+<!--                                <rect width="100%" height="100%" fill="#007bff"/></svg>-->
+<!--                            <p class="media-body pb-3 mb-0">-->
+<!--                                <strong class="d-block">@username</strong>-->
+<!--                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
+<!--                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus sdf dsdfsmf osfs-->
+<!--                                sfadf sfse sfs.-->
+<!--                                <br>-->
+<!--                                <small class="float-right">2019-12-10</small>-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </li>-->
                 </ul>
-                <div class="p-2 pb-3">
-                    <nav class="">
-                        <ul class="pagination mb-0 justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                <div class="d-flex justify-content-center mt-2" id="pagination-demo"></div>
             </div>
             <div th:include="layout/footer :: Footer"></div>
         </main>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        getPage(1);
+    });
 
+    $('#pagination-demo').twbsPagination({
+        totalPages: [[${total}]],
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+            getPage(page);
+        }
+    });
+
+    function getPage(page){
+        $.ajax({//根据page去后台加载数据
+            url : "/admin/getMessageList",
+            type : "get",
+            dataType : "json",
+            data : {"page" : page},
+            success : function(data) {
+                appendHtml(data);//处理数据
+                console.log(data);
+            }
+        });
+    }
+    function appendHtml(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
+        let tableShow = '';
+        for (let i = 0; i < list.length; i++) {
+            tableShow += '<li class="list-group-item px-3 border-0">\n' +
+                '                        <div class="d-flex justify-content-end text-light">\n' +
+                '                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="passMessage?messageID='+list[i].messageID+'">\n' +
+                '                                <span class="glyphicon glyphicon-ok"></span>\n' +
+                '                                通过\n' +
+                '                            </a>\n' +
+                '                            <a class="btn-sm btn-danger" data-toggle="collapse" href="rejectMessage?messageID='+list[i].messageID+'">\n' +
+                '                                <span class="glyphicon glyphicon-remove"></span>\n' +
+                '                                驳回\n' +
+                '                            </a>\n' +
+                '                        </div>\n' +
+                '                        <div class="media border-bottom border-gray">\n';
+            if(list[i].picture == null)
+                tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
+            else
+                tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
+            tableShow += '<div class="media-body pb-3 mb-0 small">\n' +
+                '                                <strong class="d-block">@'+list[i].userName+'</strong>\n' +
+                '                                <p>'+list[i].content+'</p>\n' +
+                '                                <small class="float-right">'+list[i].time+'</small>\n' +
+                '                            </div>\n' +
+                '                        </div>\n' +
+                '                    </li>\n';
+        }
+        $('#content').html(tableShow);
+    }
+
+</script>
 </body>
 </html>

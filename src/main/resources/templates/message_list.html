@@ -47,15 +47,15 @@
         <div class="card-body">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab1">
-                    <div id="content1"></div>
-
+                    <ul class="list-group pt-2 px-3" id="content1">
+                    </ul>
                     <div class="d-flex justify-content-center mt-2" id="pagination1"></div>
 
                 </div>
 
                 <div class="tab-pane fade" id="tab2">
-                    <div id="content2"></div>
-
+                    <ul class="list-group" id="content2">
+                    </ul>
                     <div class="d-flex justify-content-center mt-2" id="pagination2"></div>
                 </div>
             </div>
@@ -95,8 +95,7 @@
     function appendHtml1(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
         let tableShow = '';
         for (let i = 0; i < list.length; i++) {
-            tableShow += '<ul class="list-group pt-2 px-3">\n' +
-                '                        <li class="list-group-item px-3 border-0">\n' +
+            tableShow += '<li class="list-group-item px-3 border-0">\n' +
                 '                            <div class="media border-bottom border-gray">\n';
             if(list[i].picture == null)
                 tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
@@ -108,8 +107,7 @@
                 '                                    <small class="float-right">'+list[i].time+'</small>\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
-                '                        </li>\n' +
-                '                    </ul>';
+                '                        </li>\n';
         }
         $('#content1').html(tableShow);
     }
@@ -137,8 +135,7 @@
     function appendHtml2(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
         let tableShow = '';
         for (let i = 0; i < list.length; i++) {
-            tableShow += '<ul class="list-group">\n' +
-                '                        <li class="list-group-item px-3 border-0">\n' +
+            tableShow += '<li class="list-group-item px-3 border-0">\n' +
                 '                            <div class="dropdown float-right">\n' +
                 '                                <a class="text-dark" href="#" data-toggle="dropdown">\n' +
                 '                                    <span class="glyphicon glyphicon-menu-down"></span>\n' +
@@ -178,8 +175,7 @@
                 '\n' +
                 '                            </div>\n' +
                 '\n' +
-                '                        </li>\n' +
-                '                    </ul>';
+                '                        </li>\n';
         }
         $('#content2').html(tableShow);
     }
