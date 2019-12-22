@@ -31,7 +31,7 @@
                     <li class="list-group-item px-3 pt-3 border-0" th:each="venue : ${venue_list}">
                         <div class="media border-bottom border-gray pb-3">
                             <div class="media-left mr-3">
-                                <img th:src="${venue.picture}"
+                                <img th:src="${venue.picture} == null?'default.jpg':${venue.picture}"
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">
@@ -53,29 +53,7 @@
                             </div>
                         </div>
                     </li>
-<!--                    <li class="list-group-item px-3 pt-3 border-0">-->
-<!--                        <div class="media border-bottom border-gray pb-3">-->
-<!--                            <div class="media-left mr-3">-->
-<!--                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"-->
-<!--                                     alt="" height="100px" width="100px">-->
-<!--                            </div>-->
-<!--                            <div class="media-body">-->
-<!--                                <h5 class="media-heading font-weight-bold pb-3"><a th:href="@{venue}">场馆C</a></h5>-->
-<!--                                <h6 class="">-->
-<!--                                    <strong>场馆位置：</strong>-->
-<!--                                    上海市中心人民广场的南侧黄浦区人民大道201号-->
-<!--                                </h6>-->
-<!--                                <h6>-->
-<!--                                    <strong>开放时间：</strong>-->
-<!--                                    09:00 a.m. ~ 17:00 p.m.-->
-<!--                                </h6>-->
-<!--                                <h6>-->
-<!--                                    <strong>租金：</strong>-->
-<!--                                    ￥300/h-->
-<!--                                </h6>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
+
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
                     <h6 class="m-0"><a th:href="@{venue_list}"><span class="badge">MORE</span></a></h6>
@@ -99,22 +77,7 @@
                             </div>
                         </div>
                     </li>
-<!--                    <li class="list-group-item border-0 px-3 py-2">-->
-<!--                        <div class="row mx-0 pb-2 border-bottom border-gray">-->
-<!--                            <a class="ml-1" th:href="@{news}">2019年12月31日场馆装修通知</a>-->
-<!--                            <div class="ml-auto">-->
-<!--                                <span class="badge badge-secondary">2019-12-10</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li class="list-group-item border-0 px-3 py-2">-->
-<!--                        <div class="row mx-0 pb-2 border-bottom border-gray">-->
-<!--                            <a class="ml-1" th:href="@{news}">2019年12月31日场馆装修通知</a>-->
-<!--                            <div class="ml-auto">-->
-<!--                                <span class="badge badge-secondary">2019-12-10</span>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </li>-->
+
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
                     <h6 class="m-0"><a th:href="@{news_list}"><span class="badge">MORE</span></a></h6>
@@ -129,10 +92,10 @@
                 <ul class="list-group pt-2">
                     <li class="list-group-item px-3 border-0" th:each="message : ${message_list}">
                         <div class="media border-bottom border-gray">
-                            <img class="mr-2" th:src="${message.picture}"
-                                 alt="" height="100px" width="100px">
+                            <img class="mr-2" th:src="${message.picture} == null?'default.jpg':${message.picture}"
+                                 alt="" height="32px" width="32px">
                             <div class="media-body pb-3 mb-0 small">
-                                <strong class="d-block">@username</strong>
+                                <strong class="d-block" th:text="'@'+${message.userName}">@username</strong>
                                 <p  th:text="${message.content}">
                                     Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
                                     tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
@@ -142,34 +105,7 @@
 
                         </div>
                     </li>
-<!--                    <li class="list-group-item px-3 border-0">-->
-<!--                        <div class="media border-bottom border-gray">-->
-<!--                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">-->
-<!--                                <rect width="100%" height="100%" fill="#e83e8c"/>-->
-<!--                            </svg>-->
-<!--                            <p class="media-body pb-3 mb-0 small">-->
-<!--                                <strong class="d-block">@username</strong>-->
-<!--                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
-<!--                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.-->
-<!--                                <br>-->
-<!--                                <small class="float-right">2019-12-10</small>-->
-<!--                            </p>-->
-<!--                        </div>-->
-<!--                    </li>-->
-<!--                    <li class="list-group-item px-3 border-0">-->
-<!--                        <div class="media border-bottom border-gray">-->
-<!--                            <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32">-->
-<!--                                <rect width="100%" height="100%" fill="#6f42c1"/>-->
-<!--                            </svg>-->
-<!--                            <p class="media-body pb-3 mb-0 small">-->
-<!--                                <strong class="d-block">@username</strong>-->
-<!--                                Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
-<!--                                tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.-->
-<!--                                <br>-->
-<!--                                <small class="float-right">2019-12-10</small>-->
-<!--                            </p>-->
-<!--                        </div>-->
-<!--                    </li>-->
+
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
                     <h6 class="m-0"><a th:href="@{message_list}"><span class="badge">MORE</span></a></h6>
