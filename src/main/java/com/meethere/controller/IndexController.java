@@ -46,30 +46,6 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/signup")
-    public String signUp(){
-        return "signup";
-    }
-
-    @GetMapping("/login")
-    public String login(){
-        return "login";
-    }
-
-    @GetMapping("/order_place")
-    public String order_place(Model model){
-        return "order_place";
-    }
-
-    @GetMapping("/order_manage")
-    public String order_manage(Model model){
-        return "order_manage";
-    }
-
-    @GetMapping("/user_info")
-    public String user_info(Model model){
-        return "user_info";
-    }
 
     @GetMapping("/admin_index")
     public String admin_index(Model model){

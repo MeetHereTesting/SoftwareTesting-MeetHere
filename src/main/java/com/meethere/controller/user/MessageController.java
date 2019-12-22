@@ -35,6 +35,8 @@ public class MessageController {
 //        model.addAttribute("message_list",message_list);
         model.addAttribute("total",messageService.findAll(message_pageable).getTotalPages());
 
+        model.addAttribute("user_total",1);
+
         //如果user不为空进行渲染
         if(request.getSession().getAttribute("user")!=null){
             Pageable user_message_pageable = PageRequest.of(0,5, Sort.by("time").descending());
@@ -55,15 +57,16 @@ public class MessageController {
         return messageVoService.findAll(message_pageable);
     }
 
-    @GetMapping("message/findUserList")
+    @GetMapping("/message/findUserList")
     @ResponseBody
     public List<MessageVo> user_message_list(@RequestParam(value = "page",defaultValue = "1")int page,HttpServletRequest request){
-        if(request.getSession().getAttribute("user")!=null) {
+        System.out.println("find user messages");
+//        if(request.getSession().getAttribute("user")!=null) {
             Pageable message_pageable = PageRequest.of(page - 1, 5, Sort.by("time").descending());
             List<Message> user_messages = messageService.findByUser(request, message_pageable).getContent();
             return messageVoService.returnVo(user_messages);
-        }
-        return null;
+//        }
+//        return null;
     }
 
 }

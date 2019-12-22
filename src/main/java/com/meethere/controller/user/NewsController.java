@@ -27,7 +27,7 @@ public class NewsController {
     return "news";
 }
 
-    @GetMapping("/news/getNewsList")
+    @GetMapping("/newslist/getNewsList")
     @ResponseBody
     public Page<News> news_list(@RequestParam(value = "page",defaultValue = "1")int page){
         System.out.println("success");
@@ -40,6 +40,7 @@ public class NewsController {
         Pageable news_pageable= PageRequest.of(0,5, Sort.by("time").descending());
         List<News> news_list=newService.findAll(news_pageable).getContent();
         model.addAttribute("news_list",news_list);
+        model.addAttribute("total",newService.findAll(news_pageable).getTotalPages());
         return "news_list";
     }
 }
