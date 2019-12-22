@@ -108,7 +108,7 @@
 
     function getPage(page){
         $.ajax({//根据page去后台加载数据
-            url : "/admin/getUserList",
+            url : "/userList.do",
             type : "get",
             dataType : "json",
             data : {"page" : page},
@@ -129,7 +129,7 @@
                 '                        <td>'+list[i].phone+'</td>\n' +
                 '                        <td>\n' +
                 '                            <div>\n' +
-                '                                <a class="btn-sm btn-info mr-2" href="/modifyUser?userID="'+list[i].userID+'>\n' +
+                '                                <a class="btn-sm btn-info mr-2" href="/admin/user_edit?userID="'+list[i].userID+'>\n' +
                 '                                    <span class="glyphicon glyphicon-edit"></span>\n' +
                 '                                    修改\n' +
                 '                                </a>\n' +

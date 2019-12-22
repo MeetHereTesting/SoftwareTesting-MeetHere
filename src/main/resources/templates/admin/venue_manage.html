@@ -87,7 +87,7 @@
 
     function getPage(page){
         $.ajax({//根据page去后台加载数据
-            url : "/admin/getVenueList",
+            url : "/venueList.do",
             type : "get",
             dataType : "json",
             data : {"page" : page},
@@ -109,11 +109,11 @@
                 '                        <td>'+list[i].close_time+'</td>\n' +
                 '                        <td>\n' +
                 '                            <div>\n' +
-                '                                <a class="btn-sm btn-info mr-2" href="\modifyVenue?venueID='+list[i].venueID+'">\n' +
+                '                                <a class="btn-sm btn-info mr-2" href="/admin/venue_edit?venueID='+list[i].venueID+'">\n' +
                 '                                    <span class="glyphicon glyphicon-edit"></span>\n' +
                 '                                    修改\n' +
                 '                                </a>\n' +
-                '                                <a class="btn-sm btn-danger" href="\addVenue?venueID='+list[i].venueID+'">\n' +
+                '                                <a class="btn-sm btn-danger" href="/delVenue.do?venueID='+list[i].venueID+'">\n' +
                 '                                    <span class="glyphicon glyphicon-trash"></span>\n' +
                 '                                    删除\n' +
                 '                                </a>\n' +

@@ -72,7 +72,7 @@
 
     function getPage(page){
         $.ajax({//根据page去后台加载数据
-            url : "/admin/getMessageList",
+            url : "/messageList.do",
             type : "get",
             dataType : "json",
             data : {"page" : page},
@@ -87,11 +87,11 @@
         for (let i = 0; i < list.length; i++) {
             tableShow += '<li class="list-group-item px-3 border-0">\n' +
                 '                        <div class="d-flex justify-content-end text-light">\n' +
-                '                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="passMessage?messageID='+list[i].messageID+'">\n' +
+                '                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="passMessage.do?messageID='+list[i].messageID+'">\n' +
                 '                                <span class="glyphicon glyphicon-ok"></span>\n' +
                 '                                通过\n' +
                 '                            </a>\n' +
-                '                            <a class="btn-sm btn-danger" data-toggle="collapse" href="rejectMessage?messageID='+list[i].messageID+'">\n' +
+                '                            <a class="btn-sm btn-danger" data-toggle="collapse" href="rejectMessage.do?messageID='+list[i].messageID+'">\n' +
                 '                                <span class="glyphicon glyphicon-remove"></span>\n' +
                 '                                驳回\n' +
                 '                            </a>\n' +
