@@ -21,9 +21,11 @@
         <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='admin_index')"></div>
         <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
-                <h2>Dashboard</h2>
+                <h2>首页</h2>
             </div>
-
+            <div class="text-center" style="margin-top: 15%;margin-bottom: 15%">
+                <h1>欢迎使用MeetHere场馆预约管理系统！</h1>
+            </div>
             <div th:include="layout/footer :: Footer"></div>
         </main>
     </div>

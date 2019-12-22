@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MeetHere-管理系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <style type="text/css">
+        body{
+            background-color: #f5f5f5;
+            padding-top: 55px;
+        }
+    </style>
+    <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='news_manage')"></div>
+        <main class="col-10 ml-auto px-4 mt-4">
+            <div class="col-12 mb-3 pb-3 border-bottom border-gray">
+                <h2>新增用户</h2>
+            </div>
+            <div class="mt-5">
+                <form class="col-6 mx-auto" role="form" action="#" th:action="@{addUser.do}" method="post">
+                    <div class="form-group mb-4 row">
+                        <div class="media col-2">
+                            <h6 class="align-self-center ml-auto">昵称</h6>
+                            <h6 class="text-danger">*</h6>
+                        </div>
+                        <div class="col-10">
+                            <label for="userName" class="sr-only">昵称</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">@</span>
+                                </div>
+                                <input type="text" name="userName" class="form-control" id="userName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-4 row">
+                        <div class="media col-2">
+                            <h6 class="align-self-center ml-auto">邮箱</h6>
+                        </div>
+                        <div class="col-10">
+                            <label for="email" class="sr-only">邮箱</label>
+                            <input type="text" name="email" class="form-control" id="email">
+                        </div>
+                    </div>
+                    <div class="form-group mb-4 row">
+                        <div class="media col-2">
+                            <h6 class="align-self-center ml-auto">手机号</h6>
+                        </div>
+                        <div class="col-10">
+                            <label for="phone" class="sr-only">手机号</label>
+                            <input type="text" name="phone" class="form-control" id="phone">
+                        </div>
+                    </div>
+                    <div class="form-group mb-4 row">
+                        <div class="media col-2">
+                            <h6 class="align-self-center ml-auto">用户名</h6>
+                            <h6 class="text-danger">*</h6>
+                        </div>
+                        <div class="col-10">
+                            <label for="userID" class="sr-only">用户名</label>
+                            <input type="text" name="userID" class="form-control" id="userID" required>
+                        </div>
+                    </div>
+                    <div class="form-group mb-5 row">
+                        <div class="media col-2">
+                            <h6 class="align-self-center ml-auto">密码</h6>
+                            <h6 class="text-danger">*</h6>
+                        </div>
+                        <div class="col-10">
+                            <label for="password" class="sr-only">密码</label>
+                            <input type="text" name="password" class="form-control" id="password" required>
+                        </div>
+                    </div>
+                    <div class="mb-4 d-flex justify-content-center">
+                        <button class="btn btn-danger col-2 mr-5" type="submit">提交</button>
+                        <button class="btn btn-secondary col-2" type="reset" id="cancel">取消</button>
+                    </div>
+                </form>
+            </div>
+            <div th:include="layout/footer :: Footer"></div>
+        </main>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#cancel").click(function(){
+        window.history.back();
+    });
+</script>
+</body>
+</html>

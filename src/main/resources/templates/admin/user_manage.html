@@ -14,6 +14,7 @@
     </style>
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -25,7 +26,7 @@
             </div>
 
             <div class="col-4 mb-4">
-                <a class="btn-sm btn-primary" data-toggle="collapse" href="#collapseInput">
+                <a class="btn-sm btn-primary" data-toggle="collapse" th:href="@{user_add}">
                     <span class="glyphicon glyphicon-plus"></span>
                     添加用户
                 </a>
@@ -43,221 +44,106 @@
                         <th>操作</th>
                     </tr>
                     </thead>
-                    <tbody>
-                    <tr class="collapse" id="collapseInput">
-                        <td><input class="form-control form-control-sm"/></td>
-                        <td><input class="form-control form-control-sm"/></td>
-                        <td><input class="form-control form-control-sm"/></td>
-                        <td><input class="form-control form-control-sm"/></td>
-                        <td><input class="form-control form-control-sm"/></td>
-                        <td>
-                            <div class="d-flex justify-content-center align-items-center">
-                                <a class="btn-sm btn-primary" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-ok"></span>
-                                    完成
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,001</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>648239166@qq.com</td>
-                        <td>13759372593</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>274967394@qq.com</td>
-                        <td>13927461058</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>35347437394@qq.com</td>
-                        <td>13784622073</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>libero</td>
-                        <td>Sed</td>
-                        <td>32145767394@qq.com</td>
-                        <td>13637620653</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,004</td>
-                        <td>dapibus</td>
-                        <td>diam</td>
-                        <td>9546967394@qq.com</td>
-                        <td>13464648966</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,005</td>
-                        <td>Nulla</td>
-                        <td>quis</td>
-                        <td>23242673394@qq.com</td>
-                        <td>14564620573</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,006</td>
-                        <td>nibh</td>
-                        <td>elementum</td>
-                        <td>43537342234@qq.com</td>
-                        <td>13788560543</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,007</td>
-                        <td>sagittis</td>
-                        <td>ipsum</td>
-                        <td>2344233294@qq.com</td>
-                        <td>13723620843</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1,008</td>
-                        <td>Fusce</td>
-                        <td>nec</td>
-                        <td>8662343394@qq.com</td>
-                        <td>13324644058</td>
-                        <td>
-                            <div>
-                                <a class="btn-sm btn-info mr-2" data-toggle="collapse" href="#collapseInput">
-                                    <span class="glyphicon glyphicon-edit"></span>
-                                    修改
-                                </a>
-                                <a class="btn-sm btn-danger" th:href="@{user_manage}">
-                                    <span class="glyphicon glyphicon-trash"></span>
-                                    删除
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    <tbody id="content">
+<!--                    <tr>-->
+<!--                        <td>1,001</td>-->
+<!--                        <td>Lorem</td>-->
+<!--                        <td>ipsum</td>-->
+<!--                        <td>648239166@qq.com</td>-->
+<!--                        <td>13759372593</td>-->
+<!--                        <td>-->
+<!--                            <div>-->
+<!--                                <a class="btn-sm btn-info mr-2" href="#">-->
+<!--                                    <span class="glyphicon glyphicon-edit"></span>-->
+<!--                                    修改-->
+<!--                                </a>-->
+<!--                                <a class="btn-sm btn-danger" th:href="@{user_manage}">-->
+<!--                                    <span class="glyphicon glyphicon-trash"></span>-->
+<!--                                    删除-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                        </td>-->
+<!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
 
-            <div class="p-2 pb-3">
-                <nav class="">
-                    <ul class="pagination mb-0 justify-content-center">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+<!--            <div class="p-2 pb-3">-->
+<!--                <nav class="">-->
+<!--                    <ul class="pagination mb-0 justify-content-center">-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                <span aria-hidden="true">&laquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                        <li class="page-item">-->
+<!--                            <a class="page-link" href="#" aria-label="Next">-->
+<!--                                <span aria-hidden="true">&raquo;</span>-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </nav>-->
+<!--            </div>-->
+            <div class="d-flex justify-content-center mt-2" id="pagination-demo"></div>
             <div th:include="layout/footer :: Footer"></div>
         </main>
 
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        getPage(1);
+    });
 
+    $('#pagination-demo').twbsPagination({
+        totalPages: [[${total}]],
+        visiblePages: 5,
+        onPageClick: function (event, page) {
+            getPage(page);
+        }
+    });
+
+    function getPage(page){
+        $.ajax({//根据page去后台加载数据
+            url : "/admin/getUserList",
+            type : "get",
+            dataType : "json",
+            data : {"page" : page},
+            success : function(data) {
+                appendHtml(data);//处理数据
+                console.log(data);
+            }
+        });
+    }
+    function appendHtml(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
+        let tableShow = '';
+        for (let i = 0; i < list.length; i++) {
+            tableShow += '<tr>\n' +
+                '                        <td>'+list[i].id+'</td>\n' +
+                '                        <td>'+list[i].userID+'</td>\n' +
+                '                        <td>'+list[i].userName+'</td>\n' +
+                '                        <td>'+list[i].email+'</td>\n' +
+                '                        <td>'+list[i].phone+'</td>\n' +
+                '                        <td>\n' +
+                '                            <div>\n' +
+                '                                <a class="btn-sm btn-info mr-2" href="/modifyUser?userID="'+list[i].userID+'>\n' +
+                '                                    <span class="glyphicon glyphicon-edit"></span>\n' +
+                '                                    修改\n' +
+                '                                </a>\n' +
+                '                                <a class="btn-sm btn-danger" href="/deleteUser?userID="'+list[i].userID+'>\n' +
+                '                                    <span class="glyphicon glyphicon-trash"></span>\n' +
+                '                                    删除\n' +
+                '                                </a>\n' +
+                '                            </div>\n' +
+                '                        </td>\n' +
+                '                    </tr>';
+        }
+        $('#content').html(tableShow);
+    }
+
+</script>
 </body>
 </html>

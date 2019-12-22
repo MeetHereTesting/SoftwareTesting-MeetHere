@@ -23,36 +23,33 @@
         <div class="card-header py-3 text-center bg-info text-light">
             <h5 class="card-title mb-0">场馆信息</h5>
         </div>
-        <div id="content">
-<!--            <ul class="list-group pt-2 px-3">-->
-<!--                <li class="list-group-item px-3 pt-3 border-0" th:each="venue : ${venue_list}">-->
-<!--                    <div class="media border-bottom border-gray pb-3">-->
-<!--                        <div class="media-left mr-3">-->
-<!--                            <img th:src="${venue.picture}"-->
-<!--                                 alt="" height="100px" width="100px">-->
-<!--                        </div>-->
-<!--                        <div class="media-body">-->
-<!--                            <h5 class="media-heading font-weight-bold pb-3">-->
-<!--                                <a th:href="@{venue}" th:method="post" th:text="${venue.venueName}">场馆A</a>-->
-<!--                            </h5>-->
-<!--                            <h6 class="d-flex">-->
-<!--                                <p class="font-weight-bold mb-0">场馆位置：</p>-->
-<!--                                <p class="mb-0" th:text="${venue.address}">上海市中心人民广场的南侧黄浦区人民大道201号</p>-->
-<!--                            </h6>-->
-<!--                            <h6 class="d-flex">-->
-<!--                                <p class="font-weight-bold mb-0">开放时间：</p>-->
-<!--                                <p class="mb-0" th:text="${venue.open_time}+'~'+${venue.close_time}">09:00 a.m. ~ 17:00 p.m.</p>-->
-<!--                            </h6>-->
-<!--                            <h6 class="d-flex">-->
-<!--                                <p class="font-weight-bold mb-0">租金：</p>-->
-<!--                                <p class="mb-0" th:text="${venue.price}">￥300/h</p>-->
-<!--                            </h6>-->
-<!--                        </div>-->
+        <ul class="list-group pt-2 px-3" id="content">
+<!--            <li class="list-group-item px-3 pt-3 border-0" th:each="venue : ${venue_list}">-->
+<!--                <div class="media border-bottom border-gray pb-3">-->
+<!--                    <div class="media-left mr-3">-->
+<!--                        <img th:src="${venue.picture}"-->
+<!--                             alt="" height="100px" width="100px">-->
 <!--                    </div>-->
-<!--                </li>-->
-<!--            </ul>-->
-
-        </div>
+<!--                    <div class="media-body">-->
+<!--                        <h5 class="media-heading font-weight-bold pb-3">-->
+<!--                            <a th:href="@{venue}" th:method="post" th:text="${venue.venueName}">场馆A</a>-->
+<!--                        </h5>-->
+<!--                        <h6 class="d-flex">-->
+<!--                            <p class="font-weight-bold mb-0">场馆位置：</p>-->
+<!--                            <p class="mb-0" th:text="${venue.address}">上海市中心人民广场的南侧黄浦区人民大道201号</p>-->
+<!--                        </h6>-->
+<!--                        <h6 class="d-flex">-->
+<!--                            <p class="font-weight-bold mb-0">开放时间：</p>-->
+<!--                            <p class="mb-0" th:text="${venue.open_time}+'~'+${venue.close_time}">09:00 a.m. ~ 17:00 p.m.</p>-->
+<!--                        </h6>-->
+<!--                        <h6 class="d-flex">-->
+<!--                            <p class="font-weight-bold mb-0">租金：</p>-->
+<!--                            <p class="mb-0" th:text="${venue.price}">￥300/h</p>-->
+<!--                        </h6>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </li>-->
+        </ul>
         <div class="d-flex justify-content-center mt-2" id="pagination-demo"></div>
 
 
@@ -89,8 +86,7 @@
     function appendHtml(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
         let tableShow = '';
         for (let i = 0; i < list.length; i++) {
-            tableShow += '<ul class="list-group pt-2 px-3">\n' +
-                '            <li class="list-group-item px-3 pt-3 border-0">\n' +
+            tableShow += '<li class="list-group-item px-3 pt-3 border-0">\n' +
                 '                <div class="media border-bottom border-gray pb-3">\n' +
                 '                    <div class="media-left mr-3">\n';
             if(list[i].picture == null)
@@ -116,8 +112,7 @@
                 '                        </h6>\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
-                '            </li>\n' +
-                '        </ul>';
+                '            </li>\n';
         }
         $('#content').html(tableShow);
     }

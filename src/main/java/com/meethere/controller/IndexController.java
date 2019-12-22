@@ -76,4 +76,9 @@ public class IndexController {
     public String message_manage(Model model){
         return "admin/message_manage";
     }
+
+    @GetMapping("/user_edit")
+    public String user_edit(Model model){
+        return "admin/user_edit";
+    }
 }

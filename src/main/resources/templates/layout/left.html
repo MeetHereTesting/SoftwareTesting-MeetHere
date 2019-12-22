@@ -13,7 +13,7 @@
         </div>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item" th:if="${flag}">
-                <a class="nav-link pb-0" th:href="@{user_info}">
+                <a class="nav-link pb-0 d-flex" th:href="@{user_info}">
                     <div class="mr-2" style="width:24px; height:24px; border-radius:100%; overflow:hidden;">
                         <img class="mb-2" th:src="${user.picture} == null?'default.jpg':${user.picture}" alt="" height="24px" width="24px">
                     </div>
@@ -33,7 +33,7 @@
                 <li class="nav-item" >
                     <a class="nav-link side-link" th:href="@{admin_index}" th:classappend="${page}=='admin_index'?'active':''">
                         <span class="glyphicon glyphicon-home"></span>
-                        Dashboard
+                        首页
                     </a>
                 </li>
                 <li class="nav-item">
