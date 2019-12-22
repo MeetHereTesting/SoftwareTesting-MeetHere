@@ -56,11 +56,6 @@ public class IndexController {
         return "login";
     }
 
-    @GetMapping("/message_list")
-    public String message_list(Model model){
-        return "message_list";
-    }
-
     @GetMapping("/order_place")
     public String order_place(Model model){
         return "order_place";

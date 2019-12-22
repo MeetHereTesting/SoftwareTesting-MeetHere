@@ -4,6 +4,7 @@ import com.meethere.entity.Message;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface MessageService {
@@ -25,11 +26,17 @@ public interface MessageService {
     /**
      *user查看自己的留言
      *
-     * @param userID
      * @return
      */
-    List<Message> findByUser(String userID);
+     List<Message> findByUser(HttpServletRequest request);
 
+    /**
+     * 分页返回用户留言
+     * @param request
+     * @param pageable
+     * @return
+     */
+     Page<Message> findByUser(HttpServletRequest request,Pageable pageable);
 
     /**
      * 添加留言

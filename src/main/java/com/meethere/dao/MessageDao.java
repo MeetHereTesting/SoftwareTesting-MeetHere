@@ -1,6 +1,8 @@
 package com.meethere.dao;
 
 import com.meethere.entity.Message;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +13,7 @@ import java.util.List;
 public interface MessageDao extends JpaRepository<Message,Integer> {
     List<Message> findAllByUserID(String userID);
     Message findByMessageID(int messageID);
+   // Page<Message> findByUserID(Pageable pageable,String userID);
 
     @Transactional
     @Modifying
@@ -19,4 +22,5 @@ public interface MessageDao extends JpaRepository<Message,Integer> {
 
     @Query(value="select * from Message m where m.state=?1",nativeQuery = true)
     List<Message> findState(int state);
+
 }
