@@ -39,6 +39,9 @@ public interface OrderService {
      */
     List<Order> findUserOrder(HttpServletRequest httpRequest);
 
+
+    Page<Order> findUserOrder(HttpServletRequest httpRequest,Pageable pageable);
+
     /**
      * 更新订单状态
      *

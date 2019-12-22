@@ -30,33 +30,37 @@ public class MessageController {
     @GetMapping("/message_list")
     public String message_list(Model model,HttpServletRequest request){
         Pageable message_pageable= PageRequest.of(0,5, Sort.by("time").descending());
-        List<MessageVo> message_list=messageVoService.findAll(message_pageable);
+        Page<Message> messages=messageService.findAll(message_pageable);
+//        List<MessageVo> message_list=messageVoService.findAll(message_pageable);
+        List<MessageVo> message_list=messageVoService.returnVo(messages.getContent());
 
 //        model.addAttribute("message_list",message_list);
-        model.addAttribute("total",messageService.findAll(message_pageable).getTotalPages());
+        model.addAttribute("total",messages.getTotalPages());
 
         model.addAttribute("user_total",1);
 
-        //如果user不为空进行渲染
         if(request.getSession().getAttribute("user")!=null){
             Pageable user_message_pageable = PageRequest.of(0,5, Sort.by("time").descending());
-            List<Message> user_messages = messageService.findByUser(request,user_message_pageable).getContent();
-
-//            model.addAttribute("user_message_list",messageVoService.returnVo(user_messages));
             model.addAttribute("user_total",messageService.findByUser(request,user_message_pageable).getTotalPages());
+
         }
 
         return "message_list";
     }
 
+    //只显示通过状态的留言
     @GetMapping("/message/getMessageList")
     @ResponseBody
     public List<MessageVo> message_list(@RequestParam(value = "page",defaultValue = "1")int page){
         System.out.println("success");
         Pageable message_pageable= PageRequest.of(page-1,5, Sort.by("time").descending());
-        return messageVoService.findAll(message_pageable);
+        Page<Message> messages=messageService.findPassState(message_pageable);
+        List<MessageVo> message_list=messageVoService.returnVo(messages.getContent());
+
+        return message_list;
     }
 
+    //User的留言不管是否通过都显示
     @GetMapping("/message/findUserList")
     @ResponseBody
     public List<MessageVo> user_message_list(@RequestParam(value = "page",defaultValue = "1")int page,HttpServletRequest request){

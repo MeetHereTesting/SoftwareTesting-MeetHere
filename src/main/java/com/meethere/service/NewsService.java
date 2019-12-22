@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable
         ;
 import java.util.List;
 
-public interface NewService {
+public interface NewsService {
     Page<News> findAll(Pageable pageable);
 
     News findById(int newsID);
@@ -14,4 +14,6 @@ public interface NewService {
     int create(News news);
 
     void delById(int newsID);
+
+    void update(News news);
 }

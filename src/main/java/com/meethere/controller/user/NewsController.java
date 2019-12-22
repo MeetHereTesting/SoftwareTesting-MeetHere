@@ -1,7 +1,7 @@
 package com.meethere.controller.user;
 
 import com.meethere.entity.News;
-import com.meethere.service.NewService;
+import com.meethere.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,29 +18,29 @@ import java.util.List;
 @Controller
 public class NewsController {
     @Autowired
-    private NewService newService;
+    private NewsService newsService;
 
     @GetMapping("/news")
     public String news(Model model,int newsID){
-        News news=newService.findById(newsID);
+        News news= newsService.findById(newsID);
         model.addAttribute("news",news);
-    return "news";
-}
+        return "news";
+    }
 
-    @GetMapping("/news/getNewsList")
+    @GetMapping("/newslist/getNewsList")
     @ResponseBody
     public Page<News> news_list(@RequestParam(value = "page",defaultValue = "1")int page){
         System.out.println("success");
         Pageable news_pageable= PageRequest.of(page-1,5, Sort.by("time").descending());
-        return newService.findAll(news_pageable);
+        return newsService.findAll(news_pageable);
     }
 
     @GetMapping("/news_list")
     public String news_list(Model model){
         Pageable news_pageable= PageRequest.of(0,5, Sort.by("time").descending());
-        List<News> news_list=newService.findAll(news_pageable).getContent();
+        List<News> news_list= newsService.findAll(news_pageable).getContent();
         model.addAttribute("news_list",news_list);
-        model.addAttribute("total", newService.findAll(news_pageable).getTotalPages());
+        model.addAttribute("total", newsService.findAll(news_pageable).getTotalPages());
         return "news_list";
     }
 }

@@ -38,6 +38,10 @@ public interface MessageService {
      */
      Page<Message> findByUser(HttpServletRequest request,Pageable pageable);
 
+     Page<Message> findUserPass(HttpServletRequest request,Pageable pageable);
+
+     Page<Message> findUserUnPass(HttpServletRequest request,Pageable pageable);
+
     /**
      * 添加留言
      *
@@ -59,7 +63,9 @@ public interface MessageService {
 
     void rejectMessage(int messageID);
 
-    List<Message> findWaitState(int state);
+    Page<Message> findWaitState(Pageable pageable);
 
-    List<Message> findPassState(int state);
+    Page<Message> findPassState(Pageable pageable);
+
+    Page<Message> findRejectState(Pageable pageable);
 }

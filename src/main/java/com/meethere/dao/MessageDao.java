@@ -13,9 +13,12 @@ import java.util.List;
 public interface MessageDao extends JpaRepository<Message,Integer> {
     List<Message> findAllByUserID(String userID);
     Message findByMessageID(int messageID);
-   // Page<Message> findByUserID(Pageable pageable,String userID);
 
     Page<Message> findAllByUserID(String userID,Pageable pageable);
+
+    Page<Message> findAllByUserIDAndState(String userID,int state,Pageable pageable);
+
+    Page<Message> findAllByState(int state,Pageable pageable);
 
     @Transactional
     @Modifying

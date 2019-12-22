@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public interface MessageVoService  {
-    MessageVo findByMessageID(int messageID);
-    List<MessageVo> findByUserID(String userID);
-    List<MessageVo> findAll(Pageable pageable);
-    List<MessageVo> findUserMessage(HttpServletRequest request);
+    MessageVo returnMessageVoByMessageID(int messageID);
     List<MessageVo> returnVo(List<Message> messages);
 }

@@ -47,6 +47,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Page<Order> findUserOrder(HttpServletRequest httpRequest, Pageable pageable) {
+        Object user=httpRequest.getSession().getAttribute("user");
+        if(user==null)
+            throw new LoginException("请登录");
+        User loginUser=(User)user;;
+        return orderDao.findAllByUserID(loginUser.getUserID(),pageable);
+    }
+
+    @Override
     public void updateStates(int orderID, int state) {
         Order order=orderDao.getOne(orderID);
         order.setState(state);
