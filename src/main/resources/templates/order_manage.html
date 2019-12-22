@@ -18,7 +18,7 @@
 
 </head>
 <body>
-<div th:include="layout/header :: header(flag=${ifLogin},page='order_manage')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='order_manage')"></div>
 
 <main class="container">
     <div class="card bg-white rounded shadow">

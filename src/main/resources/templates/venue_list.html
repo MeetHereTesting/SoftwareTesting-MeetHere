@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-<div th:include="layout/header :: header(flag=${ifLogin},page='venue_list')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='venue_list')"></div>
 
 <main role="main" class="container">
     <div class="card bg-white rounded shadow">
@@ -87,8 +87,8 @@
         });
     }
     function appendHtml(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
-        var tableShow = '';
-        for (var i = 0; i < list.length; i++) {
+        let tableShow = '';
+        for (let i = 0; i < list.length; i++) {
             tableShow += '<ul class="list-group pt-2 px-3">\n' +
                 '            <li class="list-group-item px-3 pt-3 border-0">\n' +
                 '                <div class="media border-bottom border-gray pb-3">\n' +
@@ -98,7 +98,7 @@
                 '                    </div>\n' +
                 '                    <div class="media-body">\n' +
                 '                        <h5 class="media-heading font-weight-bold pb-3">\n' +
-                '                            <a href="venue?venueID='+list[i].venueID+'">'+list[i].venueName+'</a>\n' +
+                '                            <a href="/venue?venueID='+list[i].venueID+'">'+list[i].venueName+'</a>\n' +
                 '                        </h5>\n' +
                 '                        <h6 class="d-flex">\n' +
                 '                            <p class="font-weight-bold mb-0">场馆位置：</p>\n' +

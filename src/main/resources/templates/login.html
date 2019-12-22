@@ -15,16 +15,16 @@
 
 </head>
 <body>
-<div th:include="layout/header :: header(flag=false,page='login')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='login')"></div>
 
 <main class="container col-4" style="padding-top: 10%">
-    <form role="form" action="#" th:action="@{loginCheck}" method="post">
+    <form role="form" action="#" th:action="@{loginCheck.do}" method="post">
         <div class="text-center mb-5">
             <h1>用 户 登 录</h1>
         </div>
         <div class="form-group mb-4">
-            <label for="id" class="sr-only">User Name</label>
-            <input type="text" name="id" class="form-control form-control-lg" id="id" placeholder="用户名" required autofocus>
+            <label for="userID" class="sr-only">User Name</label>
+            <input type="text" name="userID" class="form-control form-control-lg" id="userID" placeholder="用户名" required autofocus>
         </div>
 
         <div class="form-group mb-4">
@@ -50,7 +50,7 @@
     //     $("form").attr("th:action", "@{index}");
     // });
     // $("form").submit(function(){
-    //     // window.history.back();
+    //     window.history.back();
     //     return false;
     // });
 

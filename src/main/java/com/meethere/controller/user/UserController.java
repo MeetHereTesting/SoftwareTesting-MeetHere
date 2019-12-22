@@ -5,10 +5,7 @@ import com.meethere.service.UserService;
 import com.meethere.service.exception.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +26,7 @@ public class UserController {
             response.sendRedirect("/index");
             }
             else if(user1.getIsadmin()==1){
-                request.getSession().setAttribute("admin",user1);
+                request.getSession().setAttribute("user",user1);
                 response.sendRedirect("/admin_index");
                 System.out.println("admin login!");
             }
@@ -46,7 +43,7 @@ public class UserController {
         return "login";
     }
 
-    @RequestMapping("/logout.do")
+    @GetMapping("/logout.do")
     public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.getSession().removeAttribute("user");
         System.out.println("log out success!");

@@ -27,11 +27,11 @@ public class VenueController {
     /**
      * 场馆详情页面
      */
-    @RequestMapping("/get.html")
+    @GetMapping("/venue")
     public String toGymPage(Model model,int venueID){
         Venue venue = venueService.findByVenueID(venueID);
         model.addAttribute("venue", venue);
-        return "vuene.html";
+        return "venue";
     }
 //
 //    @GetMapping("/venue")

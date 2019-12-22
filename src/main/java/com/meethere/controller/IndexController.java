@@ -39,7 +39,7 @@ public class IndexController {
         List<News> news_list=newService.findAll(news_pageable).getContent();
         List<MessageVo> message_list=messageVoService.findAll(message_pageable);
 
-        model.addAttribute("ifLogin", true);
+        model.addAttribute("user", null);
         model.addAttribute("news_list",news_list);
         model.addAttribute("venue_list",venue_list);
         model.addAttribute("message_list",message_list);

@@ -14,7 +14,7 @@
     </style>
 </head>
 <body>
-<div th:include="layout/header :: header(flag=${ifLogin},page='signup')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='signup')"></div>
 
 <main class="container col-4" style="padding-top: 8%">
     <form role="form" action="#" th:action="@{signupCheck}" method="post">

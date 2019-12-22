@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<div th:include="layout/header :: header(flag=true,page='user_info')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='user_info')"></div>
 
 <main class="container">
     <div class="card bg-white rounded col-8 mx-auto p-0">
@@ -29,12 +29,12 @@
                     <h6 class="align-self-center ml-auto">昵称：</h6>
                 </div>
                 <div class="col-8">
-                    <label for="nickname" class="sr-only">昵称</label>
+                    <label for="userName" class="sr-only">昵称</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">@</span>
                         </div>
-                        <input type="text" name="nickname" class="form-control" id="nickname" th:value="${user.userName}">
+                        <input type="text" name="userName" class="form-control" id="userName" th:value="${session.user.userName}">
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <h6 class="align-self-center ml-auto">用户名：</h6>
                 </div>
                 <div class="col-8">
-                    <h6 class="text-muted font-weight-normal" th:text="${user.userID}"></h6>
+                    <h6 class="text-muted font-weight-normal" th:text="${session.user.userID}"></h6>
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-8">
                     <label for="email" class="sr-only">邮箱</label>
-                    <input type="text" name="email" class="form-control" id="email" th:value="${user.email}">
+                    <input type="text" name="email" class="form-control" id="email" th:value="${session.user.email}">
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-8">
                     <label for="phone" class="sr-only">手机</label>
-                    <input type="text" name="phone" class="form-control" id="phone" th:value="${user.phone}">
+                    <input type="text" name="phone" class="form-control" id="phone" th:value="${session.user.phone}">
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -69,9 +69,9 @@
                     <h6 class="align-self-start ml-auto pt-1">头像：</h6>
                 </div>
                 <div class="col-8">
-                    <img th:src="${user.picture}" alt="" style="height: 100px; width: 100px">
-                    <label for="formControlFile" class="sr-only">Example file input</label>
-                    <input type="file" class="form-control-file mt-2" id="formControlFile">
+                    <img th:src="${session.user.picture} == null ? 'default.jpg': ${session.user.picture}" alt="" style="height: 100px; width: 100px">
+                    <label for="picture" class="sr-only">Example file input</label>
+                    <input type="file" class="form-control-file mt-2" id="picture" name="picture">
                 </div>
             </div>
             <div class="col-3 mx-auto mb-4">
@@ -119,6 +119,28 @@
     // $("form").submit(function(){
     //     console.log("success");
     // });
+
+    $("#picture").change(function (e){
+        console.log('value='+$(this).val());
+        console.log(e);
+        var fileMsg = e.currentTarget.files;
+        var fileName = fileMsg[0].name;
+        console.log(fileName);//js-dom.png
+        //大小 字节
+        var fileSize = fileMsg[0].size;
+        console.log(fileSize);//350061
+        //类型
+        var fileType = fileMsg[0].type;
+        console.log(fileType);//image/png
+        // 判断文件类型
+        // var type=(fileType.substr(fileType.lastIndexOf("."))).toLowerCase();
+        // if(type!=".jpg" && type!=".gif" && type!=".jpeg" && type!=".png"){
+        //     alert("您上传图片的类型不符合(.jpg|.jpeg|.gif|.png)！");
+        //     $('#picture').attr('value', '');
+        //     return false;
+        // }
+    });
+
 </script>
 <div th:include="layout/footer :: Footer"></div>
 </body>

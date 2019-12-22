@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div th:include="layout/header :: header(flag=${ifLogin},page='venue_list')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='venue_list')"></div>
 
 <main role="main" class="container-fluid">
     <div class="row">
@@ -31,7 +31,7 @@
                         </h6>
                         <h6 class="d-flex">
                             <p class="font-weight-bold mb-0">开放时间：</p>
-                            <p class="mb-0" th:text="${venue.openTime}+'~'+${venue.closeTime}">09:00 a.m. ~ 17:00 p.m.</p>
+                            <p class="mb-0" th:text="${venue.open_time}+'~'+${venue.close_time}">09:00 a.m. ~ 17:00 p.m.</p>
                         </h6>
                         <h6 class="d-flex">
                             <p class="font-weight-bold mb-0">租金：</p>
@@ -52,90 +52,90 @@
             </div>
         </div>
 
-        <div class="col-3">
-            <div class="card shadow">
-                <div class="card-header py-2 bg-info text-white">
-                    <h6 class="card-title mb-0">场馆信息</h6>
-                </div>
-                <ul class="list-group pt-2">
-                    <li class="list-group-item px-3 pt-3 border-0">
-                        <div class="media border-bottom border-gray pb-3">
-                            <div class="media-left mr-3">
-                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
-                                     alt="" height="50px" width="50px">
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading font-weight-bold"><a th:href="@{venue}">场馆A</a></h6>
-                                <small class="">
-                                    <strong>场馆位置：</strong>
-                                    上海市中心人民广场的南侧黄浦区人民大道201号
-                                </small><br>
-                                <small>
-                                    <strong>开放时间：</strong>
-                                    09:00 a.m. ~ 17:00 p.m.
-                                </small><br>
-                                <small>
-                                    <strong>租金：</strong>
-                                    ￥300/h
-                                </small>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-3 pt-3 border-0">
-                        <div class="media border-bottom border-gray pb-3">
-                            <div class="media-left mr-3">
-                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
-                                     alt="" height="50px" width="50px">
-                            </div>
-                            <div class="media-body">
-                                <h5 class="media-heading font-weight-bold pb-3">
-                                    <a th:href="@{venue}" th:method="post" th:text="${venue.venueName}">场馆A</a>
-                                </h5>
-                                <h6 class="d-flex">
-                                    <p class="font-weight-bold mb-0">场馆位置：</p>
-                                    <p class="mb-0" th:text="${venue.address}">上海市中心人民广场的南侧黄浦区人民大道201号</p>
-                                </h6>
-                                <h6 class="d-flex">
-                                    <p class="font-weight-bold mb-0">开放时间：</p>
-                                    <p class="mb-0" th:text="${venue.openTime}+'~'+${venue.closeTime}">09:00 a.m. ~ 17:00 p.m.</p>
-                                </h6>
-                                <h6 class="d-flex">
-                                    <p class="font-weight-bold mb-0">租金：</p>
-                                    <p class="mb-0" th:text="${venue.price}">￥300/h</p>
-                                </h6>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="list-group-item px-3 pt-3 border-0">
-                        <div class="media border-bottom border-gray pb-3">
-                            <div class="media-left mr-3">
-                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"
-                                     alt="" height="50px" width="50px">
-                            </div>
-                            <div class="media-body">
-                                <h6 class="media-heading font-weight-bold"><a th:href="@{venue}">场馆C</a></h6>
-                                <small class="">
-                                    <strong>场馆位置：</strong>
-                                    上海市中心人民广场的南侧黄浦区人民大道201号
-                                </small><br>
-                                <small>
-                                    <strong>开放时间：</strong>
-                                    09:00 a.m. ~ 17:00 p.m.
-                                </small><br>
-                                <small>
-                                    <strong>租金：</strong>
-                                    ￥300/h
-                                </small>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                <div class="card-body text-right pt-0 pb-2">
-                    <h6 class="m-0"><a th:href="@{venue_list}"><span class="badge">MORE</span></a></h6>
-                </div>
+<!--        <div class="col-3">-->
+<!--            <div class="card shadow">-->
+<!--                <div class="card-header py-2 bg-info text-white">-->
+<!--                    <h6 class="card-title mb-0">场馆信息</h6>-->
+<!--                </div>-->
+<!--                <ul class="list-group pt-2">-->
+<!--                    <li class="list-group-item px-3 pt-3 border-0">-->
+<!--                        <div class="media border-bottom border-gray pb-3">-->
+<!--                            <div class="media-left mr-3">-->
+<!--                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"-->
+<!--                                     alt="" height="50px" width="50px">-->
+<!--                            </div>-->
+<!--                            <div class="media-body">-->
+<!--                                <h6 class="media-heading font-weight-bold"><a th:href="@{venue}">场馆A</a></h6>-->
+<!--                                <small class="">-->
+<!--                                    <strong>场馆位置：</strong>-->
+<!--                                    上海市中心人民广场的南侧黄浦区人民大道201号-->
+<!--                                </small><br>-->
+<!--                                <small>-->
+<!--                                    <strong>开放时间：</strong>-->
+<!--                                    09:00 a.m. ~ 17:00 p.m.-->
+<!--                                </small><br>-->
+<!--                                <small>-->
+<!--                                    <strong>租金：</strong>-->
+<!--                                    ￥300/h-->
+<!--                                </small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="list-group-item px-3 pt-3 border-0">-->
+<!--                        <div class="media border-bottom border-gray pb-3">-->
+<!--                            <div class="media-left mr-3">-->
+<!--                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"-->
+<!--                                     alt="" height="50px" width="50px">-->
+<!--                            </div>-->
+<!--                            <div class="media-body">-->
+<!--                                <h5 class="media-heading font-weight-bold pb-3">-->
+<!--                                    <a th:href="@{venue}" th:method="post" th:text="${venue.venueName}">场馆A</a>-->
+<!--                                </h5>-->
+<!--                                <h6 class="d-flex">-->
+<!--                                    <p class="font-weight-bold mb-0">场馆位置：</p>-->
+<!--                                    <p class="mb-0" th:text="${venue.address}">上海市中心人民广场的南侧黄浦区人民大道201号</p>-->
+<!--                                </h6>-->
+<!--                                <h6 class="d-flex">-->
+<!--                                    <p class="font-weight-bold mb-0">开放时间：</p>-->
+<!--                                    <p class="mb-0" th:text="${venue.openTime}+'~'+${venue.closeTime}">09:00 a.m. ~ 17:00 p.m.</p>-->
+<!--                                </h6>-->
+<!--                                <h6 class="d-flex">-->
+<!--                                    <p class="font-weight-bold mb-0">租金：</p>-->
+<!--                                    <p class="mb-0" th:text="${venue.price}">￥300/h</p>-->
+<!--                                </h6>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="list-group-item px-3 pt-3 border-0">-->
+<!--                        <div class="media border-bottom border-gray pb-3">-->
+<!--                            <div class="media-left mr-3">-->
+<!--                                <img src="https://img.zcool.cn/community/0181bc5b20cf25a80121bbecb074ca.jpg@1280w_1l_2o_100sh.jpg"-->
+<!--                                     alt="" height="50px" width="50px">-->
+<!--                            </div>-->
+<!--                            <div class="media-body">-->
+<!--                                <h6 class="media-heading font-weight-bold"><a th:href="@{venue}">场馆C</a></h6>-->
+<!--                                <small class="">-->
+<!--                                    <strong>场馆位置：</strong>-->
+<!--                                    上海市中心人民广场的南侧黄浦区人民大道201号-->
+<!--                                </small><br>-->
+<!--                                <small>-->
+<!--                                    <strong>开放时间：</strong>-->
+<!--                                    09:00 a.m. ~ 17:00 p.m.-->
+<!--                                </small><br>-->
+<!--                                <small>-->
+<!--                                    <strong>租金：</strong>-->
+<!--                                    ￥300/h-->
+<!--                                </small>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--                <div class="card-body text-right pt-0 pb-2">-->
+<!--                    <h6 class="m-0"><a th:href="@{venue_list}"><span class="badge">MORE</span></a></h6>-->
+<!--                </div>-->
 
-            </div>
-        </div>
+<!--            </div>-->
+<!--        </div>-->
 
 
     </div>

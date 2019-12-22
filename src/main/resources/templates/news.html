@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div th:include="layout/header :: header(flag=${ifLogin},page='news_list')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='news_list')"></div>
 
 
 <main role="main" class="container-fluid">
@@ -36,19 +36,6 @@
                         教育部科技司基础处张楠楠，我校副校长孙真荣、发展规划部部长杨蓉、研究生院培养办主任陈灵犀、科技处副处长杨艳琴、
                         经济与管理学部副主任冯学钢、学校各职能部门代表以及重点实验室骨干科研人员出席了会议。会议由张楠楠主持。
                     </p>
-<!--                    <p style="text-indent: 2em">-->
-<!--                        12月11日，教育部科技司组织专家组在我校召开“统计与数据科学前沿理论及应用”教育部重点实验室建设项目验收会议。-->
-<!--                        教育部科技司基础处张楠楠，我校副校长孙真荣、发展规划部部长杨蓉、研究生院培养办主任陈灵犀、科技处副处长杨艳琴、-->
-<!--                        经济与管理学部副主任冯学钢、学校各职能部门代表以及重点实验室骨干科研人员出席了会议。会议由张楠楠主持。-->
-<!--                    </p>-->
-<!--                    <p style="text-indent: 2em">-->
-<!--                        12月11日，教育部科技司组织专家组在我校召开“统计与数据科学前沿理论及应用”教育部重点实验室建设项目验收会议。-->
-<!--                        教育部科技司基础处张楠楠，我校副校长孙真荣、发展规划部部长杨蓉、研究生院培养办主任陈灵犀、科技处副处长杨艳琴、-->
-<!--                        经济与管理学部副主任冯学钢、学校各职能部门代表以及重点实验室骨干科研人员出席了会议。会议由张楠楠主持。-->
-<!--                        12月11日，教育部科技司组织专家组在我校召开“统计与数据科学前沿理论及应用”教育部重点实验室建设项目验收会议。-->
-<!--                        教育部科技司基础处张楠楠，我校副校长孙真荣、发展规划部部长杨蓉、研究生院培养办主任陈灵犀、科技处副处长杨艳琴、-->
-<!--                        经济与管理学部副主任冯学钢、学校各职能部门代表以及重点实验室骨干科研人员出席了会议。会议由张楠楠主持。-->
-<!--                    </p>-->
                 </div>
 
                 <small class="d-block text-muted text-right mt-3">
@@ -58,20 +45,20 @@
         </div>
 
 
-        <div class="col-3">
-            <div class="bg-white rounded shadow">
-                <div class="card-header py-2 bg-danger text-white">
-                    <h6 class="card-title mb-0">新闻</h6>
-                </div>
-                <ul class="list-group pt-2">
-                    <li class="list-group-item border-0 px-3 py-2" th:each="news : ${news_list}">
-                        <div class="row mx-0 pb-2 border-bottom border-gray">
-                            <a class="ml-1" th:href="@{news}" th:text="${news.title}">2019年12月24日场馆暂时关闭通知</a>
-                            <div class="ml-auto">
-                                <span class="badge badge-secondary" th:text="${news.time}">2019-12-10</span>
-                            </div>
-                        </div>
-                    </li>
+<!--        <div class="col-3">-->
+<!--            <div class="bg-white rounded shadow">-->
+<!--                <div class="card-header py-2 bg-danger text-white">-->
+<!--                    <h6 class="card-title mb-0">新闻</h6>-->
+<!--                </div>-->
+<!--                <ul class="list-group pt-2">-->
+<!--                    <li class="list-group-item border-0 px-3 py-2" th:each="news : ${news_list}">-->
+<!--                        <div class="row mx-0 pb-2 border-bottom border-gray">-->
+<!--                            <a class="ml-1" th:href="@{news}" th:text="${news.title}">2019年12月24日场馆暂时关闭通知</a>-->
+<!--                            <div class="ml-auto">-->
+<!--                                <span class="badge badge-secondary" th:text="${news.time}">2019-12-10</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
 <!--                    <li class="list-group-item border-0 px-3 py-2">-->
 <!--                        <div class="row mx-0 pb-2 border-bottom border-gray">-->
 <!--                            <a class="ml-1" th:href="@{news}">教育部党组任命梅兵同志为华东师范大学党委书记</a>-->
@@ -96,12 +83,12 @@
 <!--                            </div>-->
 <!--                        </div>-->
 <!--                    </li>-->
-                </ul>
-                <div class="card-body text-right pt-0 pb-2">
-                    <h6 class="m-0"><a th:href="@{news_list}"><span class="badge">MORE</span></a></h6>
-                </div>
-            </div>
-        </div>
+<!--                </ul>-->
+<!--                <div class="card-body text-right pt-0 pb-2">-->
+<!--                    <h6 class="m-0"><a th:href="@{news_list}"><span class="badge">MORE</span></a></h6>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
 
 </main>

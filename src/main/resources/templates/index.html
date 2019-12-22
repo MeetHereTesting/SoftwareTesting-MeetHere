@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<div th:include="layout/header :: header(flag=${ifLogin},page='index')"></div>
+<div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='index')"></div>
 
 
 <main class="container-fluid">

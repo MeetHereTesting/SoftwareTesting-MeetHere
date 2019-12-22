@@ -5,23 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="left(page)">
+<div th:fragment="left(user,flag,page)">
 
     <nav class="navbar navbar-expand-sm navbar-dark fixed-top bg-dark shadow" role="navigation">
         <div class="navbar-header">
             <a class="navbar-brand" th:href="@{admin_index}" style="font-weight: bold">Meet Here 场馆预约管理系统</a>
         </div>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item" th:classappend="${page}=='user_info'?'active':''">
+            <li class="nav-item" th:if="${flag}">
                 <a class="nav-link pb-0" th:href="@{user_info}">
-                    <svg width="24px" height="24px">
-                        <circle cx=50% cy="50%" r="12px" fill="#007bff"></circle>
-                    </svg>
-                    Username
+                    <div class="mr-2" style="width:24px; height:24px; border-radius:100%; overflow:hidden;">
+                        <img class="mb-2" th:src="${user.picture} == null?'default.jpg':${user.picture}" alt="" height="24px" width="24px">
+                    </div>
+                    <p class="mb-0" th:text="${user.userName}"></p>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{index}" ><span class="glyphicon glyphicon-log-out"></span> 注销</a>
+                <a class="nav-link" href="/logout.do"><span class="glyphicon glyphicon-log-out"></span> 注销</a>
             </li>
         </ul>
     </nav>
