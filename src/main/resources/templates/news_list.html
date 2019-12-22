@@ -26,16 +26,7 @@
             <h5 class="card-title mb-0">新闻</h5>
         </div>
         <div id="content"></div>
-<!--        <ul class="list-group pt-2 px-3">-->
-<!--            <li class="list-group-item border-0 px-3 py-2" th:each="news : ${news_list}">-->
-<!--                <div class="row mx-0 pb-2 border-bottom border-gray">-->
-<!--                    <a class="ml-1" th:href="@{news}" th:text="${news.title}">教育部党组任命梅兵同志为华东师范大学党委书记</a>-->
-<!--                    <div class="ml-auto">-->
-<!--                        <span class="badge badge-secondary" th:text="${news_date}">2019-12-13</span>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </li>-->
-<!--        </ul>-->
+
         <div class="d-flex justify-content-center mt-2" id="pagination-demo"></div>
 
     </div>
@@ -58,7 +49,7 @@
 
     function getPage(page){
         $.ajax({//根据page去后台加载数据
-            url : "/newslist/getNewsList",
+            url : "/news/getNewsList",
             type : "get",
             dataType : "json",
             data : {"page" : page},
@@ -74,7 +65,7 @@
             tableShow += '<ul class="list-group pt-2 px-3">\n' +
                 '            <li class="list-group-item border-0 px-3 py-2">\n' +
                 '                <div class="row mx-0 pb-2 border-bottom border-gray">\n' +
-                '                    <a class="ml-1" th:href="@{news}">'+list[i].title+'</a>\n' +
+                '                    <a class="ml-1" href="/news?newsID='+list[i].newsID+'">'+list[i].title+'</a>\n' +
                 '                    <div class="ml-auto">\n' +
                 '                        <span class="badge badge-secondary">'+list[i].time+'</span>\n' +
                 '                    </div>\n' +

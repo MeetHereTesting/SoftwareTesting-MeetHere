@@ -31,7 +31,7 @@ public class IndexController {
 
     @GetMapping("/index")
     public String index(Model model){
-        Pageable venue_pageable= PageRequest.of(0,3, Sort.by("venueID").descending());
+        Pageable venue_pageable= PageRequest.of(0,5, Sort.by("venueID").ascending());
         Pageable news_pageable= PageRequest.of(0,5, Sort.by("newsID").descending());
         Pageable message_pageable= PageRequest.of(0,5, Sort.by("messageID").descending());
 

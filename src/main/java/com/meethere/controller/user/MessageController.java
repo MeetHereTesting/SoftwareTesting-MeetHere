@@ -59,7 +59,6 @@ public class MessageController {
     @ResponseBody
     public List<MessageVo> user_message_list(@RequestParam(value = "page",defaultValue = "1")int page,HttpServletRequest request){
         if(request.getSession().getAttribute("user")!=null) {
-            System.out.println("getuserlist");
             Pageable message_pageable = PageRequest.of(page - 1, 5, Sort.by("time").descending());
             List<Message> user_messages = messageService.findByUser(request, message_pageable).getContent();
             return messageVoService.returnVo(user_messages);

@@ -48,72 +48,14 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab1">
                     <div id="content1"></div>
-<!--                    <ul class="list-group pt-2 px-3">-->
-<!--                        <li class="list-group-item px-3 border-0" th:each="message : ${message_list}">-->
-<!--                            <div class="media border-bottom border-gray">-->
-<!--                                <img class="mr-2" th:src="${message.picture}"-->
-<!--                                     alt="" height="32px" width="32px">-->
-<!--                                <div class="media-body pb-3 mb-0 small">-->
-<!--                                    <strong class="d-block">@username</strong>-->
-<!--                                    <p th:text="${message.content}">-->
-<!--                                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
-<!--                                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.-->
-<!--                                    </p>-->
-<!--                                    <small class="float-right" th:text="${message.time}">2019-12-10</small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </li>-->
-<!--                    </ul>-->
+
                     <div class="d-flex justify-content-center mt-2" id="pagination1"></div>
 
                 </div>
 
                 <div class="tab-pane fade" id="tab2">
                     <div id="content2"></div>
-<!--                    <ul class="list-group">-->
-<!--                        <li class="list-group-item px-3 border-0">-->
-<!--                            <div class="dropdown float-right">-->
-<!--                                <a class="text-dark" href="#" data-toggle="dropdown">-->
-<!--                                    <span class="glyphicon glyphicon-menu-down"></span>-->
-<!--                                </a>-->
-<!--                                <div class="dropdown-menu">-->
-<!--                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage">修改</a>-->
-<!--                                    <a class="dropdown-item" href="#">删除</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="media border-bottom border-gray">-->
-<!--                                <img class="mr-2" th:src="${message.picture}"-->
-<!--                                     alt="" height="32px" width="32px">-->
-<!--                                <div class="media-body pb-3 mb-0 small">-->
-<!--                                    <strong class="d-block">@username</strong>-->
-<!--                                    <p  th:text="${message.content}">-->
-<!--                                        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,-->
-<!--                                        tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.-->
-<!--                                    </p>-->
-<!--                                    <small class="float-right" th:text="${message.time}">2019-12-10</small>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <div class="collapse" id="modifyMessage">-->
-<!--                                <form role="form" th:action="@{modifyMessage}" method="post">-->
-<!--                                    <div class="form-group">-->
-<!--                                        <label for="myMessage" class="font-weight-bold sr-only">发布留言</label>-->
-<!--                                        <textarea class="form-control" id="myMessage" rows="3" required></textarea>-->
-<!--                                    </div>-->
-<!--                                    <div class="col-3 ml-auto d-flex justify-content-end">-->
-<!--                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage" type="submit">-->
-<!--                                            完成-->
-<!--                                        </a>-->
-<!--                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage">-->
-<!--                                            取消-->
-<!--                                        </a>-->
-<!--                                    </div>-->
 
-<!--                                </form>-->
-
-<!--                            </div>-->
-
-<!--                        </li>-->
-<!--                    </ul>-->
                     <div class="d-flex justify-content-center mt-2" id="pagination2"></div>
                 </div>
             </div>
@@ -155,10 +97,12 @@
         for (let i = 0; i < list.length; i++) {
             tableShow += '<ul class="list-group pt-2 px-3">\n' +
                 '                        <li class="list-group-item px-3 border-0">\n' +
-                '                            <div class="media border-bottom border-gray">\n' +
-                '                                <img class="mr-2" th:src="'+list[i].picture+'"\n' +
-                '                                     alt="" height="32px" width="32px">\n' +
-                '                                <div class="media-body pb-3 mb-0 small">\n' +
+                '                            <div class="media border-bottom border-gray">\n';
+            if(list[i].picture == null)
+                tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
+            else
+                tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
+            tableShow += '<div class="media-body pb-3 mb-0 small">\n' +
                 '                                    <strong class="d-block">@'+list[i].userName+'</strong>\n' +
                 '                                    <p>'+list[i].content+'</p>\n' +
                 '                                    <small class="float-right">'+list[i].time+'</small>\n' +
@@ -201,29 +145,31 @@
                 '                                </a>\n' +
                 '                                <div class="dropdown-menu">\n' +
                 '                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage'+i+'">修改</a>\n' +
-                '                                    <a class="dropdown-item" href="#">删除</a>\n' +
+                '                                    <a class="dropdown-item" herf="modifyMessage?messageID='+list[i].messageID+'">删除</a>\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
-                '                            <div class="media border-bottom border-gray">\n' +
-                '                                <img class="mr-2" th:src="'+list[i].picture+'"\n' +
-                '                                     alt="" height="32px" width="32px">\n' +
-                '                                <div class="media-body pb-3 mb-0 small">\n' +
+                '                            <div class="media border-bottom border-gray">\n';
+            if(list[i].picture == null)
+                tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
+            else
+                tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
+            tableShow += '<div class="media-body pb-3 mb-0 small">\n' +
                 '                                    <strong class="d-block">@'+list[i].userName+'</strong>\n' +
                 '                                    <p>'+list[i].content+'</p>\n' +
                 '                                    <small class="float-right">'+list[i].time+'</small>\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
                 '                            <div class="collapse" id="modifyMessage'+i+'">\n' +
-                '                                <form role="form" th:action="@{modifyMessage?messageID='+list[i].messageID+'}" method="post">\n' +
+                '                                <form role="form" action="@{modifyMessage?messageID='+list[i].messageID+'}" method="post">\n' +
                 '                                    <div class="form-group">\n' +
                 '                                        <label for="myMessage'+i+'" class="font-weight-bold sr-only">发布留言</label>\n' +
                 '                                        <textarea class="form-control" id="myMessage'+i+'" rows="3" text="'+list[i].content+'" required></textarea>\n' +
                 '                                    </div>\n' +
                 '                                    <div class="col-3 ml-auto d-flex justify-content-end">\n' +
-                '                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage" type="submit">\n' +
+                '                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage'+i+'" type="submit">\n' +
                 '                                            完成\n' +
                 '                                        </a>\n' +
-                '                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage">\n' +
+                '                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage'+i+'">\n' +
                 '                                            取消\n' +
                 '                                        </a>\n' +
                 '                                    </div>\n' +

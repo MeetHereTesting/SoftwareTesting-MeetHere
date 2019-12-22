@@ -40,6 +40,7 @@ public class NewsController {
         Pageable news_pageable= PageRequest.of(0,5, Sort.by("time").descending());
         List<News> news_list=newService.findAll(news_pageable).getContent();
         model.addAttribute("news_list",news_list);
+        model.addAttribute("total", newService.findAll(news_pageable).getTotalPages());
         return "news_list";
     }
 }
