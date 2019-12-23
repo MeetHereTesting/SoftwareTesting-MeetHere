@@ -1,13 +1,13 @@
 package com.meethere.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import javax.persistence.Id;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
+
+import java.time.LocalTime;
 import java.util.Date;
 
 @Data
@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Venue {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int venueID;
 
     @Column(name="venue_name")

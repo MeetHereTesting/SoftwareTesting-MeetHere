@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -33,9 +34,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Page<Order> findAll(Pageable pageable) {
-        return orderDao.findAll(pageable);
+    public Page<Order> findAll(Pageable pageable, int state) {
+        return null;
     }
+
 
     @Override
     public List<Order> findUserOrder(HttpServletRequest httpRequest) {
@@ -63,18 +65,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void submit(int gymID, Date startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void submit(int venueID, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Object user = request.getSession().getAttribute("user");
         if (user == null)
             throw new LoginException("请登录！");
-        Venue venue =venueDao.findByVenueID(gymID);
+        Venue venue =venueDao.findByVenueID(venueID);
 
         User loginUser = (User) user;
         Order order=new Order();
         order.setState(STATE_NO_AUDIT);
         order.setHours(hours);
-        order.setVenueID(gymID);
-        order.setOrderTime(new Date());
+        order.setVenueID(venueID);
+        order.setOrderTime(LocalDateTime.now());
         order.setStartTime(startTime);
         order.setUserID(loginUser.getUserID());
         order.setTotal(hours* venue.getPrice());
@@ -110,5 +112,15 @@ public class OrderServiceImpl implements OrderService {
         if(order == null)
             throw new RuntimeException("订单不存在");
         orderDao.updateState(STATE_REJECT,order.getOrderID());
+    }
+
+    @Override
+    public Page<Order> findNoAuditOrder(Pageable pageable) {
+        return orderDao.findAllByState(STATE_NO_AUDIT,pageable);
+    }
+
+    @Override
+    public List<Order> findAuditOrder() {
+        return orderDao.findAudit(STATE_WAIT,STATE_FINISH);
     }
 }

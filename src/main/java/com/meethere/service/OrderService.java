@@ -8,6 +8,7 @@ import org.springframework.http.HttpRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,11 @@ public interface OrderService {
      * @param pageable
      * @return
      */
-    Page<Order> findAll(Pageable pageable);
+    Page<Order> findAll(Pageable pageable,int state);
+
+    Page<Order> findNoAuditOrder(Pageable pageable);
+
+    List<Order> findAuditOrder();
 
     /**
      * 查看用户的订单
@@ -56,7 +61,7 @@ public interface OrderService {
      * @param startTime
      * @param hours
      */
-    void submit(int venueID, Date startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
+    void submit(int venueID, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
     /**
      * 删除订单

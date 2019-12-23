@@ -15,6 +15,7 @@ public interface VenueService {
      */
     Venue findByVenueID(int id);
 
+    Venue findByVenueName(String venueName);
     /**
      * 分页查看所有场馆
      * @param pageable

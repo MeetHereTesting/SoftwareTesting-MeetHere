@@ -55,25 +55,9 @@ public class IndexController {
     }
 
 
-    @GetMapping("/venue_manage")
-    public String venue_manage(Model model){
-        return "admin/venue_manage";
-    }
 
-    @GetMapping("/reservation_manage")
-    public String reservation_manage(Model model){
-        return "admin/reservation_manage";
-    }
-
-
-
-    @GetMapping("/message_manage")
-    public String message_manage(Model model){
-        return "admin/message_manage";
-    }
-
-    @GetMapping("/user_edit")
-    public String user_edit(Model model){
-        return "admin/user_edit";
-    }
+//    @GetMapping("/user_edit")
+//    public String user_edit(Model model){
+//        return "admin/user_edit";
+//    }
 }

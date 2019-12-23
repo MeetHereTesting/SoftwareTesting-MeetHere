@@ -15,9 +15,14 @@ public interface OrderDao extends JpaRepository<Order,Integer> {
 
     Order findByOrderID(int orderID);
 
+    Page<Order> findAllByState(int State,Pageable pageable);
+
+    @Query(value = "select * from `order` where state = ?1 or state = ?2 ", nativeQuery = true)
+    List<Order> findAudit(int state1,int state2);
+
     Page<Order> findAllByUserID(String userID, Pageable pageable);
     @Transactional
     @Modifying
-    @Query(value="update Order o set o.state=?1 where o.orderID=?2",nativeQuery =true)
+    @Query(value="update `order` o set o.state=?1 where o.orderID=?2",nativeQuery =true)
     void updateState(int state, int orderID);
 }

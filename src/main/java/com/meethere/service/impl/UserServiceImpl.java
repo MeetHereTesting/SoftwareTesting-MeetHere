@@ -20,7 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findByUserID(Pageable pageable) {
-        return userDao.findAll(pageable);
+        return userDao.findAllByIsadmin(0,pageable);
     }
 
     @Override

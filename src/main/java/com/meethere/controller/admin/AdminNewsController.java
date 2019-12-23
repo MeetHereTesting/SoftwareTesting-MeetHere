@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Controller
@@ -30,7 +31,7 @@ public class AdminNewsController {
         News news= newsService.findById(newsID);
         news.setTitle(title);
         news.setContent(content);
-        news.setTime(new Date());
+        news.setTime(LocalDateTime.now());
         newsService.update(news);
     }
 
@@ -39,7 +40,7 @@ public class AdminNewsController {
         News news= new News();
         news.setTitle(title);
         news.setContent(content);
-        news.setTime(new Date());
+        news.setTime(LocalDateTime.now());
         newsService.create(news);
     }
 

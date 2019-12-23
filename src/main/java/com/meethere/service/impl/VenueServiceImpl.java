@@ -21,6 +21,11 @@ public class VenueServiceImpl implements VenueService {
     }
 
     @Override
+    public Venue findByVenueName(String venueName) {
+        return venueDao.findByVenueName(venueName);
+    }
+
+    @Override
     public Page<Venue> findAll(Pageable pageable) {
         return venueDao.findAll(pageable);
     }
