@@ -16,15 +16,15 @@
 <body>
 <div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='signup')"></div>
 
-<main class="container col-4" style="padding-top: 8%">
-    <form role="form" action="#" th:action="@{register.do}" method="post">
+<main class="container" style="padding-top: 8%">
+    <form class="col-6 mx-auto" role="form" action="#" th:action="@{register.do}" method="post">
         <div class="text-center mb-5">
             <h1>注 册</h1>
         </div>
 
         <div class="form-group mb-4 row">
             <div class="media col-2">
-                <h6 class="align-self-center">昵称</h6>
+                <h6 class="align-self-center ml-auto">昵称</h6>
                 <h6 class="text-danger">*</h6>
             </div>
             <div class="col-10">
@@ -39,25 +39,35 @@
         </div>
         <div class="form-group mb-4 row">
             <div class="media col-2">
-                <h6 class="align-self-center">邮箱</h6>
+                <h6 class="align-self-center ml-auto">邮箱</h6>
             </div>
             <div class="col-10">
                 <label for="email" class="sr-only">邮箱</label>
-                <input type="text" name="email" class="form-control" id="email">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><span class="glyphicon glyphicon-envelope"></span></span>
+                    </div>
+                    <input type="text" name="email" class="form-control" id="email">
+                </div>
             </div>
         </div>
         <div class="form-group mb-4 row">
             <div class="media col-2">
-                <h6 class="align-self-center">手机号</h6>
+                <h6 class="align-self-center ml-auto">手机</h6>
             </div>
             <div class="col-10">
-                <label for="phone" class="sr-only">手机号</label>
-                <input type="text" name="phone" class="form-control" id="phone">
+                <label for="phone" class="sr-only">手机</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><span class="glyphicon glyphicon-earphone"></span></span>
+                    </div>
+                    <input type="text" name="phone" class="form-control" id="phone">
+                </div>
             </div>
         </div>
         <div class="form-group mb-4 row">
             <div class="media col-2">
-                <h6 class="align-self-center">用户名</h6>
+                <h6 class="align-self-center ml-auto">用户名</h6>
                 <h6 class="text-danger">*</h6>
             </div>
             <div class="col-10">
@@ -65,9 +75,10 @@
                 <input type="text" name="userID" class="form-control" id="userID" required>
             </div>
         </div>
+        <div class="alert alert-danger col-10 ml-auto" hidden><span class="glyphicon glyphicon-info-sign"></span> 用户名已被占用，请重新输入！</div>
         <div class="form-group mb-5 row">
             <div class="media col-2">
-                <h6 class="align-self-center">密码</h6>
+                <h6 class="align-self-center ml-auto">密码</h6>
                 <h6 class="text-danger">*</h6>
             </div>
             <div class="col-10">
@@ -75,15 +86,36 @@
                 <input type="password" name="password" class="form-control" id="password" required>
             </div>
         </div>
-        <button class="btn btn-lg btn-danger btn-block col-4 m-auto" type="submit">注 册</button>
+        <button id="signup" class="btn btn-lg btn-danger btn-block col-4 m-auto" type="submit">注 册</button>
     </form>
 </main>
 
 <div th:include="layout/footer :: Footer"></div>
 <script type="text/javascript">
-    $("form").submit(function(){
-        window.history.back();
-        return false;
+    // $("form").submit(function(){
+    //     window.history.back();
+    //     return false;
+    // });
+    // $("form").submit(function () {
+    //     $(".alert").removeAttr('hidden');
+    // });
+    $("#userID").change(function () {
+        $.ajax({
+            url : "/order/getOrderList.do",
+            type : "get",
+            dataType : "json",
+            data : {"userID" : $(this).val()},
+            success : function(data) {
+                if(date){
+                    $(".alert").removeAttr('hidden');
+                    $("#signup").addClass("disabled");
+                }
+            }
+        });
+    });
+    $("#userID").change(function () {
+        $(".alert").attr('hidden', 'hidden');
+        $("#signup").removeClass("disabled");
     });
 </script>
 

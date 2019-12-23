@@ -29,20 +29,31 @@ public class AdminUserController {
 
 
     @GetMapping("/user_manage")
-    public String user_manage(){
+    public String user_manage(Model model){
+        Pageable user_pageable= PageRequest.of(0,5, Sort.by("id").ascending());
+        Page<User> users=userService.findByUserID(user_pageable);
+        model.addAttribute("total",users.getTotalPages());
         return "admin/user_manage";
     }
 
     @GetMapping("/userList.do")
     @ResponseBody
-    public Page<User> userList(@RequestParam(value = "page",defaultValue = "1")int page){
+    public List<User> userList(@RequestParam(value = "page",defaultValue = "1")int page){
         Pageable user_pageable= PageRequest.of(page-1,5, Sort.by("id").ascending());
         Page<User> users=userService.findByUserID(user_pageable);
-        return users;
+        return users.getContent();
+    }
+
+
+    @GetMapping("/user_edit")
+    public String user_edit(Model model,String userID){
+        User user=userService.findByUserID(userID);
+        model.addAttribute("user",user);
+        return "admin/user_edit";
     }
 
     @PostMapping("/addUser.do")
-    public void addUSer(String userID, String user_name, String password, String email, String phone, MultipartFile image,
+    public void addUSer(String userID,String user_name, String password, String email, String phone,
                         HttpServletRequest request, HttpServletResponse response) throws IOException{
         User user=new User();
         user.setUserID(userID);
@@ -50,5 +61,23 @@ public class AdminUserController {
         user.setPassword(password);
         user.setEmail(email);
         user.setPhone(phone);
+        userService.create(user);
+        response.sendRedirect("user_manage");
+    }
+
+    @PostMapping("/editUser.do")
+    public void editUser(String userID, String user_name, String password, String email, String phone, MultipartFile image,
+                         HttpServletRequest request, HttpServletResponse response) throws IOException{
+        User user=new User();
+        user.setUserName(user_name);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
+        userService.updateUser(user);
+    }
+
+    @PostMapping("/delUser.do")
+    public void delUser(String userID){
+        userService.delByUserID(userID);
     }
 }

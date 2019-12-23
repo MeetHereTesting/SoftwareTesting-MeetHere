@@ -18,13 +18,13 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='news_manage')"></div>
+        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='user_manage')"></div>
         <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
                 <h2>修改用户信息</h2>
             </div>
             <div class="mt-5">
-                <form class="col-6 mx-auto" role="form" action="#" th:action="@{'modifyUser.do?userID='+${user.userID}}" method="post">
+                <form class="col-6 mx-auto" role="form" action="#" th:action="@{'editUser.do?userID='+${user.userID}}" method="post">
                     <div class="form-group mb-4 row">
                         <div class="media col-2">
                             <h6 class="align-self-center ml-auto">昵称</h6>
@@ -51,10 +51,10 @@
                     </div>
                     <div class="form-group mb-4 row">
                         <div class="media col-2">
-                            <h6 class="align-self-center ml-auto">手机号</h6>
+                            <h6 class="align-self-center ml-auto">手机</h6>
                         </div>
                         <div class="col-10">
-                            <label for="phone" class="sr-only">手机号</label>
+                            <label for="phone" class="sr-only">手机</label>
                             <input type="text" name="phone" class="form-control" id="phone" th:value="${user.phone}">
                         </div>
                     </div>

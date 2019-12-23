@@ -31,13 +31,19 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="密码" required>
         </div>
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me" name="remember"> 记住密码
-            </label>
+<!--        <div class="alert alert-danger text-center" role="alert">-->
+<!--            登录失败，用户名或密码错误！-->
+<!--        </div>-->
+<!--        <div class="checkbox mb-3">-->
+<!--            <label>-->
+<!--                <input type="checkbox" value="remember-me" name="remember"> 记住密码-->
+<!--            </label>-->
+<!--        </div>-->
+        <div class="alert alert-danger" hidden><span class="glyphicon glyphicon-info-sign"></span> 用户名或密码错误，请重新输入！</div>
+        <div class="pt-4">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+
     </form>
 
 </main>
@@ -53,7 +59,13 @@
     //     window.history.back();
     //     return false;
     // });
-
+    // $("form").submit(function () {
+    //     $(".alert").removeAttr('hidden');
+    // });
+    $("input").change(function () {
+        $(".alert").attr('hidden', 'hidden');
+        // alert("登陆失败");
+    });
 </script>
 
 </body>
