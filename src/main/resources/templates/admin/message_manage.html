@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
-    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
     <style type="text/css">
         body{
             background-color: #f5f5f5;
@@ -15,6 +14,8 @@
     </style>
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
+
 </head>
 <body>
 <div class="container-fluid">
@@ -87,11 +88,11 @@
         for (let i = 0; i < list.length; i++) {
             tableShow += '<li class="list-group-item px-3 border-0">\n' +
                 '                        <div class="d-flex justify-content-end text-light">\n' +
-                '                            <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="passMessage.do?messageID='+list[i].messageID+'">\n' +
+                '                            <a class="btn-sm btn-success mr-2" data-toggle="collapse"  onclick="pass('+list[i].messageID+',this)">\n' +
                 '                                <span class="glyphicon glyphicon-ok"></span>\n' +
                 '                                通过\n' +
                 '                            </a>\n' +
-                '                            <a class="btn-sm btn-danger" data-toggle="collapse" href="rejectMessage.do?messageID='+list[i].messageID+'">\n' +
+                '                            <a class="btn-sm btn-danger" data-toggle="collapse" onclick="reject('+list[i].messageID+',this)">\n' +
                 '                                <span class="glyphicon glyphicon-remove"></span>\n' +
                 '                                驳回\n' +
                 '                            </a>\n' +
@@ -111,7 +112,50 @@
         }
         $('#content').html(tableShow);
     }
+    function pass(messageID,btn) {
+        if (!confirm("确定通过留言？")) {
+            return;
+        }
 
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "passMessage.do",
+            dataType: "Json",
+            data: {
+                messageID:messageID
+            },
+            async: false,
+            success: function (result) {
+                $(btn).parent().parent().fadeOut();
+                if (result) {
+                    alert("修改成功！");
+                }
+            }
+        });
+    }
+    function reject(messageID,btn) {
+        if (!confirm("确定驳回留言？")) {
+            return;
+        }
+
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "rejectMessage.do",
+            dataType: "Json",
+            data: {
+                messageID:messageID
+            },
+            async: false,
+            success: function (result) {
+                $(btn).parent().parent().fadeOut();
+                if (result) {
+                    alert("驳回成功！");
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
