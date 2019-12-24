@@ -28,7 +28,8 @@
                 <h2>修改场馆信息</h2>
             </div>
             <div>
-                <form class="col-10 mx-auto" role="form" th:action="@{'modifyVenue.do?venueID='+${venue.venueID}}">
+                <form class="col-10 mx-auto" role="form" th:action="@{modifyVenue.do}">
+                    <input type="text" name="vanueID" class="form-control" id="vanueID" hidden required th:text="${venue.venueID}">
                     <div class="form-group mb-4 d-flex justify-content-start">
                         <div class="col-2 align-self-center text-right">
                             <h6 class=" ml-auto">场馆名称：</h6>
