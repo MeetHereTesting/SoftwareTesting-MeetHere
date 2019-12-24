@@ -1,7 +1,9 @@
 package com.meethere.controller.admin;
 
 import com.meethere.entity.Message;
+import com.meethere.entity.vo.MessageVo;
 import com.meethere.service.MessageService;
+import com.meethere.service.MessageVoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +19,8 @@ import java.util.List;
 public class AdminMessageController {
     @Autowired
     private MessageService messageService;
+    @Autowired
+    private MessageVoService messageVoService;
 
     @GetMapping("/message_manage")
     public String message_manage(Model model){
@@ -26,30 +30,39 @@ public class AdminMessageController {
     }
 
     /**
-     * 管理员看到的留言只是未审核的留言，不进行封装，只显示留言内容，用户id，状态，时间
+     *
      * @param page
      * @return
      */
     @GetMapping("/messageList.do")
     @ResponseBody
-    public List<Message> messageList(@RequestParam(value = "page",defaultValue = "1")int page){
+    public List<MessageVo> messageList(@RequestParam(value = "page",defaultValue = "1")int page){
         Pageable message_pageable= PageRequest.of(page-1,10, Sort.by("time").descending());
-        return messageService.findWaitState(message_pageable).getContent();
+        List<Message> messages=messageService.findWaitState(message_pageable).getContent();
+        return messageVoService.returnVo(messages);
     }
 
     @PostMapping("/passMessage.do")
-    public void passMessage(int messageID){
+    @ResponseBody
+    public boolean passMessage(int messageID){
+
         messageService.confirmMessage(messageID);
+        return true;
     }
 
     @PostMapping("/rejectMessage.do")
-    public void rejectMessage(int messageID){
+    @ResponseBody
+    public boolean rejectMessage(int messageID){
+
         messageService.rejectMessage(messageID);
+        return true;
     }
 
     @RequestMapping("/delMessage.do")
-    public void delMessage(int messageID){
+    @ResponseBody
+    public boolean delMessage(int messageID){
         messageService.delById(messageID);
+        return true;
     }
 
 }
