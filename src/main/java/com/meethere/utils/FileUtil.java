@@ -7,46 +7,33 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
+import java.util.UUID;
 
 public class FileUtil {
 
     /**
      * 保存上传的文件
      *
-     * @param file
+     * @param picture
      * @return 文件下载的url
      * @throws Exception
      */
-    public static String saveFile(MultipartFile file) throws Exception {
-        if (file == null || file.isEmpty())
-            return "";
-        File target = new File("file");
-        if (!target.isDirectory()) {
-            target.mkdirs();
-        }
-        String originalFilename = file.getOriginalFilename();
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        md.update(file.getBytes());
-        String fileName = (Helper.bytesToHex(md.digest(),0,md.digest().length-1)) + "." + getPostfix(originalFilename);
-        File file1 = new File(target.getPath() + "/" + fileName);
-        Files.write(Paths.get(file1.toURI()), file.getBytes(), StandardOpenOption.CREATE_NEW);
-        return "/mall/admin/product/img/" + fileName;
-    }
+    public static String saveVenueFile(MultipartFile picture) throws Exception {
 
-    /**
-     * 获得文件的后缀名
-     *
-     * @param fileName
-     * @return
-     */
-    public static String getPostfix(String fileName) {
-        if (fileName == null || "".equals(fileName.trim())) {
-            return "";
+        // 获取文件名
+        String fileName = picture.getOriginalFilename();
+        // 获取文件的后缀名
+        String suffixName = fileName.substring(fileName.lastIndexOf("."));
+        // 文件上传后的路径
+        String filePath = "E:\\SoftwareTesting-MeetHere\\file\\venue";
+        // 解决中文问题，liunx下中文路径，图片显示问题
+        fileName = UUID.randomUUID() + suffixName;
+        File dest = new File(filePath, fileName);
+        // 检测是否存在目录
+        if (!dest.getParentFile().exists()) {
+            dest.getParentFile().mkdirs();
         }
-        if (fileName.contains(".")) {
-            return fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
-        }
-        return "";
+        picture.transferTo(dest);
+        return filePath + fileName;
     }
-
 }

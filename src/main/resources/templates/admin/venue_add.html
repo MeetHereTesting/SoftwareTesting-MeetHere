@@ -28,7 +28,7 @@
                 <h2>新增场馆</h2>
             </div>
             <div>
-                <form class="col-10 mx-auto" role="form" th:action="@{'addVenue.do?venueID='+${venue.venueID}}">
+                <form class="col-10 mx-auto" role="form" th:action="@{/addVenue.do}" th:method="POST" enctype="multipart/form-data" th:onsubmit="return checkFile()">
                     <div class="form-group mb-4 d-flex justify-content-start">
                         <div class="col-2 align-self-center text-right">
                             <h6 class=" ml-auto">场馆名称：</h6>
@@ -109,16 +109,24 @@
 </div>
 
 <script type="text/javascript">
+    function checkFile(){
+        var file=$('#picture').get(0).files[0];
+        if(!file){
+            alert("请选择图片！");
+            return false;
+        }
+        return true;
+    }
     $('textarea').each(function () {
         this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
     }).on('input', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
-    $("form").submit(function(){
-        window.history.back();
-        return false;
-    });
+    // $("form").submit(function(){
+    //     window.history.back();
+    //     return false;
+    // });
     $(function () {
         const picker1 = $('#startTime').datetimepicker({
             format: 'HH:mm ',
