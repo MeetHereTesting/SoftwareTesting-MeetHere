@@ -66,6 +66,7 @@ public class AdminVenueController {
         venue.setOpen_time(open_time);
         venue.setClose_time(close_time);
 
+        System.out.println(venueName);
         venue.setPicture(FileUtil.saveVenueFile(picture));
         int id=venueService.create(venue);
         if (id <= 0) {
@@ -78,10 +79,10 @@ public class AdminVenueController {
 
     @PostMapping("/modifyVenue.do")
     @ResponseBody
-    public void modifyVenue(String venueName, String address, String description,
+    public void modifyVenue(int venueID,String venueName, String address, String description,
                             int price, MultipartFile picture, String open_time,String close_time,HttpServletRequest request,
                             HttpServletResponse response) throws Exception {
-        Venue venue=venueService.findByVenueName(venueName);
+        Venue venue=venueService.findByVenueID(venueID);
         venue.setVenueName(venueName);
         venue.setAddress(address);
         venue.setDescription(description);
@@ -89,12 +90,11 @@ public class AdminVenueController {
         venue.setPicture(FileUtil.saveVenueFile(picture));
         venue.setOpen_time(open_time);
         venue.setClose_time(close_time);
-        venue.setPicture(FileUtil.saveVenueFile(picture));
         venueService.update(venue);
         response.sendRedirect("venue_manage");
     }
 
-    @PostMapping("/delVenue.do")
+    @GetMapping("/delVenue.do")
     public void delVenue(int venueID,HttpServletResponse response) throws IOException {
         venueService.delById(venueID);
         response.sendRedirect("venue_manage");
