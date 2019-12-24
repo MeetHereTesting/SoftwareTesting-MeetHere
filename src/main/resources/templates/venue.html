@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>场馆信息</title>
+    <title th:text="'场馆信息_'+${venue.venueName}">场馆信息</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -152,7 +152,8 @@
             window.location.href = '/login';
         }
         else{
-            window.location.href = "/order_place?venueID=\""+[[${venue.venueID}]]+"\"";
+            window.open("/order_place?venueID=\""+[[${venue.venueID}]]+"\"");
+            // window.location.href = "/order_place?venueID=\""+[[${venue.venueID}]]+"\"";
         }
     }
 </script>

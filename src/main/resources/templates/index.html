@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>MeetHere-首页</title>
+    <title>MeetHere</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <style type="text/css">
@@ -108,7 +108,8 @@
 
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
-                    <h6 class="m-0"><a th:href="@{message_list}"><span class="badge">MORE</span></a></h6>
+                    <h6 class="m-0"><a href="#" onclick="message_list()" th:href="@{message_list}"><span class="badge">MORE</span></a></h6>
+                    <div id="user" th:text="${session.user}" hidden></div>
                 </div>
             </div>
 
@@ -118,7 +119,18 @@
 </main>
 
 <div th:include="layout/footer :: Footer"></div>
-
+<script type="text/javascript">
+    function message_list(){
+        let flag = $("#user").html() == '';
+        if(flag){
+            alert("请登录！");
+            window.location.href = '/login';
+        }
+        else{
+            window.location.href = '/message_list';
+        }
+    }
+</script>
 
 </body>
 </html>

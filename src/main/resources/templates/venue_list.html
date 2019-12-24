@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>场馆信息</title>
+    <title>场馆-MeetHere</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -96,7 +96,7 @@
             tableShow += '</div>\n' +
                 '                    <div class="media-body">\n' +
                 '                        <h5 class="media-heading font-weight-bold pb-3">\n' +
-                '                            <a href="/venue?venueID='+list[i].venueID+'">'+list[i].venueName+'</a>\n' +
+                '                            <a href="/venue?venueID='+list[i].venueID+'" target="_blank">'+list[i].venueName+'</a>\n' +
                 '                        </h5>\n' +
                 '                        <h6 class="d-flex">\n' +
                 '                            <p class="font-weight-bold mb-0">场馆位置：</p>\n' +

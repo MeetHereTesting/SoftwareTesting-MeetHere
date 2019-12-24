@@ -2,10 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>留言板</title>
+    <title>留言板-MeetHere</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/jquery.twbsPagination.js}"></script>
@@ -47,7 +48,7 @@
         <div class="card-body">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="tab1">
-                    <ul class="list-group pt-2 px-3" id="content1">
+                    <ul class="list-group" id="content1">
                     </ul>
                     <div class="d-flex justify-content-center mt-2" id="pagination1"></div>
 
@@ -101,7 +102,7 @@
                 tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
             else
                 tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
-            tableShow += '<div class="media-body pb-3 mb-0 small">\n' +
+            tableShow += '<div class="media-body pb-3 mb-0">\n' +
                 '                                    <strong class="d-block">@'+list[i].userName+'</strong>\n' +
                 '                                    <p>'+list[i].content+'</p>\n' +
                 '                                    <small class="float-right">'+list[i].time+'</small>\n' +
@@ -135,22 +136,36 @@
     function appendHtml2(list) {//此函数用于处理后台返回的数据，根据自己需求来实现页面拼接
         let tableShow = '';
         for (let i = 0; i < list.length; i++) {
+            let ifPass = list[i].state;
+            console.log(list[i].state);
             tableShow += '<li class="list-group-item px-3 border-0">\n' +
-                '                            <div class="dropdown float-right">\n' +
+                '                        <div class="d-flex mb-1">\n';
+            if(list[i].state == 3){
+                tableShow +='<div class="mr-auto">\n' +
+                    '                                <small class="text-danger"><span class="glyphicon glyphicon-info-sign"></span>未通过</small>\n' +
+                    '                            </div>\n';
+            }
+            else if(list[i].state == 1){
+                tableShow += '<div class="mr-auto">\n' +
+                    '                                <small class="text-warning"><span class="glyphicon glyphicon-info-sign"></span>审核中</small>\n' +
+                    '                            </div>\n';
+            }
+            tableShow += '                            <div class="dropdown ml-auto">\n' +
                 '                                <a class="text-dark" href="#" data-toggle="dropdown">\n' +
                 '                                    <span class="glyphicon glyphicon-menu-down"></span>\n' +
                 '                                </a>\n' +
                 '                                <div class="dropdown-menu">\n' +
                 '                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage'+i+'">修改</a>\n' +
-                '                                    <a class="dropdown-item" herf="modifyMessage?messageID='+list[i].messageID+'">删除</a>\n' +
+                '                                    <a class="dropdown-item" href="modifyMessage?messageID='+list[i].messageID+'">删除</a>\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
+                '                        </div>\n' +
                 '                            <div class="media border-bottom border-gray">\n';
             if(list[i].picture == null)
                 tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
             else
                 tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
-            tableShow += '<div class="media-body pb-3 mb-0 small">\n' +
+            tableShow += '<div class="media-body pb-3 mb-0">\n' +
                 '                                    <strong class="d-block">@'+list[i].userName+'</strong>\n' +
                 '                                    <p>'+list[i].content+'</p>\n' +
                 '                                    <small class="float-right">'+list[i].time+'</small>\n' +
