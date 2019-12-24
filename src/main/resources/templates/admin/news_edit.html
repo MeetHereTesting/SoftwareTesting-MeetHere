@@ -24,7 +24,17 @@
                 <h2>修改新闻</h2>
             </div>
             <div>
-                <form class="col-10 mx-auto" role="form" th:action="@{'modifyNews.do?newsID='+${news.newsID}}">
+                <form class="col-10 mx-auto" role="form" th:action="@{modifyNews.do}" th:method="POST">
+                    <div class="form-group mb-4 d-flex justify-content-start">
+                        <div class="media">
+                            <h6 class="align-self-center ml-auto">新闻ID：</h6>
+                        </div>
+                        <div class="col-11">
+                            <label for="newsID" class="sr-only">新闻ID</label>
+                            <input type="text" name="newsID" class="form-control" id="newsID" hidden required th:value="${news.newsID}"  th:text="${news.newsID}" >
+                        </div>
+                    </div>
+
                     <div class="form-group mb-4 d-flex justify-content-start">
                         <div class="media">
                             <h6 class="align-self-center ml-auto">标题：</h6>
@@ -40,7 +50,7 @@
                         </div>
                         <div class="col-11">
                             <label for="content" class="sr-only">正文</label>
-                            <textarea class="form-control" id="content" name="content" rows="10" required th:text="${news.content}"></textarea>
+                            <textarea class="form-control" id="content" name="content" rows="10" required  th:text="${news.content}"></textarea>
                         </div>
                     </div>
                     <div class="mb-4 d-flex justify-content-center">

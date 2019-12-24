@@ -32,8 +32,15 @@ public class AdminNewsController {
     }
 
     @RequestMapping("/news_add")
-    public String venue_add(){
+    public String news_add(){
         return "/admin/news_add";
+    }
+
+    @RequestMapping("/news_edit")
+    public String news_edit(int newsID,Model model){
+        News news=newsService.findById(newsID);
+        model.addAttribute("news",news);
+        return "/admin/news_edit";
     }
 
     @RequestMapping("/newsList.do")
@@ -45,16 +52,23 @@ public class AdminNewsController {
     }
 
     @PostMapping("/delNews.do")
-    public void delNews(int newsID){
+    @ResponseBody
+    public boolean delNews(int newsID){
         newsService.delById(newsID);
+        return true;
+
     }
 
-    @PostMapping("/modeifyNews.do")
+    @PostMapping("/modifyNews.do")
     public void modifyNews(int newsID,String title,String content,HttpServletResponse response) throws IOException {
         News news= newsService.findById(newsID);
+        System.out.println("1");
         news.setTitle(title);
+        System.out.println("2");
         news.setContent(content);
+        System.out.println("3");
         news.setTime(LocalDateTime.now());
+        System.out.println("4");
         newsService.update(news);
         response.sendRedirect("news_manage");
     }
