@@ -23,7 +23,7 @@
         <div class="card-header py-3 text-center bg-primary text-light">
             <h5 class="card-title mb-0">我的信息</h5>
         </div>
-        <form class="my-5 col-8 mx-auto" role="form" th:action="@{'updateUser.do?userID='+ ${session.user.userID}}" method="post">
+        <form class="my-5 col-8 mx-auto" role="form" th:action="@{updateUser.do}" method="post">
             <div class="form-group mb-4 row">
                 <div class="media col-3">
                     <h6 class="align-self-center ml-auto">昵称：</h6>
