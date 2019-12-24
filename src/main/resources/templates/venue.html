@@ -48,7 +48,8 @@
                         现位于上海市中心人民广场的南侧黄浦区人民大道201号。
                     </p>
                 </div>
-                <a class="btn btn-warning btn-block col-2 ml-auto" th:href="@{order_place}" type="submit">预约</a>
+                <a class="btn btn-warning btn-block col-2 ml-auto" href="#" onclick="order_venue()" type="submit">预约</a>
+                <div id="user" th:text="${session.user}" hidden></div>
             </div>
         </div>
 
@@ -143,7 +144,18 @@
 </main>
 
 <div th:include="layout/footer :: Footer"></div>
-
+<script type="text/javascript">
+    function order_venue(){
+        let flag = $("#user").html() == '';
+        if(flag){
+            alert("请登录！");
+            window.location.href = '/login';
+        }
+        else{
+            window.location.href = "/order_place?venueID=\""+[[${venue.venueID}]]+"\"";
+        }
+    }
+</script>
 
 </body>
 </html>

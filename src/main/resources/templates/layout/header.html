@@ -24,15 +24,15 @@
                 <li class="nav-item dropdown" th:classappend="${page}=='order_place' or ${page}=='order_manage'?'active':''">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown" data-toggle="dropdown">预约管理</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" th:href="@{order_place}">场馆预约</a>
-                        <a class="dropdown-item" th:href="@{order_manage}">订单管理</a>
+                        <a class="dropdown-item loginfirst" href="#" th:onclick="'javascript:order_place('+${flag}+')'">场馆预约</a>
+                        <a class="dropdown-item loginfirst" href="#" th:onclick="'javascript:order_manage('+${flag}+')'">订单管理</a>
                     </div>
                 </li>
                 <li class="nav-item" th:classappend="${page}=='news_list'?'active':''">
                     <a class="nav-link" th:href="@{news_list}">新闻</a>
                 </li>
                 <li class="nav-item" th:classappend="${page}=='message_list'?'active':''">
-                    <a class="nav-link" th:href="@{message_list}">留言板</a>
+                    <a class="nav-link loginfirst" href="#" th:onclick="'javascript:message_list('+${flag}+')'">留言板</a>
                 </li>
             </ul>
             <div th:if="${flag}">
@@ -63,6 +63,35 @@
 
         </div>
     </nav>
+    <script type="text/javascript">
+        function message_list(flag){
+            if(!flag){
+                alert("请登录！");
+                window.location.href = '/login';
+            }
+            else{
+                window.location.href = '/message_list';
+            }
+        }
+        function order_manage(flag){
+            if(!flag){
+                alert("请登录！");
+                window.location.href = '/login';
+            }
+            else{
+                window.location.href = '/order_manage';
+            }
+        }
+        function order_place(flag){
+            if(!flag){
+                alert("请登录！");
+                window.location.href = '/login';
+            }
+            else{
+                window.location.href = '/order_place';
+            }
+        }
+    </script>
 </div>
 </body>
 </html>
