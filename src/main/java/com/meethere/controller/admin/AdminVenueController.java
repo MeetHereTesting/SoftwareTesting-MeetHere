@@ -15,7 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 public class AdminVenueController {
@@ -23,18 +26,23 @@ public class AdminVenueController {
     private VenueService venueService;
 
 
-    @GetMapping("/venue_manage")
+    @RequestMapping("/venue_manage")
     public String venue_manage(Model model){
         Pageable pageable= PageRequest.of(0,10, Sort.by("venueID").ascending());
         model.addAttribute("total",venueService.findAll(pageable).getTotalPages());
         return "admin/venue_manage";
     }
 
-    @RequestMapping("/admin/venue_edit")
+    @RequestMapping("/venue_edit")
     public String editVenue(Model model,int venueID){
         Venue venue=venueService.findByVenueID(venueID);
         model.addAttribute("venue",venue);
         return "/admin/venue_edit";
+    }
+
+    @RequestMapping("/venue_add")
+    public String venue_add(){
+        return "/admin/venue_add";
     }
 
     @GetMapping("/venueList.do")
@@ -48,48 +56,48 @@ public class AdminVenueController {
     @PostMapping("/addVenue.do")
     @ResponseBody
     public void addVenue(String venueName, String address, String description,
-                         int price, MultipartFile image, String open_time,String close_time,HttpServletRequest request,
+                         int price, MultipartFile picture, String open_time,String close_time,HttpServletRequest request,
                          HttpServletResponse response) throws Exception {
         Venue venue=new Venue();
         venue.setVenueName(venueName);
         venue.setAddress(address);
         venue.setDescription(description);
         venue.setPrice(price);
-        String imgUrl = FileUtil.saveFile(image);
-        venue.setPicture(imgUrl);
-        int id = venueService.create(venue);
+        venue.setOpen_time(open_time);
+        venue.setClose_time(close_time);
+
+        venue.setPicture(FileUtil.saveVenueFile(picture));
+        int id=venueService.create(venue);
         if (id <= 0) {
             request.setAttribute("message", "添加失败！");
-            request.getRequestDispatcher(".html").forward(request, response);
+            response.sendRedirect("venue_add");
         } else {
-            request.getRequestDispatcher("toEdit.html?id=" + id).forward(request, response);
+            response.sendRedirect("venue_manage");
         }
     }
 
     @PostMapping("/modifyVenue.do")
-    public void modifyVenue(int venueID, String venueName, String address, String description,
-                            int price, MultipartFile image, String open_time,String close_time,HttpServletRequest request,
-                            HttpServletResponse response){
-        Venue venue=venueService.findByVenueID(venueID);
+    @ResponseBody
+    public void modifyVenue(String venueName, String address, String description,
+                            int price, MultipartFile picture, String open_time,String close_time,HttpServletRequest request,
+                            HttpServletResponse response) throws Exception {
+        Venue venue=venueService.findByVenueName(venueName);
         venue.setVenueName(venueName);
         venue.setAddress(address);
         venue.setDescription(description);
         venue.setPrice(price);
-//        if (StringUtils.isNotBlank(imgUrl)) {
-//            product.setImage(imgUrl);
-//        }
-//        boolean flag = false;
-//        try {
-//            productService.update(product);
-//            flag = true;
-//        } catch (Exception e) {
-//            throw new Exception(e);
-//        }
-//        if (!flag) {
-//            request.setAttribute("message", "更新失败！");
-//        }
-//        response.sendRedirect("toList.html");
-//
+        venue.setPicture(FileUtil.saveVenueFile(picture));
+        venue.setOpen_time(open_time);
+        venue.setClose_time(close_time);
+        venue.setPicture(FileUtil.saveVenueFile(picture));
+        venueService.update(venue);
+        response.sendRedirect("venue_manage");
+    }
+
+    @PostMapping("/delVenue.do")
+    public void delVenue(int venueID,HttpServletResponse response) throws IOException {
+        venueService.delById(venueID);
+        response.sendRedirect("venue_manage");
     }
 
 }
