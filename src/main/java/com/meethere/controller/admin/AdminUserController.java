@@ -30,34 +30,52 @@ public class AdminUserController {
 
     @GetMapping("/user_manage")
     public String user_manage(Model model){
-        Pageable user_pageable= PageRequest.of(0,5, Sort.by("id").ascending());
+        Pageable user_pageable= PageRequest.of(0,10, Sort.by("id").ascending());
         Page<User> users=userService.findByUserID(user_pageable);
         model.addAttribute("total",users.getTotalPages());
         return "admin/user_manage";
     }
 
+    @GetMapping("/user_add")
+    public String user_add(){
+        return "admin/user_add";
+    }
+
     @GetMapping("/userList.do")
     @ResponseBody
     public List<User> userList(@RequestParam(value = "page",defaultValue = "1")int page){
-        Pageable user_pageable= PageRequest.of(page-1,5, Sort.by("id").ascending());
+        Pageable user_pageable= PageRequest.of(page-1,10, Sort.by("id").ascending());
         Page<User> users=userService.findByUserID(user_pageable);
         return users.getContent();
     }
 
 
     @GetMapping("/user_edit")
-    public String user_edit(Model model,String userID){
-        User user=userService.findByUserID(userID);
+    public String user_edit(Model model,int id){
+        User user=userService.findById(id);
         model.addAttribute("user",user);
         return "admin/user_edit";
     }
 
+    @PostMapping("/modifyUser.do")
+    public void modifyUSer(String userID,String userName, String password, String email, String phone,
+                        HttpServletRequest request, HttpServletResponse response) throws IOException{
+        User user=userService.findByUserID(userID);
+        user.setUserID(userID);
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
+        userService.updateUser(user);
+        response.sendRedirect("user_manage");
+    }
+
     @PostMapping("/addUser.do")
-    public void addUSer(String userID,String user_name, String password, String email, String phone,
+    public void addUSer(String userID,String userName, String password, String email, String phone,
                         HttpServletRequest request, HttpServletResponse response) throws IOException{
         User user=new User();
         user.setUserID(userID);
-        user.setUserName(user_name);
+        user.setUserName(userName);
         user.setPassword(password);
         user.setEmail(email);
         user.setPhone(phone);
@@ -77,7 +95,9 @@ public class AdminUserController {
     }
 
     @PostMapping("/delUser.do")
-    public void delUser(String userID){
-        userService.delByUserID(userID);
+    @ResponseBody
+    public boolean delUser(int id){
+        userService.delByID(id);
+        return true;
     }
 }

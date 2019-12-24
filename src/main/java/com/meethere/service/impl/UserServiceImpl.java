@@ -19,6 +19,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findById(int id) {
+        return userDao.findById(id);
+    }
+
+    @Override
     public Page<User> findByUserID(Pageable pageable) {
         return userDao.findAllByIsadmin(0,pageable);
     }
@@ -35,12 +40,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delByUserID(String userID) {
-        userDao.deleteByUserID(userID);
+    public void delByID(int id) {
+        userDao.deleteById(id);
     }
+
 
     @Override
     public void updateUser(User user) {
         userDao.save(user);
+    }
+
+    @Override
+    public int countUserID(String userID) {
+        return userDao.countByUserID(userID);
     }
 }
