@@ -20,6 +20,8 @@ public class FileUtil {
      */
     public static String saveVenueFile(MultipartFile picture) throws Exception {
 
+        if(picture.isEmpty())
+            return "";
         // 获取文件名
         String fileName = picture.getOriginalFilename();
         // 获取文件的后缀名
