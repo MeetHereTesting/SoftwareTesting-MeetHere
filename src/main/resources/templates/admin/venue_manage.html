@@ -113,7 +113,7 @@
                 '                                    <span class="glyphicon glyphicon-edit"></span>\n' +
                 '                                    修改\n' +
                 '                                </a>\n' +
-                '                                <a class="btn-sm btn-danger" href="/delVenue.do?venueID='+list[i].venueID+'" methods="POST">\n' +
+                '                                <a class="btn-sm btn-danger" href="#" onclick="del('+list[i].venueID+',this)">\n' +
                 '                                    <span class="glyphicon glyphicon-trash"></span>\n' +
                 '                                    删除\n' +
                 '                                </a>\n' +
@@ -123,7 +123,28 @@
         }
         $('#content').html(tableShow);
     }
+    function del(venueID,btn) {
+        if (!confirm("确定删除该场馆？")) {
+            return;
+        }
 
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "delVenue.do",
+            dataType: "Json",
+            data: {
+                venueID:venueID
+            },
+            async: false,
+            success: function (result) {
+                $(btn).parent().parent().parent().fadeOut();
+                if (result) {
+                    alert("删除成功！");
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

@@ -94,10 +94,11 @@ public class AdminVenueController {
         response.sendRedirect("venue_manage");
     }
 
-    @GetMapping("/delVenue.do")
-    public void delVenue(int venueID,HttpServletResponse response) throws IOException {
+    @PostMapping("/delVenue.do")
+    @ResponseBody
+    public boolean delVenue(int venueID) throws IOException {
         venueService.delById(venueID);
-        response.sendRedirect("venue_manage");
+        return true;
     }
 
 }
