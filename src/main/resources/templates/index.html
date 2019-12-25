@@ -50,7 +50,7 @@
                             </div>
                             <div class="media-body">
                                 <h5 class="media-heading font-weight-bold pb-3">
-                                    <a th:href="@{'venue?venueID='+${venue.venueID}}" th:text="${venue.venueName}">场馆A</a>
+                                    <a th:href="@{'venue?venueID='+${venue.venueID}}" target="_blank" th:text="${venue.venueName}">场馆A</a>
                                 </h5>
                                 <h6 class="d-flex">
                                     <p class="font-weight-bold mb-0">场馆位置：</p>
@@ -85,7 +85,7 @@
                 <ul class="list-group pt-2">
                     <li class="list-group-item border-0 px-3 py-2" th:each="news : ${news_list}">
                         <div class="row mx-0 pb-2 border-bottom border-gray">
-                            <a class="ml-1" th:href="@{'news?newsID='+${news.newsID}}" th:text="${news.title}">2019年12月24日场馆暂时关闭通知</a>
+                            <a class="ml-1" th:href="@{'news?newsID='+${news.newsID}}" target="_blank" th:text="${news.title}">2019年12月24日场馆暂时关闭通知</a>
                             <div class="ml-auto">
                                 <span class="badge badge-secondary" th:text="${#temporals.format(news.time, 'yyyy-MM-dd HH:mm:ss')}">2019-12-10</span>
                             </div>

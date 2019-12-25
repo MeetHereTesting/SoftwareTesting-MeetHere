@@ -47,12 +47,13 @@
         .selected{
             background-color: #007bff;
         }
-        .banned{
-            background-color: #eeeeee;
-        }
         .occupied{
             background-color: #dc3545;
         }
+        .banned{
+            background-color: #eeeeee;
+        }
+
         html {
             overflow-y: scroll;
         }
@@ -119,7 +120,9 @@
 
             </div>
             <div class="d-flex justify-content-center">
-                <ul class="timebar">
+                <ul class="timebar d-flex">
+                    <li class="time-item" id="6">6:00</li>
+                    <li class="time-item" id="7">7:00</li>
                     <li class="time-item" id="8">8:00</li>
                     <li class="time-item" id="9">9:00</li>
                     <li class="time-item" id="10">10:00</li>
@@ -151,7 +154,6 @@
 
     $(document).ready(function(){
 
-
         let moveSelected=$('#moveSelected')[0];
         let ifDrag=false;//是搜开启拖拽的标志
         let oldLeft=0;//鼠标按下时的left,top
@@ -167,6 +169,8 @@
         let selectedOrderList=[];//向后台请求的订单列表
         let venueName = $("#venueName").val();
         let date = $("#date").val();
+        let now = new Date().getHours();
+        let today = date;
         let selectedVenue = null;
 
         $('#date').datetimepicker().on('dp.change', function () {
@@ -179,6 +183,12 @@
             getOrderList();
         });
 
+        if(venueName != ''){
+            // console.log("ready");
+            getOrderList();
+        }
+
+
         function getOrderList() {
             console.log(date);
             console.log(venueName);
@@ -186,13 +196,12 @@
                 url : "/order/getOrderList.do",
                 type : "get",
                 dataType : "json",
-                data : {"date" : date, "venueName" : venueName},
+                data : {"venueName" : venueName, "date" : date},
                 success : function(data) {
                     console.log(data);
                     selectedOrderList = data.orders;
                     selectedVenue = data.venue;
                     resetTimebar();//处理数据
-                    console.log(data);
                 }
             });
         }
@@ -203,19 +212,27 @@
             if(selectedVenue != null){//设置开放时间
                 let start = parseInt(selectedVenue.open_time.slice(0,2), 10);
                 let end = parseInt(selectedVenue.close_time.slice(0,2), 10);
-                setTimeItem(start, end, '.banned');
+                if(today == date && start <= now)
+                    setTimeItem(6, now+1, 'banned');
+                else
+                    setTimeItem(6, start, 'banned');
+                setTimeItem(end, 23, 'banned');
+            }
+            for (let i = 0; i < selectedOrderList.length; i++) {//设置已被预约时间
+                let start = parseInt(selectedOrderList[i].startTime.slice(11,13), 10);
+                let end = start + selectedOrderList[i].hours;
+                setTimeItem(start, end, 'occupied');
             }
 
-            for (let i = 0; i < selectedOrderList.length; i++) {//设置已被预约时间
-                let start = selectedOrderList[i].startTime.getHour();
-                let end = start + selectedOrderList[i].hours;
-                setTimeItem(start, end, '.occupied');
-            }
+
+
+
         }
 
         function setTimeItem(start, end, type){
             for(let i = start; i < end; i++){
-                $("\"#"+i+"\"").addClass(type);
+                let id = '#' + i;
+                $(id).addClass(type);
             }
         }
 
