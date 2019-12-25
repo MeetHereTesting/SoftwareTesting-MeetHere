@@ -65,8 +65,8 @@ public class OrderController {
 
     @PostMapping("/addOrder")
     public void addOrder(String venueName, String date, String startTime, int hours,HttpServletRequest request, HttpServletResponse response) throws Exception {
-        date=date+" "+startTime;
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        date=startTime;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
         orderService.submit(venueName,ldt,hours,request,response);
 
@@ -83,14 +83,15 @@ public class OrderController {
         Order order=orderService.findById(orderID);
         Venue venue=venueService.findByVenueID(order.getVenueID());
         model.addAttribute("venue",venue);
-        return "order_place";
+        model.addAttribute("order",order);
+        return "order_edit";
     }
 
     @PostMapping("/modifyOrder")
     @ResponseBody
-    public void modifyOrder(int orderID,String venueName, String date, String startTime, int hours,HttpServletRequest request, HttpServletResponse response) throws Exception {
-        date=date+" "+startTime;
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    public void modifyOrder(String venueName, String date, String startTime, int hours,int orderID, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        date=startTime;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
         orderService.updateOrder(orderID,venueName,ldt,hours,request,response);
 

@@ -27,7 +27,7 @@ public class NewsController {
         return "news";
     }
 
-    @GetMapping("/newsList/getNewsList")
+    @GetMapping("/news/getNewsList")
     @ResponseBody
     public Page<News> news_list(@RequestParam(value = "page",defaultValue = "1")int page){
         System.out.println("success");
