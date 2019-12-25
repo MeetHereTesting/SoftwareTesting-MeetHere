@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,10 +75,24 @@ public class UserController {
 
     @PostMapping("/updateUser.do")
     @ResponseBody
-    public boolean updateUser(){
+    public boolean updateUser(String userName, String userID, String password,String email, String phone, MultipartFile picture){
+        User user=userService.findByUserID(userID);
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
+        userService.updateUser(user);
         return true;
     }
 
+
+    @GetMapping("/checkPassword.do")
+    @ResponseBody
+    public boolean checkPassword(String userID,String password)
+    {
+        User user=userService.findByUserID(userID);
+        return user.getPassword().equals(password);
+    }
 
     @GetMapping("/user_info")
     public String user_info(Model model){

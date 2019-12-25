@@ -160,7 +160,7 @@
                 '                                </a>\n' +
                 '                                <div class="dropdown-menu">\n' +
                 '                                    <a class="dropdown-item" data-toggle="collapse" href="#modifyMessage'+i+'">修改</a>\n' +
-                '                                    <a class="dropdown-item" href="modifyMessage?messageID='+list[i].messageID+'">删除</a>\n' +
+                '                                    <a class="dropdown-item" href="#"  onclick="del('+list[i].messageID+',this)">删除</a>\n' +
                 '                                </div>\n' +
                 '                            </div>\n' +
                 '                        </div>\n' +
@@ -176,13 +176,17 @@
                 '                                </div>\n' +
                 '                            </div>\n' +
                 '                            <div class="collapse" id="modifyMessage'+i+'">\n' +
-                '                                <form role="form" action="@{modifyMessage?messageID='+list[i].messageID+'}" method="post">\n' +
+                '                                <form role="form" >\n' +
+                '                                    <div class="form-group">\n' +
+                '                                        <label for="myMessage'+i+'" class="font-weight-bold sr-only"></label>\n' +
+                '                                        <input type="text" name="messageID" class="form-control" id="messageID'+i+'" required hidden th:value="'+list[i].messageID+'">' +
+                '                                    </div>\n' +
                 '                                    <div class="form-group">\n' +
                 '                                        <label for="myMessage'+i+'" class="font-weight-bold sr-only">发布留言</label>\n' +
-                '                                        <textarea class="form-control" id="myMessage'+i+'" rows="3" text="'+list[i].content+'" required></textarea>\n' +
+                '                                        <textarea class="form-control" name="content" id="myMessage'+i+'" rows="3" required>'+list[i].content+'</textarea>\n' +
                 '                                    </div>\n' +
                 '                                    <div class="col-3 ml-auto d-flex justify-content-end">\n' +
-                '                                        <a class="btn btn-primary mr-2" data-toggle="collapse" href="#modifyMessage'+i+'" type="submit">\n' +
+                '                                        <a class="btn btn-primary mr-2" data-toggle="collapse"  type="submit" onclick="modify('+list[i].messageID+','+i+',this)">\n' +
                 '                                            完成\n' +
                 '                                        </a>\n' +
                 '                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage'+i+'">\n' +
@@ -197,6 +201,54 @@
                 '                        </li>\n';
         }
         $('#content2').html(tableShow);
+    }
+    function del(messageID,btn) {
+        if (!confirm("确定删除该留言？")) {
+            return;
+        }
+
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/delMessage.do",
+            dataType: "Json",
+            data: {
+                messageID:messageID
+            },
+            async: false,
+            success: function (result) {
+                if (result) {
+                    $(btn).parent().parent().parent().parent().fadeOut();
+                    alert("删除成功！");
+                }
+            }
+        });
+    }
+    function modify(messageID,i,btn) {
+        if (!confirm("确定修改该信息？")) {
+            return;
+        }
+
+        var s="#myMessage"+i;
+        var content=$(s).val();
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/modifyMessage.do",
+            dataType: "Json",
+            data: {
+                messageID:messageID,
+                content:content
+            },
+            async: false,
+            success: function (result) {
+
+                if (result) {
+                    alert("修改成功！");
+                    alert("请刷新！")
+                }
+            }
+        });
     }
 </script>
 

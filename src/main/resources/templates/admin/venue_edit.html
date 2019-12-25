@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-7">
                             <label for="venueName" class="sr-only">场馆名称</label>
-                            <input type="text" name="venueName" class="form-control" id="venueName" required th:text="${venue.venueName}" >
+                            <input type="text" name="venueName" class="form-control" id="venueName" required th:value="${venue.venueName}" >
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-7">
                             <label for="address" class="sr-only">位置</label>
-                            <input type="text" name="address" class="form-control" id="address" required th:text="${venue.address}">
+                            <input type="text" name="address" class="form-control" id="address" required th:value="${venue.address}">
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -67,7 +67,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">￥</div>
                                 </div>
-                                <input type="text" name="price" class="form-control" id="price" required th:text="${venue.price}">
+                                <input type="text" name="price" class="form-control" id="price" required th:value="${venue.price}">
                             </div>
                         </div>
                     </div>
@@ -78,12 +78,12 @@
                         <div class="col-10 d-flex justify-content-start">
                             <div class="date col-4 pl-0">
                                 <label for="startTime" class="sr-only">开始时间</label>
-                                <input type="text" id="startTime" name="open_time" class="form-control" required th:text="${venue.open_time}">
+                                <input type="text" id="startTime" name="open_time" class="form-control" required th:value="${venue.open_time}">
                             </div>
                             <h6 class="align-self-center strong h4">~</h6>
                             <div class="date col-4 pr-0">
                                 <label for="endTime" class="sr-only">结束时间</label>
-                                <input type="text" id="endTime" name="close_time" class="form-control" required th:text="${venue.close_time}">
+                                <input type="text" id="endTime" name="close_time" class="form-control" required th:value="${venue.close_time}">
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                             <h6 class="ml-auto">图片：</h6>
                         </div>
                         <div class="col-10">
-                            <img src="image.JPG" alt="" style="height: 100px; width: 100px">
+                            <img th:src="@{${venue.picture}}" alt="" style="height: 100px; width: 100px">
                             <label for="picture" class="sr-only">Example file input</label>
                             <input type="file" class="form-control-file mt-2" id="picture" name="picture" th:value="${venue.picture}">
                         </div>

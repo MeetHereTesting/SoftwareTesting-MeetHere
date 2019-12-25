@@ -2,9 +2,11 @@ package com.meethere.controller.user;
 
 import com.meethere.entity.News;
 import com.meethere.entity.Order;
+import com.meethere.entity.Venue;
 import com.meethere.entity.vo.OrderVo;
 import com.meethere.service.OrderService;
 import com.meethere.service.OrderVoService;
+import com.meethere.service.VenueService;
 import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +26,8 @@ public class OrderController {
     private OrderService orderService;
     @Autowired
     private OrderVoService orderVoService;
+    @Autowired
+    private VenueService venueService;
 
     @GetMapping("/order_manage")
     public String order_manage(Model model,HttpServletRequest request){
@@ -31,6 +35,14 @@ public class OrderController {
         Page<Order> page=orderService.findUserOrder(request,order_pageable);
         model.addAttribute("total",page.getTotalPages());
         return "order_manage";
+    }
+
+    @GetMapping("/order_place.do")
+    public String order_place(Model model,int venueID) {
+
+        Venue venue=venueService.findByVenueID(venueID);
+        model.addAttribute("venue",venue);
+        return "order_place";
     }
 
     @GetMapping("/order_place")

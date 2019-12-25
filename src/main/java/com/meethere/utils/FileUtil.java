@@ -1,8 +1,10 @@
 package com.meethere.utils;
 
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -20,22 +22,50 @@ public class FileUtil {
      */
     public static String saveVenueFile(MultipartFile picture) throws Exception {
 
-        if(picture.isEmpty())
+        if (picture.isEmpty())
             return "";
-        // 获取文件名
-        String fileName = picture.getOriginalFilename();
-        // 获取文件的后缀名
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));
-        // 文件上传后的路径
-        String filePath = "E:\\SoftwareTesting-MeetHere\\file\\venue";
-        // 解决中文问题，liunx下中文路径，图片显示问题
-        fileName = UUID.randomUUID() + suffixName;
-        File dest = new File(filePath, fileName);
-        // 检测是否存在目录
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
+        String fileDirPath = new String("src/main/resources/" + "static/file/venue");
+
+        File fileDir = new File(fileDirPath);
+        if (!fileDir.exists()) {
+            // 递归生成文件夹
+            fileDir.mkdirs();
         }
-        picture.transferTo(dest);
-        return filePath + fileName;
+
+        String filename = picture.getOriginalFilename();
+
+        System.out.println(fileDir.getAbsolutePath());
+        String suffixName = filename.substring(filename.lastIndexOf("."));
+        filename = UUID.randomUUID() + suffixName;
+        File newFile = new File(fileDir.getAbsolutePath() + File.separator + filename);
+        System.out.println(newFile.getAbsolutePath());
+            // 上传图片到 -》 “绝对路径”
+            picture.transferTo(newFile);
+            return "file/venue/"+filename;
     }
+
+    public static String saveUserFile(MultipartFile picture) throws Exception{
+        if (picture.isEmpty())
+            return "";
+        String fileDirPath = new String("src/main/resources/" + "static/file/venue");
+
+        File fileDir = new File(fileDirPath);
+        if (!fileDir.exists()) {
+            // 递归生成文件夹
+            fileDir.mkdirs();
+        }
+
+        String filename = picture.getOriginalFilename();
+
+        System.out.println(fileDir.getAbsolutePath());
+        String suffixName = filename.substring(filename.lastIndexOf("."));
+        filename = UUID.randomUUID() + suffixName;
+        File newFile = new File(fileDir.getAbsolutePath() + File.separator + filename);
+        System.out.println(newFile.getAbsolutePath());
+        // 上传图片到 -》 “绝对路径”
+        picture.transferTo(newFile);
+        return "file/user/"+filename;
+    }
+
+
 }

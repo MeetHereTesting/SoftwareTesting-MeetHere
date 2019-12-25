@@ -4,6 +4,7 @@ import com.meethere.entity.Message;
 import com.meethere.entity.User;
 import com.meethere.entity.vo.MessageVo;
 import com.meethere.service.UserService;
+import com.meethere.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -79,15 +80,16 @@ public class AdminUserController {
         user.setPassword(password);
         user.setEmail(email);
         user.setPhone(phone);
+        user.setPicture("");
         userService.create(user);
         response.sendRedirect("user_manage");
     }
 
     @PostMapping("/editUser.do")
-    public void editUser(String userID, String user_name, String password, String email, String phone, MultipartFile image,
-                         HttpServletRequest request, HttpServletResponse response) throws IOException{
-        User user=new User();
-        user.setUserName(user_name);
+    public void editUser(String userID, String userName, String password, String email, String phone,
+                         HttpServletRequest request, HttpServletResponse response) throws Exception {
+        User user=userService.findByUserID(userID);
+        user.setUserName(userName);
         user.setPassword(password);
         user.setEmail(email);
         user.setPhone(phone);
