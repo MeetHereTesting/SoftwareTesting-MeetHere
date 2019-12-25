@@ -11,6 +11,20 @@
             background-color: #f5f5f5;
             padding-top: 55px;
         }
+        html {
+            overflow-y: scroll;
+        }
+        :root {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        :root body {
+            position: absolute;
+        }
+        body {
+            width: 100vw;
+            overflow: hidden;
+        }
     </style>
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
@@ -98,7 +112,7 @@
                 '                            </a>\n' +
                 '                        </div>\n' +
                 '                        <div class="media border-bottom border-gray">\n';
-            if(list[i].picture == null)
+            if(list[i].picture == '')
                 tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
             else
                 tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
@@ -109,6 +123,9 @@
                 '                            </div>\n' +
                 '                        </div>\n' +
                 '                    </li>\n';
+        }
+        if(list.length == 0){
+            tableShow += '<div class="text-center">没有需要审核的留言</div>';
         }
         $('#content').html(tableShow);
     }

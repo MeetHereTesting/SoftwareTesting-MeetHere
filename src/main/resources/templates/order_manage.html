@@ -16,6 +16,20 @@
             background-color: #f5f5f5;
             padding-top: 80px;
         }
+        html {
+            overflow-y: scroll;
+        }
+        :root {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        :root body {
+            position: absolute;
+        }
+        body {
+            width: 100vw;
+            overflow: hidden;
+        }
     </style>
 
 </head>
@@ -92,7 +106,7 @@
                 '                </div>\n' +
                 '                    <div class="media border-bottom border-gray pb-3">\n' +
                 '                        <div class="media-left mr-3">\n';
-            if(list[i].picture == null)
+            if(list[i].picture == '')
                 tableShow += '<img src="image.JPG" alt="" height="100px" width="100px">\n';
             else
                 tableShow += '<img src="'+list[i].picture+'" alt="" height="100px" width="100px">\n';

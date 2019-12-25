@@ -12,6 +12,20 @@
             background-color: #f5f5f5;
             padding-top: 80px;
         }
+        html {
+            overflow-y: scroll;
+        }
+        :root {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        :root body {
+            position: absolute;
+        }
+        body {
+            width: 100vw;
+            overflow: hidden;
+        }
     </style>
 
 </head>
@@ -69,7 +83,7 @@
                     <h6 class="align-self-start ml-auto pt-1">头像：</h6>
                 </div>
                 <div class="col-8">
-                    <img th:src="${session.user.picture} == null ? 'default.jpg': ${session.user.picture}" alt="" style="height: 100px; width: 100px">
+                    <img th:src="${session.user.picture} == '' ? 'default.jpg': ${session.user.picture}" alt="" style="height: 100px; width: 100px">
                     <label for="picture" class="sr-only">Example file input</label>
                     <input type="file" class="form-control-file mt-2" id="picture" name="picture">
                 </div>

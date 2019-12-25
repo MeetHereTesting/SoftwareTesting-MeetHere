@@ -15,6 +15,20 @@
             background-color: #f5f5f5;
             padding-top: 80px;
         }
+        html {
+            overflow-y: scroll;
+        }
+        :root {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        :root body {
+            position: absolute;
+        }
+        body {
+            width: 100vw;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -102,7 +116,7 @@
         for (let i = 0; i < list.length; i++) {
             tableShow += '<li class="list-group-item px-3 border-0">\n' +
                 '                            <div class="media border-bottom border-gray">\n';
-            if(list[i].picture == null)
+            if(list[i].picture == '')
                 tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
             else
                 tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
@@ -165,7 +179,7 @@
                 '                            </div>\n' +
                 '                        </div>\n' +
                 '                            <div class="media border-bottom border-gray">\n';
-            if(list[i].picture == null)
+            if(list[i].picture == '')
                 tableShow += '<img class="mr-2" src="default.jpg" alt="" height="32px" width="32px">\n';
             else
                 tableShow += '<img class="mr-2" src="'+list[i].picture+'" alt="" height="32px" width="32px">\n';
@@ -240,9 +254,9 @@
                 messageID:messageID,
                 content:content
             },
-            async: false,
+            // async: false,
             success: function (result) {
-
+                alert("修改成功！");
                 if (result) {
                     alert("修改成功！");
                     alert("请刷新！")

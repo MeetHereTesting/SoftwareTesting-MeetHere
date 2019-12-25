@@ -11,6 +11,20 @@
             background-color: #f5f5f5;
             padding-top: 55px;
         }
+        html {
+            overflow-y: scroll;
+        }
+        :root {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        :root body {
+            position: absolute;
+        }
+        body {
+            width: 100vw;
+            overflow: hidden;
+        }
     </style>
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
@@ -41,7 +55,7 @@
                         </div>
                         <div class="col-11">
                             <label for="title" class="sr-only">标题</label>
-                            <input type="text" name="title" class="form-control" id="title" required th:text="${news.title}">
+                            <input type="text" name="title" class="form-control" id="title" required th:value="${news.title}">
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">

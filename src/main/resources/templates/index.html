@@ -10,6 +10,20 @@
             background-color: #f5f5f5;
             padding-top: 80px;
         }
+        html {
+            overflow-y: scroll;
+        }
+        :root {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        :root body {
+            position: absolute;
+        }
+        body {
+            width: 100vw;
+            overflow: hidden;
+        }
     </style>
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
@@ -31,7 +45,7 @@
                     <li class="list-group-item px-3 pt-3 border-0" th:each="venue : ${venue_list}">
                         <div class="media border-bottom border-gray pb-3">
                             <div class="media-left mr-3">
-                                <img th:src="${venue.picture} == null?'image.JPG':${venue.picture}"
+                                <img th:src="${venue.picture} == ''?'image.JPG':${venue.picture}"
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">
@@ -92,7 +106,7 @@
                 <ul class="list-group pt-2">
                     <li class="list-group-item px-3 border-0" th:each="message : ${message_list}">
                         <div class="media border-bottom border-gray">
-                            <img class="mr-2" th:src="${message.picture} == null?'default.jpg':${message.picture}"
+                            <img class="mr-2" th:src="${message.picture} == ''?'default.jpg':${message.picture}"
                                  alt="" height="32px" width="32px">
                             <div class="media-body pb-3 mb-0 small">
                                 <strong class="d-block" th:text="'@'+${message.userName}">@username</strong>

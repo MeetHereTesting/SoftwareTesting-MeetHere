@@ -83,11 +83,11 @@ public class OrderController {
         return true;
     }
 
-    @GetMapping("/order/getOrderList.do")
-    @ResponseBody
-    public VenueOrder modifyOrder(String venueName,String date){
-        Venue venue=venueService.findByVenueName(venueName);
-
-        return ;
-    }
+//    @GetMapping("/order/getOrderList.do")
+//    @ResponseBody
+//    public VenueOrder modifyOrder(String venueName,String date){
+//        Venue venue=venueService.findByVenueName(venueName);
+//
+//        return ;
+//    }
 }
