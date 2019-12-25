@@ -15,10 +15,10 @@
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-zh-CN.min.js"></script>
-    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -62,10 +62,10 @@
                                     <tr th:each="order: ${order_list}">
                                         <td th:text="${order.orderID}">101</td>
                                         <td th:text="${order.venueName}">场馆A</td>
-                                        <td th:text="${order.startTime}">2019-12-28 11:00</td>
+                                        <td th:text="${#temporals.format(order.startTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                         <td th:text="${order.hours}">4小时</td>
-                                        <td th:text="${order.price}">￥1200</td>
-                                        <td th:text="${order.orderTime}">2019-12-10 16:00:00</td>
+                                        <td th:text="${order.total}">￥1200</td>
+                                        <td th:text="${#temporals.format(order.orderTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -143,7 +143,7 @@
 
     function getPage(page){
         $.ajax({//根据page去后台加载数据
-            url : "/admin/getOrderList",
+            url : "/admin/getOrderList.do",
             type : "get",
             dataType : "json",
             data : {"page" : page},
@@ -158,11 +158,11 @@
         for (let i = 0; i < list.length; i++) {
             tableShow += '<li class="list-group-item px-3 border-0">\n' +
                 '                                    <div class="d-flex justify-content-end text-light">\n' +
-                '                                        <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#">\n' +
+                '                                        <a class="btn-sm btn-success mr-2" data-toggle="collapse" href="#" onclick="pass('+list[i].orderID+',this)">\n' +
                 '                                            <span class="glyphicon glyphicon-ok"></span>\n' +
                 '                                            通过\n' +
                 '                                        </a>\n' +
-                '                                        <a class="btn-sm btn-danger" data-toggle="collapse" href="#">\n' +
+                '                                        <a class="btn-sm btn-danger" data-toggle="collapse" href="#" onclick="reject('+list[i].orderID+',this)">\n' +
                 '                                            <span class="glyphicon glyphicon-remove"></span>\n' +
                 '                                            驳回\n' +
                 '                                        </a>\n' +
@@ -195,10 +195,54 @@
                 '                        </div>\n' +
                 '                    </div>\n' +
                 '                </li>\n';
+            console.log(list[i].orderTime);
         }
         $('#content').html(tableShow);
     }
+    function pass( orderID,btn) {
+        if (!confirm("确定通过订单？")) {
+            return;
+        }
 
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "passOrder.do",
+            dataType: "Json",
+            data: {
+               orderID: orderID
+            },
+            async: false,
+            success: function (result) {
+                $(btn).parent().parent().fadeOut();
+                if (result) {
+                    alert("修改成功！");
+                }
+            }
+        });
+    }
+    function reject(orderID,btn) {
+        if (!confirm("确定驳回订单？")) {
+            return;
+        }
+
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "rejectOrder.do",
+            dataType: "Json",
+            data: {
+                orderID: orderID
+            },
+            async: false,
+            success: function (result) {
+                $(btn).parent().parent().fadeOut();
+                if (result) {
+                    alert("驳回成功！");
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>

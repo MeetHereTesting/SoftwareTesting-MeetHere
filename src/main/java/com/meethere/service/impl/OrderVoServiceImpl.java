@@ -23,7 +23,7 @@ public class OrderVoServiceImpl implements OrderVoService {
 
 
     @Override
-    public OrderVo returnOrderVOByOrderID(int orderID) {
+    public OrderVo returnOrderVoByOrderID(int orderID) {
         Order order=orderDao.findByOrderID(orderID);
         Venue venue=venueDao.findByVenueID(order.getVenueID());
         OrderVo orderVo=new OrderVo(order.getOrderID(),order.getUserID(),order.getVenueID(),venue.getVenueName(),
@@ -36,7 +36,7 @@ public class OrderVoServiceImpl implements OrderVoService {
     public List<OrderVo> returnVo(List<Order> list) {
         List<OrderVo> list1=new ArrayList<>();
         for(int i=0;i<list.size();i++)
-            list1.add(returnOrderVOByOrderID(list.get(i).getOrderID()));
+            list1.add(returnOrderVoByOrderID(list.get(i).getOrderID()));
         return list1;
     }
 }
