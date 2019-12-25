@@ -85,8 +85,8 @@
                 '                            <span class="glyphicon glyphicon-menu-down"></span>\n' +
                 '                        </a>\n' +
                 '                        <div class="dropdown-menu">\n' +
-                '                            <a class="dropdown-item" href="modifyOrder?orderID='+list[i].orderID+'">修改</a>\n' +
-                '                            <a class="dropdown-item" href="deleteOrder?orderID='+list[i].orderID+'">取消</a>\n' +
+                '                            <a class="dropdown-item" href="modifyOrder.do?orderID='+list[i].orderID+'">修改</a>\n' +
+                '                            <a class="dropdown-item" href="#" onclick="del('+list[i].orderID+',this)">取消</a>\n' +
                 '                        </div>\n' +
                 '                    </div>\n' +
                 '                </div>\n' +
@@ -120,6 +120,28 @@
                 '                </li>\n';
         }
         $('#content').html(tableShow);
+    }
+    function del(orderID,btn) {
+        if (!confirm("确定删除该留言？")) {
+            return;
+        }
+
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/delOrder.do",
+            dataType: "Json",
+            data: {
+                orderID:orderID
+            },
+            async: false,
+            success: function (result) {
+                if (result) {
+                    $(btn).parent().parent().parent().parent().fadeOut();
+                    alert("删除成功！");
+                }
+            }
+        });
     }
 </script>
 
