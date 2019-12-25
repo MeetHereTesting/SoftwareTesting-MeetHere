@@ -18,7 +18,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='news_manage')"></div>
+        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='user_manage')"></div>
         <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
                 <h2>新增用户</h2>
@@ -46,7 +46,12 @@
                         </div>
                         <div class="col-10">
                             <label for="email" class="sr-only">邮箱</label>
-                            <input type="text" name="email" class="form-control" id="email" onblur="emailVerify()">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><span class="glyphicon glyphicon-envelope"></span></span>
+                                </div>
+                                <input type="text" name="email" class="form-control" id="email" onblur="emailVerify()">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group mb-4 row">
@@ -54,8 +59,13 @@
                             <h6 class="align-self-center ml-auto">手机号</h6>
                         </div>
                         <div class="col-10">
-                            <label for="phone" class="sr-only">手机号</label>
-                            <input type="text" name="phone" class="form-control" id="phone" onblur="phoneVerify()">
+                            <label for="phone" class="sr-only">手机</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><span class="glyphicon glyphicon-earphone"></span></span>
+                                </div>
+                                <input type="text" name="phone" class="form-control" id="phone" onblur="phoneVerify()">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group mb-4 row">
