@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-8">
                     <label for="email" class="sr-only">邮箱</label>
-                    <input type="text" name="email" class="form-control" id="email" th:value="${session.user.email}">
+                    <input type="text" name="email" class="form-control" id="email" th:value="${session.user.email}" onblur="emailVerify()">
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-8">
                     <label for="phone" class="sr-only">手机</label>
-                    <input type="text" name="phone" class="form-control" id="phone" th:value="${session.user.phone}">
+                    <input type="text" name="phone" class="form-control" id="phone" th:value="${session.user.phone}" onblur="phoneVerify()">
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -69,7 +69,7 @@
                     <h6 class="align-self-start ml-auto pt-1">头像：</h6>
                 </div>
                 <div class="col-8">
-                    <img th:src="${session.user.picture} == null ? 'default.jpg': ${session.user.picture}" alt="" style="height: 100px; width: 100px">
+                    <img th:src="${@{session.user.picture}} == null ? 'default.jpg': ${@{session.user.picture}}" alt="" style="height: 100px; width: 100px">
                     <label for="picture" class="sr-only">Example file input</label>
                     <input type="file" class="form-control-file mt-2" id="picture" name="picture">
                 </div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-8">
                         <label for="passwordOld" class="sr-only">原密码</label>
-                        <input type="password" name="password" class="form-control" id="passwordOld">
+                        <input type="password" name="password" class="form-control" id="passwordOld" >
                     </div>
                 </div>
                 <div class="form-group mb-4 row">
@@ -93,7 +93,7 @@
                     </div>
                     <div class="col-8">
                         <label for="passwordNew" class="sr-only">新密码</label>
-                        <input type="password" name="password" class="form-control" id="passwordNew">
+                        <input type="passwordNew" name="password" class="form-control" id="passwordNew">
                     </div>
                 </div>
             </div>
@@ -140,7 +140,63 @@
         //     return false;
         // }
     });
+    var flag=1;
+    function doVerify(){
+        if(!flag) return;
+        var password =  $("#passwordOld").val();
+        var userID =$("#userID").val();
+        if(password=="")
+            return;
+        if(password !=""){
+            $.ajax({
+                url:"checkPassword.do",
+                dataType: "Json",
+                type: "get",
+                data:{
+                    userID:userID,
+                    password: password
+                },
+                success: function(msg){
+                    if(!msg) {
+                        $("#save").attr('disabled',true);
+                        alert("原密码错误！");
+                    }
+                    else
+                        $("#save").attr('disabled',false);
+                }
+            });
+        }
+    }
 
+    function phoneVerify() {
+        if(!flag) return;
+        var phone =  $("#phone").val();
+        if(phone=="") return;
+        var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
+        if (!myreg.test(phone)) {
+            $("#submit").attr('disabled',true);
+            flag=0;
+            alert("请输入正确的手机号");
+        } else {
+            flag=1;
+            $("#submit").attr('disabled',false);
+        }
+    }
+
+    function emailVerify(){
+
+        var email = $("#email").val();
+        if(email=="") return;
+        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        if(reg.test(email)){
+            $("#submit").attr('disabled',false);
+            flag=1;
+        }else{
+            $("#submit").attr('disabled',true);
+            flag=0;
+            alert("邮箱格式不正确");
+        }
+    }
 </script>
 <div th:include="layout/footer :: Footer"></div>
 </body>
