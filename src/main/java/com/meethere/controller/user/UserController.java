@@ -32,7 +32,8 @@ public class UserController {
 
 
     @PostMapping("/loginCheck.do")
-    public void login(String userID,String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    @ResponseBody
+    public boolean login(String userID,String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user=userService.checkLogin(userID,password);
         if(user!=null){
             if(user.getIsadmin()==0){
@@ -47,8 +48,7 @@ public class UserController {
             }
 
         }
-        else
-            throw new LoginException("登录失败，用户名或密码错误！");
+        return false;
 
     }
 

@@ -73,7 +73,7 @@
                         <div class="row mx-0 pb-2 border-bottom border-gray">
                             <a class="ml-1" th:href="@{'news?newsID='+${news.newsID}}" th:text="${news.title}">2019年12月24日场馆暂时关闭通知</a>
                             <div class="ml-auto">
-                                <span class="badge badge-secondary" th:text="${news.time}">2019-12-10</span>
+                                <span class="badge badge-secondary" th:text="${#temporals.format(news.time, 'yyyy-MM-dd HH:mm:ss')}">2019-12-10</span>
                             </div>
                         </div>
                     </li>
@@ -100,7 +100,7 @@
                                     Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,
                                     tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
                                 </p>
-                                <small class="float-right" th:text="${message.time}">2019-12-10</small>
+                                <small class="float-right" th:text="${#temporals.format(message.time, 'yyyy-MM-dd HH:mm:ss')}">2019-12-10</small>
                             </div>
 
                         </div>

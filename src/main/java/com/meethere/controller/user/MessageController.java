@@ -63,12 +63,12 @@ public class MessageController {
     //User的留言不管是否通过都显示
     @GetMapping("/message/findUserList")
     @ResponseBody
-    public List<MessageVo> user_message_list(@RequestParam(value = "page",defaultValue = "1")int page,HttpServletRequest request){
+    public List<Message> user_message_list(@RequestParam(value = "page",defaultValue = "1")int page,HttpServletRequest request){
         System.out.println("find user messages");
 //        if(request.getSession().getAttribute("user")!=null) {
             Pageable message_pageable = PageRequest.of(page - 1, 5, Sort.by("time").descending());
             List<Message> user_messages = messageService.findByUser(request, message_pageable).getContent();
-            return messageVoService.returnVo(user_messages);
+            return user_messages;
 //        }
 //        return null;
     }

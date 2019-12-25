@@ -54,7 +54,7 @@
 
     function getPage(page){
         $.ajax({//根据page去后台加载数据
-            url : "/order/getOrderList",
+            url : "/getOrderList.do",
             type : "get",
             dataType : "json",
             data : {"page" : page},

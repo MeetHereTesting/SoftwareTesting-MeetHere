@@ -25,4 +25,6 @@ public class MessageVo {
     private String userName;
 
     private String picture;
+
+    private int state;
 }

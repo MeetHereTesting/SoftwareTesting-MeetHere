@@ -18,7 +18,7 @@
 <div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='login')"></div>
 
 <main class="container col-4" style="padding-top: 10%">
-    <form role="form" action="#" th:action="@{loginCheck.do}" method="post">
+    <form role="form">
         <div class="text-center mb-5">
             <h1>用 户 登 录</h1>
         </div>
@@ -41,7 +41,7 @@
 <!--        </div>-->
         <div class="alert alert-danger" hidden><span class="glyphicon glyphicon-info-sign"></span> 用户名或密码错误，请重新输入！</div>
         <div class="pt-4">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">登 录</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" onclick="check()">登 录</button>
         </div>
 
     </form>
@@ -66,6 +66,33 @@
         $(".alert").attr('hidden', 'hidden');
         // alert("登陆失败");
     });
+    function check() {
+        var account =  $("#userID").val();
+        var account1= $("#password").val();
+        console.log(account);
+        console.log(account1);
+        if(account=="")
+            alert("请输入用户名！");
+        if(account !=""){
+            $.ajax({
+                url:"loginCheck.do",
+                dataType: "Json",
+                type: "post",
+                data:{
+                    userID:account,
+                    password:account1,
+                },
+                success: function(msg){
+                    console.log("msg");
+                    if(!msg) {
+                        alert("账号名或密码错误!");
+                    }
+                    else
+                        window.location.href="/index";
+                }
+            });
+        }
+    }
 </script>
 
 </body>

@@ -26,7 +26,7 @@ public class MessageVoServiceImpl implements MessageVoService {
     public MessageVo returnMessageVoByMessageID(int messageID) {
         Message message=messageDao.findByMessageID(messageID);
         User user=userDao.findByUserID(message.getUserID());
-        MessageVo messageVo=new MessageVo(message.getMessageID(),user.getUserID(),message.getContent(),message.getTime(),user.getUserName(),user.getPicture());
+        MessageVo messageVo=new MessageVo(message.getMessageID(),user.getUserID(),message.getContent(),message.getTime(),user.getUserName(),user.getPicture(),message.getState());
 
         return messageVo;
     }

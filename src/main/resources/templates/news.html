@@ -26,7 +26,7 @@
                 <div class="border-bottom border-gray py-2 mb-0 text-center">
                     <h4 class="font-weight-bold" th:text="${news.title}">“统计与数据科学前沿理论及应用”教育部重点实验室建设项目通过验收</h4>
                     <small>发布时间：</small>
-                    <small th:text="${news.time}"></small>
+                    <small th:text="${#temporals.format(news.time, 'yyyy-MM-dd HH:mm:ss')}"></small>
                 </div>
 
 
@@ -39,7 +39,7 @@
                 </div>
 
                 <small class="d-block text-muted text-right mt-3">
-                    信息来源：新闻网
+<!--                    信息来源：新闻网-->
                 </small>
             </div>
         </div>
