@@ -174,7 +174,8 @@
                 dataType : "json",
                 data : {"date" : date, "venueName" : venueName},
                 success : function(data) {
-                    selectedOrderList = data.orderList;
+                    console.log(data);
+                    selectedOrderList = data.orders;
                     selectedVenue = data.venue;
                     resetTimebar();//处理数据
                     console.log(data);

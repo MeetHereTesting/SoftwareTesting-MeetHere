@@ -105,11 +105,10 @@
         var account1= $("#oldUserID").val();
         console.log(account);
         console.log(account1);
-        if(account!=account1)
-            account=account1;
-        else return;
-        console.log(account);
-        console.log(account1);
+        if(account==account1)
+            return;
+
+
         if(account=="")
             alert("请输入用户名！");
         if(account !=""){

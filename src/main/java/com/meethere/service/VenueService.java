@@ -46,4 +46,5 @@ public interface VenueService {
      */
     void delById(int id);
 
+    int countVenueName(String venueName);
 }

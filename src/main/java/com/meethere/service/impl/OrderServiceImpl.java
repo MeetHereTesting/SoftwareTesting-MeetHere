@@ -49,6 +49,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<Order> findDateOrder(int venueID, LocalDateTime startTime, LocalDateTime startTime2) {
+        return orderDao.findByVenueIDAndStartTimeIsBetween(venueID,startTime,startTime2);
+    }
+
+    @Override
     public Page<Order> findUserOrder(HttpServletRequest httpRequest, Pageable pageable) {
         Object user=httpRequest.getSession().getAttribute("user");
         if(user==null)
