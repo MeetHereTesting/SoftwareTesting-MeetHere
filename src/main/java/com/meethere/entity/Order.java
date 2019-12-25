@@ -14,6 +14,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name="`order`")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +27,7 @@ public class Order {
     /**
      * 1未审核 2已审核 3已完成 4失效
      */
+    @Column(name="state")
     private int state;
 
     @Column(name="order_time")

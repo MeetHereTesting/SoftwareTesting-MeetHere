@@ -12,7 +12,7 @@ public interface UserService {
      * @return
      */
     User findByUserID(String userID);
-
+    User findById(int id);
     /**
      * 管理员分页查看用户
      *
@@ -39,11 +39,13 @@ public interface UserService {
     int create(User user);
 
     /**
-     * 根据userID删除用户
+     * 根据id删除用户
      *
-     * @param userID
+     * @param id
      */
-    void delByUserID(String userID);
+    void delByID(int id);
 
     void updateUser(User user);
+
+    int countUserID(String userID);
 }

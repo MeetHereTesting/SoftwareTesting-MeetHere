@@ -28,30 +28,37 @@ public class AdminOrderController {
     public String reservation_manage(Model model){
         List<Order> orders= orderService.findAuditOrder();
         List<OrderVo> orderVos=orderVoService.returnVo(orders);
-        Pageable order_pageable= PageRequest.of(0,10, Sort.by("order_time").descending());
+        Pageable order_pageable= PageRequest.of(0,10, Sort.by("orderTime").descending());
         model.addAttribute("order_list",orderVos);
         model.addAttribute("total",orderService.findNoAuditOrder(order_pageable).getTotalPages());
 
         return "admin/reservation_manage";
     }
 
-    @GetMapping("/admin/getOrderList")
+    /**
+     * 管理员查看未审核订单
+     * @param page
+     * @return
+     */
+    @GetMapping("/admin/getOrderList.do")
     @ResponseBody
     public List<OrderVo> getNoAuditOrder(@RequestParam(value = "page",defaultValue = "1")int page){
-        Pageable order_pageable= PageRequest.of(page-1,10, Sort.by("order_time").descending());
+        Pageable order_pageable= PageRequest.of(page-1,10, Sort.by("orderTime").descending());
         List<Order> orders=orderService.findNoAuditOrder(order_pageable).getContent();
         return orderVoService.returnVo(orders);
     }
 
-    @PostMapping("/confirmOrder.do")
+    @PostMapping("/passOrder.do")
     @ResponseBody
-    public void confirmOrder(int orderID) {
+    public boolean confirmOrder(int orderID) {
         orderService.confirmOrder(orderID);
+        return true;
     }
 
     @PostMapping("/rejectOrder.do")
     @ResponseBody
-    public void rejectOrder(int orderID) {
+    public boolean rejectOrder(int orderID) {
         orderService.rejectOrder(orderID);
+        return true;
     }
 }

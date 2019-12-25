@@ -29,6 +29,8 @@ public class UserController {
     }
 
 
+
+
     @PostMapping("/loginCheck.do")
     public void login(String userID,String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user=userService.checkLogin(userID,password);
@@ -61,6 +63,13 @@ public class UserController {
         request.getSession().removeAttribute("user");
         System.out.println("log out success!");
         response.sendRedirect("/index");
+    }
+
+    @PostMapping("/checkUserID.do")
+    @ResponseBody
+    public boolean checkUSerID(String userID){
+        int count=userService.countUserID(userID);
+        return count < 1;
     }
 
     @PostMapping("/updateUser.do")

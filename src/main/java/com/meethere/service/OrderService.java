@@ -17,6 +17,7 @@ public interface OrderService {
     int STATE_WAIT=2;
     int STATE_FINISH=3;
     int STATE_REJECT=4;
+
     /**
      * 根据orderID查看订单
      *
