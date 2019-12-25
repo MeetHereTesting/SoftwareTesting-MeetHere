@@ -2,10 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>订单预约</title>
+    <title>订单管理-MeetHere</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{/js/popper.min.js}"></script>
+    <script th:src="@{/js/bootstrap.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/jquery.twbsPagination.js}"></script>
 
@@ -27,41 +29,7 @@
         </div>
         <div class="card-body">
             <ul class="list-group" id="content">
-<!--                <li class="list-group-item px-3 border-0" th:each="order : ${order_list}">-->
-<!--                    <div class="dropdown float-right">-->
-<!--                        <a class="text-dark" href="#" data-toggle="dropdown">-->
-<!--                            <span class="glyphicon glyphicon-menu-down"></span>-->
-<!--                        </a>-->
-<!--                        <div class="dropdown-menu">-->
-<!--                            <a class="dropdown-item" th:href="@{order_place}">修改</a>-->
-<!--                            <a class="dropdown-item" href="#">取消</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="media border-bottom border-gray pb-3">-->
-<!--                        <div class="media-left mr-3">-->
-<!--                            <img th:src="${order.picture}"-->
-<!--                                 alt="" height="100px" width="100px">-->
-<!--                        </div>-->
-<!--                        <div class="media-body">-->
-<!--                            <h6>-->
-<!--                                <strong>预约场馆：</strong>-->
-<!--                                <a th:href="@{venue}" th:text="${order.venueName}">场馆A</a>-->
-<!--                            </h6>-->
-<!--                            <h6 class="d-flex">-->
-<!--                                <p class="font-weight-bold mb-0">预约时间：</p>-->
-<!--                                <p class="mb-0" th:text="${order.startTime}">2019年12月28日 10:00</p>-->
-<!--                            </h6>-->
-<!--                            <h6 class="d-flex">-->
-<!--                                <p class="font-weight-bold mb-0">预约时长：</p>-->
-<!--                                <p class="mb-0" th:text="${order.hours}">5小时</p>-->
-<!--                            </h6>-->
-<!--                            <h6 class="d-flex">-->
-<!--                                <p class="font-weight-bold mb-0">支付租金：</p>-->
-<!--                                <p class="mb-0" th:text="${order.total}">￥1500</p>-->
-<!--                            </h6>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
+
             </ul>
             <div class="d-flex justify-content-center mt-2" id="pagination-demo"></div>
 
@@ -100,7 +68,19 @@
         let tableShow = '';
         for (let i = 0; i < list.length; i++) {
             tableShow += '<li class="list-group-item px-3 border-0">\n' +
-                '                    <div class="dropdown float-right">\n' +
+                '                        <div class="d-flex mb-1">\n';
+            if(list[i].state == 3){
+                tableShow +='<div class="mr-auto">\n' +
+                    '                                <small class="text-danger"><span class="glyphicon glyphicon-info-sign"></span>未通过</small>\n' +
+                    '                            </div>\n';
+            }
+            else if(list[i].state == 1){
+                tableShow += '<div class="mr-auto">\n' +
+                    '                                <small class="text-warning"><span class="glyphicon glyphicon-info-sign"></span>审核中</small>\n' +
+                    '                            </div>\n';
+            }
+            tableShow +=
+            '                    <div class="dropdown float-right">\n' +
                 '                        <a class="text-dark" href="#" data-toggle="dropdown">\n' +
                 '                            <span class="glyphicon glyphicon-menu-down"></span>\n' +
                 '                        </a>\n' +
@@ -109,6 +89,7 @@
                 '                            <a class="dropdown-item" href="deleteOrder?orderID='+list[i].orderID+'">取消</a>\n' +
                 '                        </div>\n' +
                 '                    </div>\n' +
+                '                </div>\n' +
                 '                    <div class="media border-bottom border-gray pb-3">\n' +
                 '                        <div class="media-left mr-3">\n';
             if(list[i].picture == null)

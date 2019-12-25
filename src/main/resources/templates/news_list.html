@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>新闻</title>
+    <title>新闻动态-MeetHere</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
@@ -49,7 +49,7 @@
 
     function getPage(page){
         $.ajax({//根据page去后台加载数据
-            url : "/news/getNewsList",
+            url : "/newslist/getNewsList",
             type : "get",
             dataType : "json",
             data : {"page" : page},
@@ -64,7 +64,7 @@
         for (let i = 0; i < list.length; i++) {
             tableShow += '<li class="list-group-item border-0 px-3 py-2">\n' +
                 '                <div class="row mx-0 pb-2 border-bottom border-gray">\n' +
-                '                    <a class="ml-1" href="/news?newsID='+list[i].newsID+'">'+list[i].title+'</a>\n' +
+                '                    <a class="ml-1" href="/news?newsID='+list[i].newsID+'" target="_blank">'+list[i].title+'</a>\n' +
                 '                    <div class="ml-auto">\n' +
                 '                        <span class="badge badge-secondary">'+list[i].time+'</span>\n' +
                 '                    </div>\n' +

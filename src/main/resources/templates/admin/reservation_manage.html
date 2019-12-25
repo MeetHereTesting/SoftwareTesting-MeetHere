@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/locale/bootstrap-table-zh-CN.min.js"></script>
+    <script th:src="@{/js/jquery.twbsPagination.js}"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -195,7 +196,6 @@
                 '                        </div>\n' +
                 '                    </div>\n' +
                 '                </li>\n';
-            console.log(list[i].orderTime);
         }
         $('#content').html(tableShow);
     }
