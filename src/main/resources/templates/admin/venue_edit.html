@@ -59,7 +59,8 @@
                         </div>
                         <div class="col-7">
                             <label for="venueName" class="sr-only">场馆名称</label>
-                            <input type="text" name="venueName" class="form-control" id="venueName" required th:value="${venue.venueName}" >
+                            <input type="text" name="venueName" class="form-control" id="venueName" required th:value="${venue.venueName}" onblur="doVerify()">
+                            <input type="text" name="oldVenueName" class="form-control" id="oldVenueName" required hidden th:value="${venue.venueName}">
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -172,6 +173,37 @@
     $("#cancel").click(function(){
         window.history.back();
     });
+
+    function doVerify(){
+        var account =  $("#venueName").val();
+        var account1= $("#oldVenueName").val();
+        console.log(account);
+        console.log(account1);
+        if(account==account1)
+            return;
+
+        if(account=="")
+            alert("请输入场馆名！");
+        if(account !=""){
+            $.ajax({
+                url:"checkVenueName.do",
+                dataType: "Json",
+                type: "post",
+                data:{
+                    venueName: account
+                },
+                success: function(msg){
+                    if(!msg) {
+                        // 账号已经存在
+                        $("#submit").attr('disabled',true);
+                        alert("请更换场馆名！");
+                    }
+                    else
+                        $("#submit").attr('disabled',false);
+                }
+            });
+        }
+    }
 </script>
 </body>
 </html>

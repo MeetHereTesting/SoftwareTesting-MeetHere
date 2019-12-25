@@ -96,6 +96,12 @@ public class AdminUserController {
         userService.updateUser(user);
     }
 
+    @PostMapping("/checkUserID.do")
+    @ResponseBody
+    public boolean checkUSerID(String userID){
+        int count=userService.countUserID(userID);
+        return count < 1;
+    }
     @PostMapping("/delUser.do")
     @ResponseBody
     public boolean delUser(int id){

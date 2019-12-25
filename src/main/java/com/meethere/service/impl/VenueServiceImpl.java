@@ -49,4 +49,9 @@ public class VenueServiceImpl implements VenueService {
     public void delById(int id) {
         venueDao.deleteById(id);
     }
+
+    @Override
+    public int countVenueName(String venueName) {
+        return venueDao.countByVenueName(venueName);
+    }
 }

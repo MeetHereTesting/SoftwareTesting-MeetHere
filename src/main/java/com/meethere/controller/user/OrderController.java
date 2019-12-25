@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -73,6 +75,8 @@ public class OrderController {
     @GetMapping("/modifyOrder.do")
     public String modifyOrder(Model model,int orderID){
         Order order=orderService.findById(orderID);
+        Venue venue=venueService.findByVenueID(order.getVenueID());
+        model.addAttribute("venue",venue);
         return "order_place";
     }
 
@@ -83,11 +87,24 @@ public class OrderController {
         return true;
     }
 
-//    @GetMapping("/order/getOrderList.do")
-//    @ResponseBody
-//    public VenueOrder modifyOrder(String venueName,String date){
-//        Venue venue=venueService.findByVenueName(venueName);
-//
-//        return ;
-//    }
+    @GetMapping("/order/getOrderList.do")
+    @ResponseBody
+    public VenueOrder modifyOrder(String venueName,String date){
+        Venue venue=venueService.findByVenueName(venueName);
+        VenueOrder venueOrder=new VenueOrder();
+        date=date+" 00:00:00";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime time = LocalDateTime.now();
+        String localTime = df.format(time);
+        LocalDateTime ldt = LocalDateTime.parse(date,df);
+        LocalDateTime ldt2=ldt.plusDays(1);
+        System.out.println(ldt);
+        System.out.println(ldt2);
+
+        venueOrder.setVenue(venue);
+        venueOrder.setOrders(orderService.findDateOrder(venue.getVenueID(),ldt,ldt2));
+        System.out.println(venueOrder);
+        return venueOrder;
+
+    }
 }
