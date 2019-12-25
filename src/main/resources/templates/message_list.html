@@ -26,6 +26,10 @@
     <div class="card bg-white rounded shadow p-3 mb-3">
         <form role="form" th:action="@{sendMessage}" method="post">
             <div class="form-group">
+                <input type="text" name="userID" class="form-control" id="userID" required hidden th:value="${session.user.userID}">
+<!--                <input type="text" class="form-control" id="userID" name="userID" hidden  required te th:value="${session.user.userID}"></input>-->
+            </div>
+            <div class="form-group">
                 <label for="content" class="font-weight-bold sr-only">发布留言</label>
                 <textarea class="form-control" id="content" name="content" rows="3" placeholder="有什么想和大家分享的？" required></textarea>
             </div>

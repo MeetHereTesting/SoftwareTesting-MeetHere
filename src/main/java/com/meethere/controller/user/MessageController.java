@@ -12,12 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -71,6 +71,18 @@ public class MessageController {
             return user_messages;
 //        }
 //        return null;
+    }
+
+    @PostMapping("/sendMessage")
+    @ResponseBody
+    public void sendMessage(String userID, String content, HttpServletResponse response) throws IOException {
+        Message message=new Message();
+        message.setUserID(userID);
+        message.setContent(content);
+        message.setState(1);
+        message.setTime(LocalDateTime.now());
+        messageService.create(message);
+        response.sendRedirect("/message_list");
     }
 
 }
