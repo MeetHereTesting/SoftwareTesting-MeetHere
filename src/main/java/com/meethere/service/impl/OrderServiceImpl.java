@@ -71,6 +71,27 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void updateOrder(int orderID, String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Object user = request.getSession().getAttribute("user");
+        if (user == null)
+            throw new LoginException("请登录！");
+        Venue venue =venueDao.findByVenueName(venueName);
+
+        User loginUser = (User) user;
+        Order order=orderDao.findByOrderID(orderID);
+        order.setState(STATE_NO_AUDIT);
+        order.setHours(hours);
+        order.setVenueID(venue.getVenueID());
+        order.setOrderTime(LocalDateTime.now());
+        order.setStartTime(startTime);
+        order.setUserID(loginUser.getUserID());
+        order.setTotal(hours* venue.getPrice());
+
+        orderDao.save(order);
+        response.sendRedirect("order_manage");
+    }
+
+    @Override
     public void submit(String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Object user = request.getSession().getAttribute("user");
         if (user == null)

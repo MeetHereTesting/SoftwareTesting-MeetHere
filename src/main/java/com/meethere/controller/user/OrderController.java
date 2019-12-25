@@ -86,6 +86,16 @@ public class OrderController {
         return "order_place";
     }
 
+    @PostMapping("/modifyOrder")
+    @ResponseBody
+    public void modifyOrder(int orderID,String venueName, String date, String startTime, int hours,HttpServletRequest request, HttpServletResponse response) throws Exception {
+        date=date+" "+startTime;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime ldt = LocalDateTime.parse(date,df);
+        orderService.updateOrder(orderID,venueName,ldt,hours,request,response);
+
+    }
+
     @PostMapping("/delOrder.do")
     @ResponseBody
     public boolean delOrder(int orderID) {
