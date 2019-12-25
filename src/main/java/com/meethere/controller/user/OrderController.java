@@ -4,6 +4,7 @@ import com.meethere.entity.News;
 import com.meethere.entity.Order;
 import com.meethere.entity.Venue;
 import com.meethere.entity.vo.OrderVo;
+import com.meethere.entity.vo.VenueOrder;
 import com.meethere.service.OrderService;
 import com.meethere.service.OrderVoService;
 import com.meethere.service.VenueService;
@@ -69,4 +70,24 @@ public class OrderController {
         orderService.finishOrder(orderID);
     }
 
+    @GetMapping("/modifyOrder.do")
+    public String modifyOrder(Model model,int orderID){
+        Order order=orderService.findById(orderID);
+        return "order_place";
+    }
+
+    @PostMapping("/delOrder.do")
+    @ResponseBody
+    public boolean delOrder(int orderID) {
+        orderService.finishOrder(orderID);
+        return true;
+    }
+
+    @GetMapping("/order/getOrderList.do")
+    @ResponseBody
+    public VenueOrder modifyOrder(String venueName,String date){
+        Venue venue=venueService.findByVenueName(venueName);
+
+        return ;
+    }
 }
