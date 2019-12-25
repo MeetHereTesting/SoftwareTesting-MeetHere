@@ -1,6 +1,7 @@
 package com.meethere.service.impl;
 
 import com.meethere.dao.OrderDao;
+
 import com.meethere.dao.VenueDao;
 import com.meethere.entity.Venue;
 import com.meethere.entity.Order;
@@ -58,7 +59,7 @@ public class OrderServiceImpl implements OrderService {
         Object user=httpRequest.getSession().getAttribute("user");
         if(user==null)
             throw new LoginException("请登录");
-        User loginUser=(User)user;;
+        User loginUser=(User)user;
         return orderDao.findAllByUserID(loginUser.getUserID(),pageable);
     }
 
@@ -70,24 +71,45 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void submit(int venueID, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void updateOrder(int orderID, String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
         Object user = request.getSession().getAttribute("user");
         if (user == null)
             throw new LoginException("请登录！");
-        Venue venue =venueDao.findByVenueID(venueID);
+        Venue venue =venueDao.findByVenueName(venueName);
 
         User loginUser = (User) user;
-        Order order=new Order();
+        Order order=orderDao.findByOrderID(orderID);
         order.setState(STATE_NO_AUDIT);
         order.setHours(hours);
-        order.setVenueID(venueID);
+        order.setVenueID(venue.getVenueID());
         order.setOrderTime(LocalDateTime.now());
         order.setStartTime(startTime);
         order.setUserID(loginUser.getUserID());
         order.setTotal(hours* venue.getPrice());
 
         orderDao.save(order);
-        response.sendRedirect("order.html");
+        response.sendRedirect("order_manage");
+    }
+
+    @Override
+    public void submit(String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Object user = request.getSession().getAttribute("user");
+        if (user == null)
+            throw new LoginException("请登录！");
+        Venue venue =venueDao.findByVenueName(venueName);
+
+        User loginUser = (User) user;
+        Order order=new Order();
+        order.setState(STATE_NO_AUDIT);
+        order.setHours(hours);
+        order.setVenueID(venue.getVenueID());
+        order.setOrderTime(LocalDateTime.now());
+        order.setStartTime(startTime);
+        order.setUserID(loginUser.getUserID());
+        order.setTotal(hours* venue.getPrice());
+
+        orderDao.save(order);
+        response.sendRedirect("order_manage");
     }
 
     @Override

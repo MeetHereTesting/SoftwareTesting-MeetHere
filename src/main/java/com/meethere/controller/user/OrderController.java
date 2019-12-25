@@ -19,6 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -61,8 +63,12 @@ public class OrderController {
         return orderVoService.returnVo(page1.getContent());
     }
 
-    @GetMapping("/addOrder")
-    public void addOrder(int venueID){
+    @PostMapping("/addOrder")
+    public void addOrder(String venueName, String date, String startTime, int hours,HttpServletRequest request, HttpServletResponse response) throws Exception {
+        date=date+" "+startTime;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime ldt = LocalDateTime.parse(date,df);
+        orderService.submit(venueName,ldt,hours,request,response);
 
     }
 
@@ -80,6 +86,16 @@ public class OrderController {
         return "order_place";
     }
 
+    @PostMapping("/modifyOrder")
+    @ResponseBody
+    public void modifyOrder(int orderID,String venueName, String date, String startTime, int hours,HttpServletRequest request, HttpServletResponse response) throws Exception {
+        date=date+" "+startTime;
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime ldt = LocalDateTime.parse(date,df);
+        orderService.updateOrder(orderID,venueName,ldt,hours,request,response);
+
+    }
+
     @PostMapping("/delOrder.do")
     @ResponseBody
     public boolean delOrder(int orderID) {
@@ -94,8 +110,6 @@ public class OrderController {
         VenueOrder venueOrder=new VenueOrder();
         date=date+" 00:00:00";
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime time = LocalDateTime.now();
-        String localTime = df.format(time);
         LocalDateTime ldt = LocalDateTime.parse(date,df);
         LocalDateTime ldt2=ldt.plusDays(1);
         System.out.println(ldt);

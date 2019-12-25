@@ -57,13 +57,14 @@ public interface OrderService {
      */
     void updateStates(int orderID, int state);
 
+    void updateOrder(int orderID,String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
     /**
      * 新建订单
-     * @param venueID
+     * @param venueName
      * @param startTime
      * @param hours
      */
-    void submit(int venueID, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
+    void submit(String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
     /**
      * 删除订单
