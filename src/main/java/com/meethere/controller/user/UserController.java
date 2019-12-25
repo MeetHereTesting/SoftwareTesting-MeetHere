@@ -34,29 +34,37 @@ public class UserController {
 
     @PostMapping("/loginCheck.do")
     @ResponseBody
-    public boolean login(String userID,String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String login(String userID,String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user=userService.checkLogin(userID,password);
         if(user!=null){
             if(user.getIsadmin()==0){
-            request.getSession().setAttribute("user",user);
-            response.sendRedirect("/index");
+                request.getSession().setAttribute("user",user);
+//                response.sendRedirect("/index");
                 System.out.println("user login!");
+                return "/index";
             }
             else if(user.getIsadmin()==1){
                 request.getSession().setAttribute("user",user);
-                response.sendRedirect("/admin_index");
+//                response.sendRedirect("/admin_index");
                 System.out.println("admin login!");
+                return "/admin_index";
             }
-
         }
-        return false;
+        return "false";
 
     }
 
     @PostMapping("/register.do")
-    public String register(User user,HttpServletResponse response) throws IOException {
+    public void register(String userID,String userName, String password, String email, String phone,
+                        HttpServletRequest request, HttpServletResponse response) throws IOException{
+        User user=new User();
+        user.setUserID(userID);
+        user.setUserName(userName);
+        user.setPassword(password);
+        user.setEmail(email);
+        user.setPhone(phone);
         userService.create(user);
-        return "login";
+        response.sendRedirect("login");
     }
 
     @GetMapping("/logout.do")

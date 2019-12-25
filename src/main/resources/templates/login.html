@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script th:src="@{js/jquery.form.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <style type="text/css">
         body{
@@ -31,17 +32,9 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" name="password" class="form-control form-control-lg" id="password" placeholder="密码" required>
         </div>
-<!--        <div class="alert alert-danger text-center" role="alert">-->
-<!--            登录失败，用户名或密码错误！-->
-<!--        </div>-->
-<!--        <div class="checkbox mb-3">-->
-<!--            <label>-->
-<!--                <input type="checkbox" value="remember-me" name="remember"> 记住密码-->
-<!--            </label>-->
-<!--        </div>-->
         <div class="alert alert-danger" hidden><span class="glyphicon glyphicon-info-sign"></span> 用户名或密码错误，请重新输入！</div>
         <div class="pt-4">
-            <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit" onclick="check()">登 录</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">登 录</button>
         </div>
 
     </form>
@@ -49,50 +42,31 @@
 </main>
 <div th:include="layout/footer :: Footer"></div>
 <script type="text/javascript">
-    // $(document).ready(function(){
-    //     let url = document.referrer;
-    //     let lastPage = url.substring(url.lastIndexOf("\/") + 1,url.length);
-    //     console.log("@{"+lastPage+"}");
-    //     $("form").attr("th:action", "@{index}");
-    // });
-    // $("form").submit(function(){
-    //     window.history.back();
-    //     return false;
-    // });
-    // $("form").submit(function () {
-    //     $(".alert").removeAttr('hidden');
-    // });
+
     $("input").change(function () {
         $(".alert").attr('hidden', 'hidden');
+        $("#submit").removeAttr("disabled");
         // alert("登陆失败");
     });
-    function check() {
-        var account =  $("#userID").val();
-        var account1= $("#password").val();
-        console.log(account);
-        console.log(account1);
-        if(account=="")
-            alert("请输入用户名！");
-        if(account !=""){
-            $.ajax({
-                url:"loginCheck.do",
-                dataType: "Json",
-                type: "post",
-                data:{
-                    userID:account,
-                    password:account1,
-                },
-                success: function(msg){
-                    console.log("msg");
-                    if(!msg) {
-                        alert("账号名或密码错误!");
-                    }
-                    else
-                        window.location.href="/index";
+    $("form").submit(function () {
+        $("form").ajaxSubmit({
+            url:"loginCheck.do",
+            dataType: "text",
+            type: "post",
+            success: function(data){
+                console.log(data);
+                if(data == 'false') {
+                    $(".alert").removeAttr('hidden');
+                    $("#submit").attr("disabled", "disabled");
                 }
-            });
-        }
-    }
+                else{
+                    window.location.href = data;
+                }
+
+            }
+        });
+        return false;
+    });
 </script>
 
 </body>
