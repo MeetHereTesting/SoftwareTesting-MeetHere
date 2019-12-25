@@ -45,6 +45,7 @@ public interface OrderService {
      */
     List<Order> findUserOrder(HttpServletRequest httpRequest);
 
+    List<Order> findDateOrder(int venueID, LocalDateTime startTime, LocalDateTime startTime2);
 
     Page<Order> findUserOrder(HttpServletRequest httpRequest,Pageable pageable);
 

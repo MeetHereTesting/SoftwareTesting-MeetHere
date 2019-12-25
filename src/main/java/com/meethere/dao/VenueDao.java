@@ -14,5 +14,6 @@ public interface VenueDao extends JpaRepository<Venue, Integer> {
     @Query(value = "select * from venue",nativeQuery = true)
     List<Venue> findAll();
 
+    int countByVenueName(String venueName);
 
 }

@@ -101,4 +101,11 @@ public class AdminVenueController {
         return true;
     }
 
+    @PostMapping("/checkVenueName.do")
+    @ResponseBody
+    public boolean checkVenueName(String venueName){
+        int count=venueService.countVenueName(venueName);
+        return count < 1;
+    }
+
 }

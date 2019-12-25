@@ -75,12 +75,7 @@ public class UserController {
         response.sendRedirect("/index");
     }
 
-    @PostMapping("/checkUserID.do")
-    @ResponseBody
-    public boolean checkUSerID(String userID){
-        int count=userService.countUserID(userID);
-        return count < 1;
-    }
+
 
     @PostMapping("/updateUser.do")
     @ResponseBody
