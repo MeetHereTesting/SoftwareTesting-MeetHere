@@ -3,6 +3,7 @@ package com.meethere.controller.user;
 import com.meethere.entity.User;
 import com.meethere.service.UserService;
 import com.meethere.service.exception.LoginException;
+import com.meethere.utils.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,12 +79,13 @@ public class UserController {
 
     @PostMapping("/updateUser.do")
     @ResponseBody
-    public boolean updateUser(String userName, String userID, String password,String email, String phone, MultipartFile picture){
+    public boolean updateUser(String userName, String userID, String passwordNew,String email, String phone, MultipartFile picture) throws Exception {
         User user=userService.findByUserID(userID);
         user.setUserName(userName);
-        user.setPassword(password);
+        user.setPassword(passwordNew);
         user.setEmail(email);
         user.setPhone(phone);
+        user.setPicture(FileUtil.saveUserFile(picture));
         userService.updateUser(user);
         return true;
     }
