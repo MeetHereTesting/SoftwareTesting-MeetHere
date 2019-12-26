@@ -40,7 +40,7 @@
                     <li class="nav-item" th:classappend="${page}=='user_info'?'active':''">
                         <a class="nav-link pb-0 d-flex" th:href="@{user_info}">
                             <div class="mr-2" style="width:24px; height:24px; border-radius:100%; overflow:hidden;">
-                                <img class="mb-2" th:src="${user.picture} == ''?'default.jpg':${user.picture}" alt="" height="24px" width="24px">
+                                <img class="mb-2" th:src="@{${user.picture}} == null?'default.jpg':@{${user.picture}}" alt="" height="24px" width="24px">
                             </div>
                             <p class="mb-0" th:text="${user.userName}"></p>
                         </a>

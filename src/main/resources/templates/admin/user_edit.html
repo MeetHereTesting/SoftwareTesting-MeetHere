@@ -120,7 +120,10 @@
         console.log(account);
         console.log(account1);
         if(account==account1)
+        {
+            $("#submit").attr('disabled',false);
             return;
+        }
 
 
         if(account=="")

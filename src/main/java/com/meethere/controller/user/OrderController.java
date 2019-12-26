@@ -100,7 +100,7 @@ public class OrderController {
     @PostMapping("/delOrder.do")
     @ResponseBody
     public boolean delOrder(int orderID) {
-        orderService.finishOrder(orderID);
+        orderService.delOrder(orderID);
         return true;
     }
 

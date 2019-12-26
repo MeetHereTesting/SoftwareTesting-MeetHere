@@ -122,7 +122,7 @@
                         </div>
                     </div>
                     <div class="mb-4 d-flex justify-content-center">
-                        <button class="btn btn-danger col-2 mr-5" type="submit">提交</button>
+                        <button class="btn btn-danger col-2 mr-5" type="submit" id="submit">提交</button>
                         <button class="btn btn-secondary col-2" type="reset" id="cancel">取消</button>
                     </div>
 
@@ -180,7 +180,10 @@
         console.log(account);
         console.log(account1);
         if(account==account1)
+        {
+            $("#submit").attr('disabled',false);
             return;
+        }
 
         if(account=="")
             alert("请输入场馆名！");
@@ -194,7 +197,6 @@
                 },
                 success: function(msg){
                     if(!msg) {
-                        // 账号已经存在
                         $("#submit").attr('disabled',true);
                         alert("请更换场馆名！");
                     }
