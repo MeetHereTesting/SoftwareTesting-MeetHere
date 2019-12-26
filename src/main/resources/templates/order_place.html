@@ -85,8 +85,12 @@
             <div class="col-9 pl-0">
                 <label for="venueName" class="sr-only">场馆名称</label>
                 <input type="text" name="venueName" class="form-control form-control-lg" id="venueName"
-                       th:value="${venue} != null?${venue.venueName}" required>
+                       th:value="${venue} != null?${venue.venueName}" required onchange="doVerify()">
             </div>
+        </div>
+        <div class="col-6 mx-auto">
+            <div class="alert alert-danger m-3 mb-4" hidden id="alertVenue">
+                <span class="glyphicon glyphicon-info-sign"></span> 场馆不存在！</div>
         </div>
         <div class="form-group mx-auto col-6 mb-4 row">
             <div class="media col-3 pr-0">
@@ -307,6 +311,39 @@
             moveSelected.style.right=0;
         }
     });
+
+
+    function doVerify(){
+        let name = $("#venueName").val();
+        if(name =="") {
+            $("#submit").attr("disable", false);
+            $("#alertVenue").attr('hidden');
+            return;
+        }
+        $.ajax({
+            url:"checkVenueName.do",
+            dataType: "Json",
+            type: "post",
+            data:{
+                venueName: name
+            },
+            success: function(msg){
+                if(msg) {
+                    // 场馆不存在
+                    $("#submit").attr('disabled',true);
+                    $("#alertVenue").removeAttr('hidden');
+                }
+                else
+                {
+                    $("#submit").attr('disabled',false);
+                    $("#alertVenue").attr('hidden');
+                }
+
+            }
+        });
+
+    }
+
 
     $("form").submit(function () {
         alert("预约成功！");
