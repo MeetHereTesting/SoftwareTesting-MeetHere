@@ -1,6 +1,5 @@
 package com.meethere.controller.user;
 
-import com.meethere.entity.News;
 import com.meethere.entity.Order;
 import com.meethere.entity.Venue;
 import com.meethere.entity.vo.OrderVo;
@@ -8,7 +7,6 @@ import com.meethere.entity.vo.VenueOrder;
 import com.meethere.service.OrderService;
 import com.meethere.service.OrderVoService;
 import com.meethere.service.VenueService;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.crypto.Data;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -63,13 +60,13 @@ public class OrderController {
         return orderVoService.returnVo(page1.getContent());
     }
 
-    @PostMapping("/addOrder")
+    @PostMapping("/addOrder.do")
     public void addOrder(String venueName, String date, String startTime, int hours,HttpServletRequest request, HttpServletResponse response) throws Exception {
-        date=startTime;
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        date=startTime+":00";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
         orderService.submit(venueName,ldt,hours,request,response);
-
+        response.sendRedirect("order_manage");
     }
 
     @PostMapping("/finishOrder.do")
@@ -89,12 +86,13 @@ public class OrderController {
 
     @PostMapping("/modifyOrder")
     @ResponseBody
-    public void modifyOrder(String venueName, String date, String startTime, int hours,int orderID, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        date=startTime;
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    public boolean modifyOrder(String venueName, String date, String startTime, int hours,int orderID, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        date=startTime+":00";
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
         orderService.updateOrder(orderID,venueName,ldt,hours,request,response);
-
+        response.sendRedirect("order_manage");
+        return true;
     }
 
     @PostMapping("/delOrder.do")

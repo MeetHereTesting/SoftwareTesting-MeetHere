@@ -88,7 +88,6 @@ public class OrderServiceImpl implements OrderService {
         order.setTotal(hours* venue.getPrice());
 
         orderDao.save(order);
-        response.sendRedirect("order_manage");
     }
 
     @Override
@@ -107,9 +106,7 @@ public class OrderServiceImpl implements OrderService {
         order.setStartTime(startTime);
         order.setUserID(loginUser.getUserID());
         order.setTotal(hours* venue.getPrice());
-
         orderDao.save(order);
-        response.sendRedirect("order_manage");
     }
 
     @Override

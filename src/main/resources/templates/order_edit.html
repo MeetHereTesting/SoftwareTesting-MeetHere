@@ -74,8 +74,8 @@
 <body>
 <div th:include="layout/header :: header(user=${session.user},flag=${session.user}!=null,page='order_place')"></div>
 <main class="container-fluid" style="padding-top: 10%">
-    <form role="form">
-        <div class="text-center mb-5" th:action="@{modifyOrder}" th:method="post">
+    <form role="form" th:action="@{modifyOrder}" th:method="post">
+        <div class="text-center mb-5" >
             <h1>场 馆 预 约</h1>
         </div>
         <div class="form-group mx-auto col-6 mb-4 row">
@@ -312,11 +312,11 @@
         }
     });
 
-    $("form").submit(function () {
-        alert("修改成功！");
-        window.history.back();
-        return false;
-    });
+    // $("form").submit(function () {
+    //     alert("修改成功！");
+    //     window.history.back();
+    //     return false;
+    // });
 </script>
 
 </body>
