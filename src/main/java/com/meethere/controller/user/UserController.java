@@ -57,7 +57,7 @@ public class UserController {
 
     @PostMapping("/register.do")
     public void register(String userID,String userName, String password, String email, String phone,
-                        HttpServletRequest request, HttpServletResponse response) throws IOException{
+                         HttpServletResponse response) throws IOException{
         User user=new User();
         user.setUserID(userID);
         user.setUserName(userName);
@@ -78,16 +78,19 @@ public class UserController {
 
 
     @PostMapping("/updateUser.do")
-    @ResponseBody
-    public boolean updateUser(String userName, String userID, String passwordNew,String email, String phone, MultipartFile picture) throws Exception {
+    public String updateUser(String userName, String userID, String passwordNew,String email, String phone, MultipartFile picture,HttpServletRequest request) throws Exception {
         User user=userService.findByUserID(userID);
         user.setUserName(userName);
+        if(passwordNew!=null&& !passwordNew.equals(""))
         user.setPassword(passwordNew);
         user.setEmail(email);
         user.setPhone(phone);
+        if(picture!=null)
         user.setPicture(FileUtil.saveUserFile(picture));
         userService.updateUser(user);
-        return true;
+        request.getSession().removeAttribute("user");
+        request.getSession().setAttribute("user",user);
+        return "user_info";
     }
 
 

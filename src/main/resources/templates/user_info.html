@@ -23,7 +23,7 @@
         <div class="card-header py-3 text-center bg-primary text-light">
             <h5 class="card-title mb-0">我的信息</h5>
         </div>
-        <form class="my-5 col-8 mx-auto" role="form" th:action="@{updateUser.do}" method="post" enctype="multipart/form-data" th:onsubmit="return checkPassword()">
+        <form class="my-5 col-8 mx-auto" role="form" th:action="@{updateUser.do}" method="post" enctype="multipart/form-data" th:onsubmit="">
             <div class="form-group mb-4 row">
                 <div class="media col-3">
                     <h6 class="align-self-center ml-auto">昵称：</h6>
@@ -44,6 +44,7 @@
                 </div>
                 <div class="col-8">
                     <h6 class="text-muted font-weight-normal" th:text="${session.user.userID}"></h6>
+                    <input type="text" name="userID" class="form-control" id="userID" hidden th:value="${session.user.userID}">
                 </div>
             </div>
             <div class="form-group mb-4 row">
@@ -69,7 +70,7 @@
                     <h6 class="align-self-start ml-auto pt-1">头像：</h6>
                 </div>
                 <div class="col-8">
-                    <img th:src="${@{session.user.picture}} == null ? 'default.jpg': ${@{session.user.picture}}" alt="" style="height: 100px; width: 100px">
+                    <img th:src="@{${session.user.picture}} == null ? 'default.jpg': @{${session.user.picture}}" alt="" style="height: 100px; width: 100px">
                     <label for="picture" class="sr-only">Example file input</label>
                     <input type="file" class="form-control-file mt-2" id="picture" name="picture">
                 </div>
@@ -141,7 +142,7 @@
         // }
     });
     var flag=1;
-    function doVerify(){
+    function checkPassword(){
         if(!flag) return;
         var password =  $("#passwordOld").val();
         var userID =$("#userID").val();
