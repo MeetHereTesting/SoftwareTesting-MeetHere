@@ -88,7 +88,7 @@
                        th:value="${venue} != null?${venue.venueName}" required onchange="doVerify()">
             </div>
         </div>
-        <div class="col-6 mx-auto">
+        <div class="col-3" style="margin-left: 36%">
             <div class="alert alert-danger m-3 mb-4" hidden id="alertVenue">
                 <span class="glyphicon glyphicon-info-sign"></span> 场馆不存在！</div>
         </div>
@@ -317,7 +317,7 @@
         let name = $("#venueName").val();
         if(name =="") {
             $("#submit").attr("disable", false);
-            $("#alertVenue").attr('hidden');
+            $("#alertVenue").attr('hidden', 'hidden');
             return;
         }
         $.ajax({
@@ -336,7 +336,7 @@
                 else
                 {
                     $("#submit").attr('disabled',false);
-                    $("#alertVenue").attr('hidden',true);
+                    $("#alertVenue").attr('hidden', 'hidden');
                 }
 
             }

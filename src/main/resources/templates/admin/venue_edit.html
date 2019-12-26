@@ -42,7 +42,7 @@
                 <h2>场馆信息管理</h2>
             </div>
             <div>
-                <form class="col-10 mx-auto" role="form" th:action="@{'modifyVenue.do'}" th:onsubmit="return checkFile()" th:method="POST" enctype="multipart/form-data">
+                <form class="col-10 mx-auto" role="form" th:action="@{'modifyVenue.do'}" th:method="POST" enctype="multipart/form-data">
                     <div class="form-group mb-4 d-flex justify-content-start">
                         <div class="col-2 align-self-center text-right">
                             <h6 class=" ml-auto">场馆ID：</h6>
@@ -59,9 +59,13 @@
                         </div>
                         <div class="col-7">
                             <label for="venueName" class="sr-only">场馆名称</label>
-                            <input type="text" name="venueName" class="form-control" id="venueName" required th:value="${venue.venueName}" onblur="doVerify()">
+                            <input type="text" name="venueName" class="form-control" id="venueName" required th:value="${venue.venueName}" onchange="doVerify()">
                             <input type="text" name="oldVenueName" class="form-control" id="oldVenueName" required hidden th:value="${venue.venueName}">
                         </div>
+                    </div>
+                    <div class="col-5 mr-auto" style="margin-left: 15%">
+                        <div class="alert alert-danger m-3 mb-4" hidden  id="alertVenue">
+                            <span class="glyphicon glyphicon-info-sign"></span> 场馆已存在，请更换场馆名称！</div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
                         <div class="col-2 align-self-center text-right">
@@ -134,14 +138,14 @@
 </div>
 
 <script type="text/javascript">
-    function checkFile(){
-        var file=$('#picture').get(0).files[0];
-        if(!file){
-            alert("请选择图片！");
-            return false;
-        }
-        return true;
-    }
+    // function checkFile(){
+    //     var file=$('#picture').get(0).files[0];
+    //     if(!file){
+    //         alert("请选择图片！");
+    //         return false;
+    //     }
+    //     return true;
+    // }
     $('textarea').each(function () {
         this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
     }).on('input', function () {
@@ -179,32 +183,31 @@
         var account1= $("#oldVenueName").val();
         console.log(account);
         console.log(account1);
-        if(account==account1)
+        if(account==account1 || account=="")
         {
             $("#submit").attr('disabled',false);
+            $("#alertVenue").attr('hidden', 'hidden');
             return;
         }
-
-        if(account=="")
-            alert("请输入场馆名！");
-        if(account !=""){
-            $.ajax({
-                url:"checkVenueName.do",
-                dataType: "Json",
-                type: "post",
-                data:{
-                    venueName: account
-                },
-                success: function(msg){
-                    if(!msg) {
-                        $("#submit").attr('disabled',true);
-                        alert("请更换场馆名！");
-                    }
-                    else
-                        $("#submit").attr('disabled',false);
+        $.ajax({
+            url:"checkVenueName.do",
+            dataType: "Json",
+            type: "post",
+            data:{
+                venueName: account
+            },
+            success: function(msg){
+                if(!msg) {
+                    $("#submit").attr('disabled',true);
+                    $("#alertVenue").removeAttr('hidden');
                 }
-            });
-        }
+                else{
+                    $("#submit").attr('disabled',false);
+                    $("#alertVenue").attr('hidden', 'hidden');
+                }
+            }
+        });
+
     }
 </script>
 </body>

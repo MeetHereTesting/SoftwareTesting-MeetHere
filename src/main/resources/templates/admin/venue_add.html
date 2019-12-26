@@ -42,15 +42,19 @@
                 <h2>新增场馆</h2>
             </div>
             <div>
-                <form class="col-10 mx-auto" role="form" th:action="@{/addVenue.do}" th:method="POST" enctype="multipart/form-data" th:onsubmit="return checkFile()">
+                <form class="col-10 mx-auto" role="form" th:action="@{/addVenue.do}" th:method="POST" enctype="multipart/form-data">
                     <div class="form-group mb-4 d-flex justify-content-start">
                         <div class="col-2 align-self-center text-right">
                             <h6 class=" ml-auto">场馆名称：</h6>
                         </div>
                         <div class="col-7">
                             <label for="venueName" class="sr-only">场馆名称</label>
-                            <input type="text" name="venueName" class="form-control" id="venueName" required onblur="doVerify()">
+                            <input type="text" name="venueName" class="form-control" id="venueName" required onchange="doVerify()">
                         </div>
+                    </div>
+                    <div class="col-5 mr-auto" style="margin-left: 15%">
+                        <div class="alert alert-danger m-3 mb-4" hidden  id="alertVenue">
+                            <span class="glyphicon glyphicon-info-sign"></span> 场馆已存在，请更换场馆名称！</div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
                         <div class="col-2 align-self-center text-right">
@@ -123,14 +127,14 @@
 </div>
 
 <script type="text/javascript">
-    function checkFile(){
-        var file=$('#picture').get(0).files[0];
-        if(!file){
-            alert("请选择图片！");
-            return false;
-        }
-        return true;
-    }
+    // function checkFile(){
+    //     var file=$('#picture').get(0).files[0];
+    //     if(!file){
+    //         alert("请选择图片！");
+    //         return false;
+    //     }
+    //     return true;
+    // }
     $('textarea').each(function () {
         this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
     }).on('input', function () {
@@ -165,26 +169,31 @@
     function doVerify(){
         var account =  $("#venueName").val();
         console.log(account);
-        if(account=="")
-            alert("请输入场馆名！");
-        if(account !=""){
-            $.ajax({
-                url:"checkVenueName.do",
-                dataType: "Json",
-                type: "post",
-                data:{
-                    venueName: account
-                },
-                success: function(msg){
-                    if(!msg) {
-                        $("#submit").attr('disabled',true);
-                        alert("请更换场馆名！");
-                    }
-                    else
-                        $("#submit").attr('disabled',false);
-                }
-            });
+        if(account==""){
+            $("#submit").attr('disabled',false);
+            $("#alertVenue").attr('hidden', 'hidden');
+            return;
         }
+
+        $.ajax({
+            url:"checkVenueName.do",
+            dataType: "Json",
+            type: "post",
+            data:{
+                venueName: account
+            },
+            success: function(msg){
+                if(!msg) {
+                    $("#submit").attr('disabled',true);
+                    $("#alertVenue").removeAttr('hidden');
+                }
+                else{
+                    $("#submit").attr('disabled',false);
+                    $("#alertVenue").attr('hidden', 'hidden');
+                }
+
+            }
+        });
     }
 </script>
 </body>
