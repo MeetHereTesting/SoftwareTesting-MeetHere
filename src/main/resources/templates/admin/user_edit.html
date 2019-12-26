@@ -50,7 +50,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input type="text" name="userName" class="form-control" id="userName" th:value="${user.userName}">
+                                <input type="text" name="userName" class="form-control" id="userName" required th:value="${user.userName}">
                             </div>
                         </div>
                     </div>
@@ -60,18 +60,20 @@
                         </div>
                         <div class="col-10">
                             <label for="email" class="sr-only">邮箱</label>
-                            <input type="text" name="email" class="form-control" id="email" th:value="${user.email}" onblur="emailVerify()">
+                            <input type="text" name="email" class="form-control" id="email" th:value="${user.email}" onchange="emailVerify()">
                         </div>
                     </div>
+                    <div class="alert alert-danger col-10 ml-auto" hidden id="alertEmail"><span class="glyphicon glyphicon-info-sign"></span> 请输入正确的邮箱</div>
                     <div class="form-group mb-4 row">
                         <div class="media col-2">
-                            <h6 class="align-self-center ml-auto">手机号</h6>
+                            <h6 class="align-self-center ml-auto">手机</h6>
                         </div>
                         <div class="col-10">
-                            <label for="phone" class="sr-only">手机号</label>
-                            <input type="text" name="phone" class="form-control" id="phone" th:value="${user.phone}" onblur="phoneVerify()">
+                            <label for="phone" class="sr-only">手机</label>
+                            <input type="text" name="phone" class="form-control" id="phone" th:value="${user.phone}" onchange="phoneVerify()">
                         </div>
                     </div>
+                    <div class="alert alert-danger col-10 ml-auto" hidden id="alertPhone"><span class="glyphicon glyphicon-info-sign"></span> 请输入正确的手机号</div>
                     <div class="form-group mb-4 row">
                         <div class="media col-2">
                             <h6 class="align-self-center ml-auto">用户名</h6>
@@ -79,10 +81,11 @@
                         </div>
                         <div class="col-10">
                             <label for="userID" class="sr-only">用户名</label>
-                            <input type="text" name="userID" class="form-control" id="userID" required th:value="${user.userID}" onblur="doVerify()">
+                            <input type="text" name="userID" class="form-control" id="userID" required th:value="${user.userID}" onchange="doVerify()">
                             <input type="text" name="oldUserID" class="form-control" id="oldUserID" required hidden th:value="${user.userID}">
                         </div>
                     </div>
+                    <div class="alert alert-danger col-10 ml-auto" hidden id="alertId"><span class="glyphicon glyphicon-info-sign"></span> 用户名已被占用，请重新输入！</div>
                     <div class="form-group mb-5 row">
                         <div class="media col-2">
                             <h6 class="align-self-center ml-auto">密码</h6>
@@ -108,75 +111,102 @@
     $("#cancel").click(function(){
         window.history.back();
     });
-
-    $("#cancel").click(function(){
-        window.history.back();
-    });
-    var flag=1;
+    var flag = [false, false, false];
+    function justifySubmit() {
+        console.log(flag);
+        for(let i = 0; i < 3; i++){
+            if(flag[i]){
+                $("#submit").attr('disabled',true);
+                return;
+            }
+        }
+        $("#submit").attr('disabled',false);
+    }
     function doVerify(){
-        if(!flag) return;
-        var account =  $("#userID").val();
-        var account1= $("#oldUserID").val();
-        console.log(account);
-        console.log(account1);
-        if(account==account1)
-        {
-            $("#submit").attr('disabled',false);
+        let account =  $("#userID").val();
+        // console.log(account);
+        if(account =="" || account == $("#oldUserID").val()) {
+            if (flag[0]) {
+                $("#alertId").attr('hidden', 'hidden');
+                flag[0] = false;
+            }
+            justifySubmit();
             return;
         }
-
-
-        if(account=="")
-            alert("请输入用户名！");
-        if(account !=""){
-            $.ajax({
-                url:"checkUserID.do",
-                dataType: "Json",
-                type: "post",
-                data:{
-                    userID:account
-                },
-                success: function(msg){
-                    if(!msg) {
-                        // 账号已经存在
-                        $("#submit").attr('disabled',true);
-                        alert("该用户名已被注册");
+        $.ajax({
+            url:"checkUserID.do",
+            dataType: "Json",
+            type: "post",
+            data:{
+                userID:account
+            },
+            success: function(msg){
+                if(!msg) {
+                    // 账号已经存在
+                    if(!flag[0]){
+                        flag[0] = true;
+                        $("#alertId").removeAttr('hidden');
                     }
-                    else
-                        $("#submit").attr('disabled',false);
                 }
-            });
-        }
-    }
+                else{
+                    if(flag[0]){
+                        flag[0] = false;
+                        $("#alertId").attr('hidden', 'hidden');
+                    }
+                }
+                justifySubmit();
+            }
+        });
 
+    }
     function phoneVerify() {
-        if(!flag) return;
         var phone =  $("#phone").val();
-        if(phone=="") return;
+        if(phone =="") {
+            if (flag[1]) {
+                $("#alertPhone").attr('hidden', 'hidden');
+                flag[1] = false;
+            }
+            justifySubmit();
+            return;
+        }
         var myreg=/^[1][3,4,5,7,8][0-9]{9}$/;
         if (!myreg.test(phone)) {
-            $("#submit").attr('disabled',true);
-            flag=0;
-            alert("请输入正确的手机号");
+            if(!flag[1]){
+                flag[1] = true;
+                $("#alertPhone").removeAttr('hidden');
+            }
         } else {
-            flag=1;
-            $("#submit").attr('disabled',false);
+            if(flag[1]){
+                flag[1] = false;
+                $("#alertPhone").attr('hidden', 'hidden');
+            }
         }
+        justifySubmit();
     }
-
     function emailVerify(){
 
         var email = $("#email").val();
-        if(email=="") return;
-        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-        if(reg.test(email)){
-            $("#submit").attr('disabled',false);
-            flag=1;
-        }else{
-            $("#submit").attr('disabled',true);
-            flag=0;
-            alert("邮箱格式不正确");
+        if(email =="") {
+            if (flag[2]) {
+                $("#alertEmail").attr('hidden', 'hidden');
+                flag[2] = false;
+            }
+            justifySubmit();
+            return;
         }
+        var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+        if(!reg.test(email)){
+            if(!flag[2]){
+                flag[2] = true;
+                $("#alertEmail").removeAttr('hidden');
+            }
+        }else{
+            if(flag[2]){
+                flag[2] = false;
+                $("#alertEmail").attr('hidden', 'hidden');
+            }
+        }
+        justifySubmit();
     }
 </script>
 </body>
