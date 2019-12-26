@@ -47,7 +47,7 @@ public class FileUtil {
     public static String saveUserFile(MultipartFile picture) throws Exception{
         if (picture.isEmpty())
             return "";
-        String fileDirPath = new String("src/main/resources/" + "static/file/venue");
+        String fileDirPath = new String("src/main/resources/" + "static/file/user");
 
         File fileDir = new File(fileDirPath);
         if (!fileDir.exists()) {
