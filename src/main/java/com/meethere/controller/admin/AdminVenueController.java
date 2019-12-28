@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Controller
@@ -67,7 +68,10 @@ public class AdminVenueController {
         venue.setClose_time(close_time);
 
         System.out.println(venueName);
-        venue.setPicture(FileUtil.saveVenueFile(picture));
+        if(!Objects.equals(picture.getOriginalFilename(), "")){
+            venue.setPicture(FileUtil.saveVenueFile(picture));
+        }
+
         int id=venueService.create(venue);
         if (id <= 0) {
             request.setAttribute("message", "添加失败！");
@@ -87,7 +91,9 @@ public class AdminVenueController {
         venue.setAddress(address);
         venue.setDescription(description);
         venue.setPrice(price);
-        venue.setPicture(FileUtil.saveVenueFile(picture));
+        if(!Objects.equals(picture.getOriginalFilename(), "")){
+            venue.setPicture(FileUtil.saveVenueFile(picture));
+        }
         venue.setOpen_time(open_time);
         venue.setClose_time(close_time);
         venueService.update(venue);

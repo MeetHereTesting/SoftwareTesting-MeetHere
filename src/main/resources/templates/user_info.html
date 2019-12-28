@@ -37,7 +37,7 @@
         <div class="card-header py-3 text-center bg-primary text-light">
             <h5 class="card-title mb-0">我的信息</h5>
         </div>
-        <form class="my-5 col-8 mx-auto" role="form" th:action="@{updateUser.do}" method="post" enctype="multipart/form-data" th:onsubmit="">
+        <form class="my-5 col-8 mx-auto" role="form" th:action="@{updateUser.do}" method="post" enctype="multipart/form-data">
             <div class="form-group mb-4 row">
                 <div class="media col-3">
                     <h6 class="align-self-center ml-auto">昵称：</h6>
@@ -88,7 +88,7 @@
                     <h6 class="align-self-start ml-auto pt-1">头像：</h6>
                 </div>
                 <div class="col-8">
-                    <img th:src="@{${session.user.picture}} == '' ? 'default.jpg': @{${session.user.picture}}" alt="" style="height: 100px; width: 100px">
+                    <img th:src="${session.user.picture} == '' ? 'default.jpg': ${session.user.picture}" alt="" style="height: 100px; width: 100px">
                     <label for="picture" class="sr-only">Example file input</label>
                     <input type="file" class="form-control-file mt-2" id="picture" name="picture">
                 </div>
@@ -160,12 +160,12 @@
         var fileType = fileMsg[0].type;
         console.log(fileType);//image/png
         // 判断文件类型
-        // var type=(fileType.substr(fileType.lastIndexOf("."))).toLowerCase();
-        // if(type!=".jpg" && type!=".gif" && type!=".jpeg" && type!=".png"){
-        //     alert("您上传图片的类型不符合(.jpg|.jpeg|.gif|.png)！");
-        //     $('#picture').attr('value', '');
-        //     return false;
-        // }
+        var type=(fileType.substr(fileType.lastIndexOf("/"))).toLowerCase();
+        if(type!="/jpg" && type!="/gif" && type!="/jpeg" && type!="/png"){
+            alert("您上传图片的类型不符合(.jpg|.jpeg|.gif|.png)！\n请重新上传！");
+            $('#picture').val('');
+            return false;
+        }
     });
 
     function checkPassword(){
@@ -267,6 +267,12 @@
         }
         justifySubmit();
     }
+
+    $("form").submit(function () {
+        alert("保存成功！");
+        window.location.href='/user_info';
+    });
+
 </script>
 <div th:include="layout/footer :: Footer"></div>
 </body>

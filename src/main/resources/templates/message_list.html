@@ -254,12 +254,10 @@
                 messageID:messageID,
                 content:content
             },
-            // async: false,
             success: function (result) {
-                alert("修改成功！");
                 if (result) {
                     alert("修改成功！");
-                    alert("请刷新！")
+                    window.location.reload();
                 }
             }
         });

@@ -87,13 +87,13 @@ public class MessageController {
 
     @PostMapping("/modifyMessage.do")
     @ResponseBody
-    public void modifyMessage(int messageID,String content, HttpServletResponse response) throws IOException {
+    public boolean modifyMessage(int messageID,String content, HttpServletResponse response) throws IOException {
         Message message=messageService.findById(messageID);
         message.setContent(content);
         message.setTime(LocalDateTime.now());
         message.setState(1);
         messageService.update(message);
-        response.sendRedirect("/message_list");
+        return true;
     }
 
     @PostMapping("/delMessage.do")

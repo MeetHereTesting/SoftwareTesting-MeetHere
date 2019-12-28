@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.PastOrPresent;
 import java.io.IOException;
+import java.util.Objects;
 
 @Controller
 public class UserController {
@@ -35,18 +36,16 @@ public class UserController {
 
     @PostMapping("/loginCheck.do")
     @ResponseBody
-    public String login(String userID,String password, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String login(String userID,String password, HttpServletRequest request) throws IOException {
         User user=userService.checkLogin(userID,password);
         if(user!=null){
             if(user.getIsadmin()==0){
                 request.getSession().setAttribute("user",user);
-//                response.sendRedirect("/index");
                 System.out.println("user login!");
                 return "/index";
             }
             else if(user.getIsadmin()==1){
                 request.getSession().setAttribute("user",user);
-//                response.sendRedirect("/admin_index");
                 System.out.println("admin login!");
                 return "/admin_index";
             }
@@ -79,19 +78,22 @@ public class UserController {
 
 
     @PostMapping("/updateUser.do")
-    public String updateUser(String userName, String userID, String passwordNew,String email, String phone, MultipartFile picture,HttpServletRequest request) throws Exception {
+    public void updateUser(String userName, String userID, String passwordNew,String email, String phone, MultipartFile picture,HttpServletRequest request, HttpServletResponse response) throws Exception {
         User user=userService.findByUserID(userID);
         user.setUserName(userName);
-        if(passwordNew!=null&& !passwordNew.equals(""))
-        user.setPassword(passwordNew);
+        if(passwordNew!=null&& !passwordNew.equals("")){
+            user.setPassword(passwordNew);
+        }
         user.setEmail(email);
         user.setPhone(phone);
-        if(picture!=null)
-        user.setPicture(FileUtil.saveUserFile(picture));
+        if(!Objects.equals(picture.getOriginalFilename(), "")){
+            user.setPicture(FileUtil.saveUserFile(picture));
+        }
+
         userService.updateUser(user);
         request.getSession().removeAttribute("user");
         request.getSession().setAttribute("user",user);
-        return "user_info";
+        response.sendRedirect("user_info");
     }
 
 

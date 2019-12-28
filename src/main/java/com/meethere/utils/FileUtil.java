@@ -1,5 +1,6 @@
 package com.meethere.utils;
 
+import org.springframework.util.ClassUtils;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,38 +23,24 @@ public class FileUtil {
      */
     public static String saveVenueFile(MultipartFile picture) throws Exception {
 
-        if (picture.isEmpty())
+        if (picture.isEmpty()) {
             return "";
-        String fileDirPath = "src/main/resources/" + "static/file/venue";
-
-        File fileDir = new File(fileDirPath);
-        if (!fileDir.exists()) {
-            // 递归生成文件夹
-            fileDir.mkdirs();
         }
-
-        String filename = picture.getOriginalFilename();
-
-        System.out.println(fileDir.getAbsolutePath());
-        String suffixName = filename.substring(filename.lastIndexOf("."));
-        filename = UUID.randomUUID() + suffixName;
-        File newFile = new File(fileDir.getAbsolutePath() + File.separator + filename);
-        System.out.println(newFile.getAbsolutePath());
-            // 上传图片到 -》 “绝对路径”
-            picture.transferTo(newFile);
-            return "file/venue/"+filename;
+        String fileDirPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath() + "/file/venue";
+        return "file/venue/" + savePicture(fileDirPath, picture);
     }
 
     public static String saveUserFile(MultipartFile picture) throws Exception{
-        if (picture.isEmpty())
+        if (picture.isEmpty()) {
             return "";
-        String fileDirPath = "src/main/resources/" + "static/file/user";
-
-        File fileDir = new File(fileDirPath);
-        if (!fileDir.exists()) {
-            // 递归生成文件夹
-            fileDir.mkdirs();
         }
+        String fileDirPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath() + "/file/user";
+        return "file/user/" + savePicture(fileDirPath, picture);
+    }
+
+    public static String savePicture(String filePath, MultipartFile picture) throws Exception{
+        File fileDir = new File(filePath);
+        System.out.println(fileDir.mkdirs());
 
         String filename = picture.getOriginalFilename();
 
@@ -64,8 +51,7 @@ public class FileUtil {
         System.out.println(newFile.getAbsolutePath());
         // 上传图片到 -》 “绝对路径”
         picture.transferTo(newFile);
-        return "file/user/"+filename;
+        return filename;
     }
-
 
 }
