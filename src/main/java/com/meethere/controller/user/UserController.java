@@ -64,6 +64,7 @@ public class UserController {
         user.setPassword(password);
         user.setEmail(email);
         user.setPhone(phone);
+        user.setPicture("");
         userService.create(user);
         response.sendRedirect("login");
     }

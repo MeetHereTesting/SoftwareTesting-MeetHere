@@ -32,7 +32,7 @@ public class MessageController {
         Pageable message_pageable= PageRequest.of(0,5, Sort.by("time").descending());
         Page<Message> messages=messageService.findAll(message_pageable);
 //        List<MessageVo> message_list=messageVoService.findAll(message_pageable);
-        List<MessageVo> message_list=messageVoService.returnVo(messages.getContent());
+//        List<MessageVo> message_list=messageVoService.returnVo(messages.getContent());
 
 //        model.addAttribute("message_list",message_list);
         model.addAttribute("total",messages.getTotalPages());
