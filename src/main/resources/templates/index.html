@@ -45,7 +45,7 @@
                     <li class="list-group-item px-3 pt-3 border-0" th:each="venue : ${venue_list}">
                         <div class="media border-bottom border-gray pb-3">
                             <div class="media-left mr-3">
-                                <img th:src="${venue.picture} == ''?'image.JPG':${venue.picture}"
+                                <img th:src="${venue.picture} == ''?'venue.jpg':${venue.picture}"
                                      alt="" height="100px" width="100px">
                             </div>
                             <div class="media-body">

@@ -85,7 +85,7 @@
             <div class="col-9 pl-0">
                 <label for="venueName" class="sr-only">场馆名称</label>
                 <input type="text" name="venueName" class="form-control form-control-lg" id="venueName"
-                       th:value="${venue} != null?${venue.venueName}" required onchange="doVerify()">
+                       th:value="${venue} != null?${venue.venueName}:''" required onchange="doVerify()">
             </div>
         </div>
         <div class="col-3" style="margin-left: 36%">

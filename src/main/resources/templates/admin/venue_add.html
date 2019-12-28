@@ -109,7 +109,7 @@
                             <h6 class="ml-auto">图片：</h6>
                         </div>
                         <div class="col-10">
-                            <img src="image.JPG" alt="" style="height: 100px; width: 100px">
+                            <img src="venue.jpg" alt="" style="height: 100px; width: 100px">
                             <label for="picture" class="sr-only">Example file input</label>
                             <input type="file" class="form-control-file mt-2" id="picture" name="picture">
                         </div>
@@ -141,10 +141,7 @@
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     });
-    // $("form").submit(function(){
-    //     window.history.back();
-    //     return false;
-    // });
+
     $(function () {
         const picker1 = $('#startTime').datetimepicker({
             format: 'HH:mm ',
@@ -195,6 +192,26 @@
             }
         });
     }
+    $("#picture").change(function (e){
+        console.log('value='+$(this).val());
+        console.log(e);
+        var fileMsg = e.currentTarget.files;
+        var fileName = fileMsg[0].name;
+        console.log(fileName);//js-dom.png
+        //大小 字节
+        var fileSize = fileMsg[0].size;
+        console.log(fileSize);//350061
+        //类型
+        var fileType = fileMsg[0].type;
+        console.log(fileType);//image/png
+        // 判断文件类型
+        var type=(fileType.substr(fileType.lastIndexOf("/"))).toLowerCase();
+        if(type!="/jpg" && type!="/gif" && type!="/jpeg" && type!="/png"){
+            alert("您上传图片的类型不符合(.jpg|.jpeg|.gif|.png)！\n请重新上传！");
+            $('#picture').val('');
+            return false;
+        }
+    });
 </script>
 </body>
 </html>
