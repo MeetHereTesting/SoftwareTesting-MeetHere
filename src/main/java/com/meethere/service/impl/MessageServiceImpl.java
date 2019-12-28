@@ -23,55 +23,17 @@ public class MessageServiceImpl implements MessageService {
     @Autowired
     private MessageDao messageDao;
 
-    private Page<Message> getMessages(HttpServletRequest request, Pageable pageable, int stateReject) {
-        Object user=request.getSession().getAttribute("user");
-        if(user==null)
-            throw new LoginException("请登录！");
-        User loginUser=(User)user;
-        Page<Message> page=messageDao.findAllByUserIDAndState(loginUser.getUserID(), stateReject,pageable);
-        return page;
-    }
-
     @Override
     public Message findById(int messageID) {
         return messageDao.getOne(messageID);
     }
 
     @Override
-    public Page<Message> findAll(Pageable pageable) {
-        return messageDao.findAllByState(STATE_PASS,pageable);
-    }
+    public Page<Message> findByUser(String userID,Pageable pageable) {
 
-    @Override
-    public Page<Message> findByUser(HttpServletRequest request, Pageable pageable) {
-        Object user=request.getSession().getAttribute("user");
-        if(user==null)
-            throw new LoginException("请登录！");
-        User loginUser=(User)user;
-        Page<Message> page=messageDao.findAllByUserID(loginUser.getUserID(),pageable);
+        Page<Message> page=messageDao.findAllByUserID(userID,pageable);
         return page;
     }
-
-    @Override
-    public Page<Message> findUserPass(HttpServletRequest request, Pageable pageable) {
-        return getMessages(request, pageable, STATE_PASS);
-    }
-
-    @Override
-    public Page<Message> findUserUnPass(HttpServletRequest request, Pageable pageable) {
-        return getMessages(request, pageable, STATE_REJECT);
-    }
-
-    @Override
-    public List<Message> findByUser(HttpServletRequest request) {
-        Object user=request.getSession().getAttribute("user");
-        if(user==null)
-            throw new LoginException("请登录！");
-        User loginUser=(User)user;
-        List<Message> messages=messageDao.findAllByUserID(loginUser.getUserID());
-        return messages;
-    }
-
 
     @Override
     public int create(Message message) {
@@ -113,12 +75,5 @@ public class MessageServiceImpl implements MessageService {
     public Page<Message> findPassState(Pageable pageable) {
         return messageDao.findAllByState(STATE_PASS,pageable);
     }
-
-    @Override
-    public Page<Message> findRejectState(Pageable pageable) {
-        return messageDao.findAllByState(STATE_REJECT,pageable);
-
-    }
-
 
 }

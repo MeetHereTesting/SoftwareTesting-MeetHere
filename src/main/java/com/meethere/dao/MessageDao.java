@@ -11,21 +11,15 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 public interface MessageDao extends JpaRepository<Message,Integer> {
-    List<Message> findAllByUserID(String userID);
     Message findByMessageID(int messageID);
 
     Page<Message> findAllByUserID(String userID,Pageable pageable);
-
-    Page<Message> findAllByUserIDAndState(String userID,int state,Pageable pageable);
-
+    
     Page<Message> findAllByState(int state,Pageable pageable);
 
     @Transactional
     @Modifying
     @Query(value="update Message o set o.state=?1 where o.messageID=?2",nativeQuery =true)
     void updateState(int state, int messageID);
-
-    @Query(value="select * from Message m where m.state=?1",nativeQuery = true)
-    List<Message> findState(int state);
 
 }

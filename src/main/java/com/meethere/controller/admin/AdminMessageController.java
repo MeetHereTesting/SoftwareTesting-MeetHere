@@ -25,7 +25,7 @@ public class AdminMessageController {
     @GetMapping("/message_manage")
     public String message_manage(Model model){
         Pageable message_pageable= PageRequest.of(0,10, Sort.by("time").descending());
-        model.addAttribute("total",messageService.findAll(message_pageable).getTotalPages());
+        model.addAttribute("total",messageService.findWaitState(message_pageable).getTotalPages());
         return "admin/message_manage";
     }
 

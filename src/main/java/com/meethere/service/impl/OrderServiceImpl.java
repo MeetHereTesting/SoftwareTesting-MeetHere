@@ -39,28 +39,14 @@ public class OrderServiceImpl implements OrderService {
         return null;
     }
 
-
-    @Override
-    public List<Order> findUserOrder(HttpServletRequest httpRequest) {
-        Object user=httpRequest.getSession().getAttribute("user");
-        if(user==null)
-            throw new LoginException("请登录");
-        User loginUser=(User)user;
-        return orderDao.findByUserID(loginUser.getUserID());
-    }
-
     @Override
     public List<Order> findDateOrder(int venueID, LocalDateTime startTime, LocalDateTime startTime2) {
         return orderDao.findByVenueIDAndStartTimeIsBetween(venueID,startTime,startTime2);
     }
 
     @Override
-    public Page<Order> findUserOrder(HttpServletRequest httpRequest, Pageable pageable) {
-        Object user=httpRequest.getSession().getAttribute("user");
-        if(user==null)
-            throw new LoginException("请登录");
-        User loginUser=(User)user;
-        return orderDao.findAllByUserID(loginUser.getUserID(),pageable);
+    public Page<Order> findUserOrder(String userID, Pageable pageable) {
+        return orderDao.findAllByUserID(userID,pageable);
     }
 
     @Override
@@ -71,40 +57,32 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void updateOrder(int orderID, String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Object user = request.getSession().getAttribute("user");
-        if (user == null)
-            throw new LoginException("请登录！");
+    public void updateOrder(int orderID, String venueName, LocalDateTime startTime, int hours,String userID)  {
         Venue venue =venueDao.findByVenueName(venueName);
-
-        User loginUser = (User) user;
         Order order=orderDao.findByOrderID(orderID);
         order.setState(STATE_NO_AUDIT);
         order.setHours(hours);
         order.setVenueID(venue.getVenueID());
         order.setOrderTime(LocalDateTime.now());
         order.setStartTime(startTime);
-        order.setUserID(loginUser.getUserID());
+        order.setUserID(userID);
         order.setTotal(hours* venue.getPrice());
 
         orderDao.save(order);
     }
 
     @Override
-    public void submit(String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        Object user = request.getSession().getAttribute("user");
-        if (user == null)
-            throw new LoginException("请登录！");
+    public void submit(String venueName, LocalDateTime startTime, int hours, String userID) {
+
         Venue venue =venueDao.findByVenueName(venueName);
 
-        User loginUser = (User) user;
         Order order=new Order();
         order.setState(STATE_NO_AUDIT);
         order.setHours(hours);
         order.setVenueID(venue.getVenueID());
         order.setOrderTime(LocalDateTime.now());
         order.setStartTime(startTime);
-        order.setUserID(loginUser.getUserID());
+        order.setUserID(userID);
         order.setTotal(hours* venue.getPrice());
         orderDao.save(order);
     }

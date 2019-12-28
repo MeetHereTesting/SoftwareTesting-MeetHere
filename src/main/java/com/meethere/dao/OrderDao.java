@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderDao extends JpaRepository<Order,Integer> {
-    List<Order> findByUserID(String userID);
 
     Order findByOrderID(int orderID);
 

@@ -1,12 +1,14 @@
 package com.meethere.controller.user;
 
 import com.meethere.entity.Order;
+import com.meethere.entity.User;
 import com.meethere.entity.Venue;
 import com.meethere.entity.vo.OrderVo;
 import com.meethere.entity.vo.VenueOrder;
 import com.meethere.service.OrderService;
 import com.meethere.service.OrderVoService;
 import com.meethere.service.VenueService;
+import com.meethere.service.exception.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,7 +36,12 @@ public class OrderController {
     @GetMapping("/order_manage")
     public String order_manage(Model model,HttpServletRequest request){
         Pageable order_pageable = PageRequest.of(0,5, Sort.by("orderTime").descending());
-        Page<Order> page=orderService.findUserOrder(request,order_pageable);
+        Object user=request.getSession().getAttribute("user");
+        if(user==null)
+            throw new LoginException("请登录！");
+        User loginUser=(User)user;
+        Page<Order> page=orderService.findUserOrder(loginUser.getUserID(),order_pageable);
+
         model.addAttribute("total",page.getTotalPages());
         return "order_manage";
     }
@@ -56,7 +63,11 @@ public class OrderController {
     @ResponseBody
     public List<OrderVo> news_list(@RequestParam(value = "page",defaultValue = "1")int page, HttpServletRequest request){
         Pageable order_pageable = PageRequest.of(page-1,5, Sort.by("orderTime").descending());
-        Page<Order> page1=orderService.findUserOrder(request,order_pageable);
+        Object user=request.getSession().getAttribute("user");
+        if(user==null)
+            throw new LoginException("请登录！");
+        User loginUser=(User)user;
+        Page<Order> page1=orderService.findUserOrder(loginUser.getUserID(),order_pageable);
         return orderVoService.returnVo(page1.getContent());
     }
 
@@ -65,7 +76,11 @@ public class OrderController {
         date=startTime+":00";
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
-        orderService.submit(venueName,ldt,hours,request,response);
+        Object user=request.getSession().getAttribute("user");
+        if(user==null)
+            throw new LoginException("请登录！");
+        User loginUser=(User)user;
+        orderService.submit(venueName,ldt,hours,loginUser.getUserID());
         response.sendRedirect("order_manage");
     }
 
@@ -90,7 +105,11 @@ public class OrderController {
         date=startTime+":00";
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
-        orderService.updateOrder(orderID,venueName,ldt,hours,request,response);
+        Object user=request.getSession().getAttribute("user");
+        if(user==null)
+            throw new LoginException("请登录！");
+        User loginUser=(User)user;
+        orderService.updateOrder(orderID,venueName,ldt,hours,loginUser.getUserID());
         response.sendRedirect("order_manage");
         return true;
     }

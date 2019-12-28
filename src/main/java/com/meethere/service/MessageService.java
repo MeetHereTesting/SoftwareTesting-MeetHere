@@ -16,31 +16,11 @@ public interface MessageService {
     Message findById(int messageID);
 
     /**
-     * 分页查询所有留言
-     *
-     * @param pageable
-     * @return
-     */
-    Page<Message> findAll(Pageable pageable);
-
-    /**
-     *user查看自己的留言
-     *
-     * @return
-     */
-     List<Message> findByUser(HttpServletRequest request);
-
-    /**
      * 分页返回用户留言
-     * @param request
      * @param pageable
      * @return
      */
-     Page<Message> findByUser(HttpServletRequest request,Pageable pageable);
-
-     Page<Message> findUserPass(HttpServletRequest request,Pageable pageable);
-
-     Page<Message> findUserUnPass(HttpServletRequest request,Pageable pageable);
+     Page<Message> findByUser(String userID,Pageable pageable);
 
     /**
      * 添加留言
@@ -67,5 +47,4 @@ public interface MessageService {
 
     Page<Message> findPassState(Pageable pageable);
 
-    Page<Message> findRejectState(Pageable pageable);
 }

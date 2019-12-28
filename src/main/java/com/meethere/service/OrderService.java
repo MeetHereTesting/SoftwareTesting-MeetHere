@@ -37,17 +37,10 @@ public interface OrderService {
 
     List<Order> findAuditOrder();
 
-    /**
-     * 查看用户的订单
-     *
-     * @param httpRequest
-     * @return
-     */
-    List<Order> findUserOrder(HttpServletRequest httpRequest);
 
     List<Order> findDateOrder(int venueID, LocalDateTime startTime, LocalDateTime startTime2);
 
-    Page<Order> findUserOrder(HttpServletRequest httpRequest,Pageable pageable);
+    Page<Order> findUserOrder(String userID,Pageable pageable);
 
     /**
      * 更新订单状态
@@ -57,14 +50,14 @@ public interface OrderService {
      */
     void updateStates(int orderID, int state);
 
-    void updateOrder(int orderID,String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
+    void updateOrder(int orderID,String venueName, LocalDateTime startTime, int hours, String userID);
     /**
      * 新建订单
      * @param venueName
      * @param startTime
      * @param hours
      */
-    void submit(String venueName, LocalDateTime startTime, int hours, HttpServletRequest request, HttpServletResponse response) throws Exception;
+    void submit(String venueName, LocalDateTime startTime, int hours, String userID);
 
     /**
      * 删除订单
