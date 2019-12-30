@@ -43,6 +43,19 @@
 <div th:include="layout/footer :: Footer"></div>
 <script type="text/javascript">
 
+    $("#userID").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 31){
+            $(this).val($(this).val().substring(0,32));
+        }
+    });
+    $("#password").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 15){
+            $(this).val($(this).val().substring(0,16));
+        }
+    });
+
     $("input").change(function () {
         $(".alert").attr('hidden', 'hidden');
         $("#submit").removeAttr("disabled");
@@ -60,6 +73,7 @@
                     $("#submit").attr("disabled", "disabled");
                 }
                 else{
+                    alert("登录成功！");
                     window.location.href = data;
                 }
 

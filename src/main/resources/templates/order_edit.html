@@ -146,7 +146,11 @@
         <input type="text" hidden="hidden" name="startTime" id="startTime" required>
         <input type="text" hidden="hidden" name="hours" id="hours" required>
         <input type="text" hidden="hidden" name="orderID" id="orderID" th:value="${order.orderID}">
-        <button class="btn btn-lg btn-danger btn-block col-4 mx-auto mt-5" id="submit" type="submit">提交订单</button>
+<!--        <button class="btn btn-lg btn-danger btn-block col-4 mx-auto mt-5" id="submit" type="submit">提交订单</button>-->
+        <div class="mb-4 pt-4 d-flex justify-content-center">
+            <button class="btn btn-danger col-2 mr-5" type="submit" id="submit">提交</button>
+            <button class="btn btn-secondary col-2" type="reset" id="cancel">取消</button>
+        </div>
     </form>
 
 </main>
@@ -310,13 +314,21 @@
             moveSelected.style.bottom=0;
             moveSelected.style.right=0;
         }
+
+        $("#submit").click(function () {
+            if(selectedList.length == 0){
+                alert("您尚未选择预约时间段！");
+                return false;
+            }
+        });
+        $("form").submit(function () {
+            alert("修改成功！");
+        });
+        $("#cancel").click(function(){
+            window.history.back();
+        });
     });
 
-    // $("form").submit(function () {
-    //     alert("修改成功！");
-    //     window.history.back();
-    //     return false;
-    // });
 </script>
 
 </body>

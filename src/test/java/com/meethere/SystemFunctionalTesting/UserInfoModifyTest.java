@@ -26,6 +26,44 @@ import java.net.URL;
 
 public class UserInfoModifyTest extends BaseTest {
   @Test
+  public void modify_success() {
+    driver.get("http://localhost:8888/index");
+    driver.findElement(By.linkText("登录")).click();
+    driver.findElement(By.id("userID")).sendKeys("test001");
+    driver.findElement(By.id("password")).click();
+    driver.findElement(By.id("password")).sendKeys("1234");
+    driver.findElement(By.id("submit")).click();
+    driver.findElement(By.linkText("testUser")).click();
+    assertThat(driver.getTitle(), is("我的信息-MeetHere"));
+    driver.findElement(By.id("userName")).click();
+    driver.findElement(By.id("userName")).sendKeys("testUser001");
+    driver.findElement(By.id("email")).click();
+    driver.findElement(By.id("email")).sendKeys("123");
+    assertThat(driver.findElement(By.id("alertEmail")).getText(), is("请输入正确的邮箱！"));
+    driver.findElement(By.id("email")).sendKeys("707864430@qq.com");
+    driver.findElement(By.id("phone")).click();
+    driver.findElement(By.id("phone")).sendKeys("123");
+    assertThat(driver.findElement(By.id("alertPhone")).getText(), is("请输入正确的手机号！"));
+    driver.findElement(By.id("phone")).sendKeys("13918826786");
+    driver.findElement(By.id("submit")).click();
+    assertThat(driver.getTitle(), is("我的信息-MeetHere"));
+    {
+      String value = driver.findElement(By.id("userName")).getAttribute("value");
+      assertThat(value, is("testUser001"));
+    }
+    {
+      String value = driver.findElement(By.id("email")).getAttribute("value");
+      assertThat(value, is("707864430@qq.com"));
+    }
+    {
+      String value = driver.findElement(By.id("phone")).getAttribute("value");
+      assertThat(value, is("13918826786"));
+    }
+  }
+
+
+
+  @Test
   public void userInfoModify() {
     driver.get("http://localhost:8888/index");
     driver.manage().window().setSize(new Dimension(1528, 806));

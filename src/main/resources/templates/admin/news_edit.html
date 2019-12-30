@@ -55,7 +55,8 @@
                         </div>
                         <div class="col-11">
                             <label for="title" class="sr-only">标题</label>
-                            <input type="text" name="title" class="form-control" id="title" required th:value="${news.title}">
+                            <input type="text" name="title" class="form-control" id="title" required th:value="${news.title}"
+                                   data-toggle="tooltip" title="最多32个字符" data-placement="right" data-trigger="manual">
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -65,6 +66,7 @@
                         <div class="col-11">
                             <label for="content" class="sr-only">正文</label>
                             <textarea class="form-control" id="content" name="content" rows="10" required  th:text="${news.content}"></textarea>
+                            <p class="text-muted my-0 float-right" id="word">5000</p>
                         </div>
                     </div>
                     <div class="mb-4 d-flex justify-content-center">
@@ -79,11 +81,49 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        let len = $("#content").val().length;
+        if(len > 4999){
+            $("#content").val($("#content").val().substring(0,5000));
+        }
+        if(len <= 0){
+            $("#word").text("");
+        }else if(len >= 5000){
+            $("#word").text('5000/5000');
+        }else
+        {
+            $("#word").text(len+'/5000');
+        }
+    });
     $('textarea').each(function () {
         this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
     }).on('input', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
+    });
+    $("#title").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 31){
+            $(this).val($(this).val().substring(0,32));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#title").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#content").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 4999){
+            $(this).val($(this).val().substring(0,5000));
+        }
+        if(len <= 0){
+            $("#word").text("");
+        }else if(len >= 5000){
+            $("#word").text('5000/5000');
+        }else
+        {
+            $("#word").text(len+'/5000');
+        }
     });
     // $("form").submit(function(){
     //     window.history.back();

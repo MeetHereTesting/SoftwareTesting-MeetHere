@@ -70,7 +70,7 @@
 
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
-                    <h6 class="m-0"><a th:href="@{venue_list}"><span class="badge">MORE</span></a></h6>
+                    <h6 class="m-0"><a th:href="@{venue_list}" target="_blank"><span class="badge">MORE</span></a></h6>
                 </div>
 
             </div>
@@ -94,7 +94,7 @@
 
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
-                    <h6 class="m-0"><a th:href="@{news_list}"><span class="badge">MORE</span></a></h6>
+                    <h6 class="m-0"><a th:href="@{news_list}" target="_blank"><span class="badge">MORE</span></a></h6>
                 </div>
             </div>
 
@@ -122,7 +122,7 @@
 
                 </ul>
                 <div class="card-body text-right pt-0 pb-2">
-                    <h6 class="m-0"><a href="#" onclick="message_list()" th:href="@{message_list}"><span class="badge">MORE</span></a></h6>
+                    <h6 class="m-0"><a href="#" onclick="message_list()" th:href="@{message_list}" target="_blank"><span class="badge">MORE</span></a></h6>
                     <div id="user" th:text="${session.user}" hidden></div>
                 </div>
             </div>

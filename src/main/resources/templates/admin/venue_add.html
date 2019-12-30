@@ -28,8 +28,8 @@
         }
     </style>
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 </head>
@@ -49,7 +49,8 @@
                         </div>
                         <div class="col-7">
                             <label for="venueName" class="sr-only">场馆名称</label>
-                            <input type="text" name="venueName" class="form-control" id="venueName" required onchange="doVerify()">
+                            <input type="text" name="venueName" class="form-control" id="venueName" required onchange="doVerify()"
+                                   data-toggle="tooltip" title="最多32个字符" data-placement="right" data-trigger="manual">
                         </div>
                     </div>
                     <div class="col-5 mr-auto" style="margin-left: 15%">
@@ -62,7 +63,8 @@
                         </div>
                         <div class="col-7">
                             <label for="address" class="sr-only">位置</label>
-                            <input type="text" name="address" class="form-control" id="address" required>
+                            <input type="text" name="address" class="form-control" id="address" required
+                                   data-toggle="tooltip" title="最多50个字符" data-placement="right" data-trigger="manual">
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -75,7 +77,8 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">￥</div>
                                 </div>
-                                <input type="text" name="price" class="form-control" id="price" required>
+                                <input type="text" name="price" class="form-control" id="price" required
+                                       data-toggle="tooltip" title="最多6位数字" data-placement="right" data-trigger="manual">
                             </div>
                         </div>
                     </div>
@@ -102,6 +105,7 @@
                         <div class="col-10">
                             <label for="description" class="sr-only">场馆介绍</label>
                             <textarea class="form-control" name="description" id="description" rows="10" required></textarea>
+                            <p class="text-muted my-0 float-right" id="word">1000</p>
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -140,6 +144,51 @@
     }).on('input', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
+    });
+
+    $("#venueName").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 31){
+            $(this).val($(this).val().substring(0,32));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#venueName").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#address").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 49){
+            $(this).val($(this).val().substring(0,50));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#address").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#price").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 5){
+            $(this).val($(this).val().substring(0,6));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#price").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#description").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 999){
+            $(this).val($(this).val().substring(0,1000));
+        }
+        if(len <= 0){
+            $("#word").text("");
+        }else if(len >= 1000){
+            $("#word").text('1000/1000');
+        }else
+        {
+            $("#word").text(len+'/1000');
+        }
     });
 
     $(function () {
