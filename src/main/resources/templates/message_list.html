@@ -99,7 +99,7 @@
             $("#word").text(0);
         }
         if(len <= 0){
-            $("#word").text("");
+            $("#word").text("0/500");
         }else if(len >= 500){
             $("#word").text('500/500');
         }else{
@@ -113,7 +113,7 @@
             $("#word2").text(0);
         }
         if(len <= 0){
-            $("#word"+i).text("");
+            $("#word"+i).text("0/500");
         }else if(len >= 500){
             $("#word"+i).text('500/500');
         }else{
@@ -291,7 +291,11 @@
         });
     }
     function modify(messageID,i,btn) {
-        if (!confirm("确定修改该信息？")) {
+        if($("#myMessage"+i).val().length <=0){
+            alert("留言不能为空！");
+            return;
+        }
+        if (!confirm("确定修改该留言？")) {
             return;
         }
 
