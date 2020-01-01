@@ -70,7 +70,7 @@ public class AdminMessageApiTest {
 
     @Test
     public void admin_del_message() throws Exception {
-        ResultActions perform=mockMvc.perform(post("/delMessage.do").param("messageID","1"));
+        ResultActions perform=mockMvc.perform(post("/delMessage.do").param("messageID","2"));
         perform.andExpect(status().isOk());
     }
 }
