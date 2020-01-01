@@ -54,9 +54,9 @@
 </main>
 <div th:include="layout/footer :: Footer"></div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        getPage(1);
-    });
+    // $(document).ready(function () {
+    //     getPage(1);
+    // });
 
     $('#pagination-demo').twbsPagination({
         totalPages: [[${total}]],
@@ -114,7 +114,7 @@
                 '                        <div class="media-body">\n' +
                 '                            <h6>\n' +
                 '                                <strong>预约场馆：</strong>\n' +
-                '                                <a href="/venue?venueID='+list[i].venueID+'">'+list[i].venueName+'</a>\n' +
+                '                                <a href="/venue?venueID='+list[i].venueID+'" target="_blank" >'+list[i].venueName+'</a>\n' +
                 '                            </h6>\n' +
                 '                            <h6 class="d-flex">\n' +
                 '                                <p class="font-weight-bold mb-0">预约时间：</p>\n' +

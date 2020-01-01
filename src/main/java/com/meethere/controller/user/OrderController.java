@@ -37,8 +37,9 @@ public class OrderController {
     public String order_manage(Model model,HttpServletRequest request){
         Pageable order_pageable = PageRequest.of(0,5, Sort.by("orderTime").descending());
         Object user=request.getSession().getAttribute("user");
-        if(user==null)
+        if(user==null) {
             throw new LoginException("请登录！");
+        }
         User loginUser=(User)user;
         Page<Order> page=orderService.findUserOrder(loginUser.getUserID(),order_pageable);
 
@@ -64,8 +65,9 @@ public class OrderController {
     public List<OrderVo> order_list(@RequestParam(value = "page",defaultValue = "1")int page, HttpServletRequest request){
         Pageable order_pageable = PageRequest.of(page-1,5, Sort.by("orderTime").descending());
         Object user=request.getSession().getAttribute("user");
-        if(user==null)
+        if(user==null) {
             throw new LoginException("请登录！");
+        }
         User loginUser=(User)user;
         Page<Order> page1=orderService.findUserOrder(loginUser.getUserID(),order_pageable);
         return orderVoService.returnVo(page1.getContent());
@@ -77,8 +79,9 @@ public class OrderController {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
         Object user=request.getSession().getAttribute("user");
-        if(user==null)
+        if(user==null) {
             throw new LoginException("请登录！");
+        }
         User loginUser=(User)user;
         orderService.submit(venueName,ldt,hours,loginUser.getUserID());
         response.sendRedirect("order_manage");
@@ -106,8 +109,9 @@ public class OrderController {
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime ldt = LocalDateTime.parse(date,df);
         Object user=request.getSession().getAttribute("user");
-        if(user==null)
+        if(user==null) {
             throw new LoginException("请登录！");
+        }
         User loginUser=(User)user;
         orderService.updateOrder(orderID,venueName,ldt,hours,loginUser.getUserID());
         response.sendRedirect("order_manage");

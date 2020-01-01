@@ -32,7 +32,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='user_manage')"></div>
+        <div th:include="layout/left :: left(user=${session.admin},flag=${session.admin}!=null,page='user_manage')"></div>
         <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
                 <h2>新增用户</h2>
@@ -50,7 +50,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">@</span>
                                 </div>
-                                <input type="text" name="userName" class="form-control" id="userName" required>
+                                <input type="text" name="userName" class="form-control" id="userName" required
+                                       data-toggle="tooltip" title="最多18个字符" data-placement="right" data-trigger="manual">
                             </div>
                         </div>
                     </div>
@@ -64,7 +65,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><span class="glyphicon glyphicon-envelope"></span></span>
                                 </div>
-                                <input type="text" name="email" class="form-control" id="email" onchange="emailVerify()">
+                                <input type="text" name="email" class="form-control" id="email" onchange="emailVerify()"
+                                       data-toggle="tooltip" title="最多32个字符" data-placement="right" data-trigger="manual">
                             </div>
                         </div>
                     </div>
@@ -79,7 +81,8 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><span class="glyphicon glyphicon-earphone"></span></span>
                                 </div>
-                                <input type="text" name="phone" class="form-control" id="phone" onchange="phoneVerify()">
+                                <input type="text" name="phone" class="form-control" id="phone" onchange="phoneVerify()"
+                                       data-toggle="tooltip" title="最多11位数字" data-placement="right" data-trigger="manual">
                             </div>
                         </div>
                     </div>
@@ -91,7 +94,8 @@
                         </div>
                         <div class="col-10">
                             <label for="userID" class="sr-only">用户名</label>
-                            <input type="text" name="userID" class="form-control" onchange="doVerify()" id="userID" required>
+                            <input type="text" name="userID" class="form-control" onchange="doVerify()" id="userID" required
+                                   data-toggle="tooltip" title="最多32个字符" data-placement="right" data-trigger="manual">
                         </div>
                     </div>
                     <div class="alert alert-danger col-10 ml-auto" hidden id="alertId"><span class="glyphicon glyphicon-info-sign"></span> 用户名已被占用，请重新输入！</div>
@@ -102,7 +106,8 @@
                         </div>
                         <div class="col-10">
                             <label for="password" class="sr-only">密码</label>
-                            <input type="text" name="password" class="form-control" id="password" required>
+                            <input type="text" name="password" class="form-control" id="password" required
+                                   data-toggle="tooltip" title="最多16个字符" data-placement="right" data-trigger="manual">
                         </div>
                     </div>
                     <div class="mb-4 d-flex justify-content-center">
@@ -221,6 +226,56 @@
         justifySubmit();
     }
 
+    $("#userName").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 17){
+            $(this).val($(this).val().substring(0,18));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#userName").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#email").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 31){
+            $(this).val($(this).val().substring(0,32));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#email").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#phone").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 10){
+            $(this).val($(this).val().substring(0,11));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#phone").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#userID").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 31){
+            $(this).val($(this).val().substring(0,32));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#userID").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#password").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 15){
+            $(this).val($(this).val().substring(0,16));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#password").tooltip('hide');
+            }, 2000);
+        }
+    });
 </script>
 </body>
 </html>

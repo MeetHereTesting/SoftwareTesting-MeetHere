@@ -85,7 +85,8 @@
             <div class="col-9 pl-0">
                 <label for="venueName" class="sr-only">场馆名称</label>
                 <input type="text" name="venueName" class="form-control form-control-lg" id="venueName"
-                       th:value="${venue} != null?${venue.venueName}:''" required onchange="doVerify()">
+                       th:value="${venue} != null?${venue.venueName}:''" required onchange="doVerify()"
+                       data-toggle="tooltip" title="最多32个字符" data-placement="right" data-trigger="manual">
             </div>
         </div>
         <div class="col-3" style="margin-left: 36%">
@@ -187,10 +188,10 @@
             getOrderList();
         });
 
-        if(venueName != ''){
-            // console.log("ready");
+        if(venueName!=''){
             getOrderList();
         }
+
 
 
         function getOrderList() {
@@ -310,6 +311,28 @@
             moveSelected.style.bottom=0;
             moveSelected.style.right=0;
         }
+
+        $("#venueName").keyup(function(){
+            let len = $(this).val().length;
+            if(len > 31){
+                $(this).val($(this).val().substring(0,32));
+                $(this).tooltip('show');
+                setTimeout(function(){
+                    $("#venueName").tooltip('hide');
+                }, 2000);
+            }
+        });
+
+        $("#submit").click(function () {
+            if(selectedList.length == 0){
+                alert("您尚未选择预约时间段！");
+                return false;
+            }
+        });
+        $("form").submit(function () {
+            alert("提交成功！");
+        });
+
     });
 
 

@@ -35,8 +35,9 @@ public class OrderVoServiceImpl implements OrderVoService {
     @Override
     public List<OrderVo> returnVo(List<Order> list) {
         List<OrderVo> list1=new ArrayList<>();
-        for(int i=0;i<list.size();i++)
+        for(int i=0;i<list.size();i++) {
             list1.add(returnOrderVoByOrderID(list.get(i).getOrderID()));
+        }
         return list1;
     }
 }

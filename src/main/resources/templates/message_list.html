@@ -38,7 +38,7 @@
 <main role="main" class="container">
 
     <div class="card bg-white rounded shadow p-3 mb-3">
-        <form role="form" th:action="@{sendMessage}" method="post">
+        <form role="form" id="sendMessage" th:action="@{sendMessage}" method="post">
             <div class="form-group">
                 <input type="text" name="userID" class="form-control" id="userID" required hidden th:value="${session.user.userID}">
 <!--                <input type="text" class="form-control" id="userID" name="userID" hidden  required te th:value="${session.user.userID}"></input>-->
@@ -46,6 +46,7 @@
             <div class="form-group">
                 <label for="content" class="font-weight-bold sr-only">发布留言</label>
                 <textarea class="form-control" id="content" name="content" rows="3" placeholder="有什么想和大家分享的？" required></textarea>
+                <p class="text-muted my-0" id="word">500</p>
             </div>
             <button class="btn btn-danger btn-block col-2 ml-auto" type="submit">发布</button>
         </form>
@@ -86,10 +87,45 @@
 <div th:include="layout/footer :: Footer"></div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        getPage1(1);
-        getPage2(1);
+    // $(document).ready(function () {
+    //     getPage1(1);
+    //     getPage2(1);
+    // });
+
+    $("#content").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 499){
+            $(this).val($(this).val().substring(0,500));
+            $("#word").text(0);
+        }
+        if(len <= 0){
+            $("#word").text("0/500");
+        }else if(len >= 500){
+            $("#word").text('500/500');
+        }else{
+            $("#word").text(len+'/500');
+        }
     });
+    function wordsLimit(i){
+        let len = $("#myMessage"+i).val().length;
+        if(len > 499){
+            $("#myMessage"+i).val($("#myMessage"+i).val().substring(0,500));
+            $("#word2").text(0);
+        }
+        if(len <= 0){
+            $("#word"+i).text("0/500");
+        }else if(len >= 500){
+            $("#word"+i).text('500/500');
+        }else{
+            $("#word"+i).text(len+'/500');
+        }
+    }
+
+
+    $("#sendMessage").submit(function () {
+        alert("发布成功，等待审核！");
+    });
+
 
     $('#pagination1').twbsPagination({
         totalPages: [[${total}]],
@@ -197,10 +233,11 @@
                 '                                    </div>\n' +
                 '                                    <div class="form-group">\n' +
                 '                                        <label for="myMessage'+i+'" class="font-weight-bold sr-only">发布留言</label>\n' +
-                '                                        <textarea class="form-control" name="content" id="myMessage'+i+'" rows="3" required>'+list[i].content+'</textarea>\n' +
+                '                                        <textarea class="form-control" name="content" id="myMessage'+i+'" rows="3" required onkeyup="wordsLimit('+i+')">'+list[i].content+'</textarea>\n' +
+                '                                        <p class="text-muted my-0" id="word'+i+'">500</p>' +
                 '                                    </div>\n' +
                 '                                    <div class="col-3 ml-auto d-flex justify-content-end">\n' +
-                '                                        <a class="btn btn-primary mr-2" data-toggle="collapse"  type="submit" onclick="modify('+list[i].messageID+','+i+',this)">\n' +
+                '                                        <a class="btn btn-primary mr-2 text-light" data-toggle="collapse"  type="submit" onclick="modify('+list[i].messageID+','+i+',this)">\n' +
                 '                                            完成\n' +
                 '                                        </a>\n' +
                 '                                        <a class="btn btn-secondary  " data-toggle="collapse" href="#modifyMessage'+i+'">\n' +
@@ -239,7 +276,11 @@
         });
     }
     function modify(messageID,i,btn) {
-        if (!confirm("确定修改该信息？")) {
+        if($("#myMessage"+i).val().length <=0){
+            alert("留言不能为空！");
+            return;
+        }
+        if (!confirm("确定修改该留言？")) {
             return;
         }
 

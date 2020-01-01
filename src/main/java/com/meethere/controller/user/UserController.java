@@ -43,7 +43,7 @@ public class UserController {
                 return "/index";
             }
             else if(user.getIsadmin()==1){
-                request.getSession().setAttribute("user",user);
+                request.getSession().setAttribute("admin",user);
                 System.out.println("admin login!");
                 return "/admin_index";
             }
@@ -72,6 +72,12 @@ public class UserController {
         System.out.println("log out success!");
         response.sendRedirect("/index");
     }
+    @GetMapping("/quit.do")
+    public void quit(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().removeAttribute("admin");
+        System.out.println("log out success!");
+        response.sendRedirect("/index");
+    }
 
 
 
@@ -79,7 +85,7 @@ public class UserController {
     public void updateUser(String userName, String userID, String passwordNew,String email, String phone, MultipartFile picture,HttpServletRequest request, HttpServletResponse response) throws Exception {
         User user=userService.findByUserID(userID);
         user.setUserName(userName);
-        if(passwordNew!=null&& !passwordNew.equals("")){
+        if(passwordNew!=null&& !"".equals(passwordNew)){
             user.setPassword(passwordNew);
         }
         user.setEmail(email);

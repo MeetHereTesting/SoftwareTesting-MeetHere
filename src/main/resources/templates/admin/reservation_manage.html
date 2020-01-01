@@ -38,7 +38,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='reservation_manage')"></div>
+        <div th:include="layout/left :: left(user=${session.admin},flag=${session.admin}!=null,page='reservation_manage')"></div>
         <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
                 <h2>预约订单管理</h2>
@@ -144,9 +144,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        getPage(1);
-    });
+    // $(document).ready(function () {
+    //     getPage(1);
+    // });
 
     $('#pagination-demo').twbsPagination({
         totalPages: [[${total}]],
@@ -184,10 +184,6 @@
                 '                                    </div>\n' +
                 '                    <div class="media border-bottom border-gray pb-3">\n' +
                 '                        <div class="media-left mr-3">\n';
-            if(list[i].picture == '')
-                tableShow += '<img src="image.JPG" alt="" height="100px" width="100px">\n';
-            else
-                tableShow += '<img src="'+list[i].picture+'" alt="" height="100px" width="100px">\n';
             tableShow += '</div>\n' +
                 '                        <div class="media-body">\n' +
                 '                            <h6 class="d-flex">\n' +
@@ -233,7 +229,7 @@
             success: function (result) {
                 $(btn).parent().parent().fadeOut();
                 if (result) {
-                    alert("修改成功！");
+                    alert("通过成功！");
                 }
             }
         });
