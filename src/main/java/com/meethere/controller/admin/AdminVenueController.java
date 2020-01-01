@@ -69,6 +69,8 @@ public class AdminVenueController {
 
         if(!Objects.equals(picture.getOriginalFilename(), "")){
             venue.setPicture(FileUtil.saveVenueFile(picture));
+        }else{
+            venue.setPicture("");
         }
 
         int id=venueService.create(venue);

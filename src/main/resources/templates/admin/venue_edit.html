@@ -28,18 +28,18 @@
         }
     </style>
     <script th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment-with-locales.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='venue_manage')"></div>
+        <div th:include="layout/left :: left(user=${session.admin},flag=${session.admin}!=null,page='venue_manage')"></div>
         <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
-                <h2>场馆信息管理</h2>
+                <h2>修改场馆信息</h2>
             </div>
             <div>
                 <form class="col-10 mx-auto" role="form" th:action="@{'modifyVenue.do'}" th:method="POST" enctype="multipart/form-data">
@@ -59,7 +59,8 @@
                         </div>
                         <div class="col-7">
                             <label for="venueName" class="sr-only">场馆名称</label>
-                            <input type="text" name="venueName" class="form-control" id="venueName" required th:value="${venue.venueName}" onchange="doVerify()">
+                            <input type="text" name="venueName" class="form-control" id="venueName" required th:value="${venue.venueName}" onchange="doVerify()"
+                                   data-toggle="tooltip" title="最多32个字符" data-placement="right" data-trigger="manual">
                             <input type="text" name="oldVenueName" class="form-control" id="oldVenueName" required hidden th:value="${venue.venueName}">
                         </div>
                     </div>
@@ -73,7 +74,8 @@
                         </div>
                         <div class="col-7">
                             <label for="address" class="sr-only">位置</label>
-                            <input type="text" name="address" class="form-control" id="address" required th:value="${venue.address}">
+                            <input type="text" name="address" class="form-control" id="address" required th:value="${venue.address}"
+                                   data-toggle="tooltip" title="最多50个字符" data-placement="right" data-trigger="manual">
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -86,7 +88,8 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">￥</div>
                                 </div>
-                                <input type="text" name="price" class="form-control" id="price" required th:value="${venue.price}">
+                                <input type="text" name="price" class="form-control" id="price" required th:value="${venue.price}"
+                                       data-toggle="tooltip" title="最多6位数字" data-placement="right" data-trigger="manual">
                             </div>
                         </div>
                     </div>
@@ -113,6 +116,7 @@
                         <div class="col-10">
                             <label for="description" class="sr-only">场馆介绍</label>
                             <textarea class="form-control" name="description" id="description" rows="10" required th:text="${venue.description}"></textarea>
+                            <p class="text-muted my-0 float-right" id="word">1000</p>
                         </div>
                     </div>
                     <div class="form-group mb-4 d-flex justify-content-start">
@@ -146,11 +150,70 @@
     //     }
     //     return true;
     // }
+    $(document).ready(function () {
+        let len = $("#description").val().length;
+        if(len > 999){
+            $("#description").val($("#description").val().substring(0,1000));
+        }
+        if(len <= 0){
+            $("#word").text("0/1000");
+        }else if(len >= 1000){
+            $("#word").text('1000/1000');
+        }else
+        {
+            $("#word").text(len+'/1000');
+        }
+    });
+
     $('textarea').each(function () {
         this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
     }).on('input', function () {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
+    });
+    $("#venueName").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 31){
+            $(this).val($(this).val().substring(0,32));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#venueName").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#address").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 49){
+            $(this).val($(this).val().substring(0,50));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#address").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#price").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 5){
+            $(this).val($(this).val().substring(0,6));
+            $(this).tooltip('show');
+            setTimeout(function(){
+                $("#price").tooltip('hide');
+            }, 2000);
+        }
+    });
+    $("#description").keyup(function(){
+        let len = $(this).val().length;
+        if(len > 999){
+            $(this).val($(this).val().substring(0,1000));
+        }
+        if(len <= 0){
+            $("#word").text("");
+        }else if(len >= 1000){
+            $("#word").text('1000/1000');
+        }else
+        {
+            $("#word").text(len+'/1000');
+        }
     });
 
     $(function () {

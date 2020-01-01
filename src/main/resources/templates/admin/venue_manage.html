@@ -33,7 +33,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div th:include="layout/left :: left(user=${session.user},flag=${session.user}!=null,page='venue_manage')"></div>
+        <div th:include="layout/left :: left(user=${session.admin},flag=${session.admin}!=null,page='venue_manage')"></div>
         <main class="col-10 ml-auto px-4 mt-4">
             <div class="col-12 mb-3 pb-3 border-bottom border-gray">
                 <h2>场馆信息管理</h2>
@@ -87,9 +87,9 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        getPage(1);
-    });
+    // $(document).ready(function () {
+    //     getPage(1);
+    // });
 
     $('#pagination-demo').twbsPagination({
         totalPages: [[${total}]],
