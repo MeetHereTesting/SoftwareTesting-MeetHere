@@ -87,10 +87,10 @@
 <div th:include="layout/footer :: Footer"></div>
 
 <script type="text/javascript">
-    $(document).ready(function () {
-        getPage1(1);
-        getPage2(1);
-    });
+    // $(document).ready(function () {
+    //     getPage1(1);
+    //     getPage2(1);
+    // });
 
     $("#content").keyup(function(){
         let len = $(this).val().length;
@@ -120,22 +120,7 @@
             $("#word"+i).text(len+'/500');
         }
     }
-    // for(let i = 0; i < 5; i++){
-    //     $("#myMessage"+i).keyup(function(){
-    //         let len = $(this).val().length;
-    //         if(len > 499){
-    //             $(this).val($(this).val().substring(0,500));
-    //             $("#word"+i).text(0);
-    //         }
-    //         if(len <= 0){
-    //             $("#word"+i).text("");
-    //         }else if(len >= 500){
-    //             $("#word"+i).text('500/500');
-    //         }else{
-    //             $("#word"+i).text(len+'/500');
-    //         }
-    //     });
-    // }
+
 
     $("#sendMessage").submit(function () {
         alert("发布成功，等待审核！");
