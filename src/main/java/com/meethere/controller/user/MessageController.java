@@ -38,8 +38,9 @@ public class MessageController {
         model.addAttribute("total",messages.getTotalPages());
 
         Object user=request.getSession().getAttribute("user");
-        if(user==null)
+        if(user==null) {
             throw new LoginException("请登录！");
+        }
         User loginUser=(User)user;
 
             Pageable user_message_pageable = PageRequest.of(0,5, Sort.by("time").descending());
@@ -69,8 +70,9 @@ public class MessageController {
         System.out.println("find user messages");
 //        if(request.getSession().getAttribute("user")!=null) {
         Object user=request.getSession().getAttribute("user");
-        if(user==null)
+        if(user==null) {
             throw new LoginException("请登录！");
+        }
         User loginUser=(User)user;
 
             Pageable message_pageable = PageRequest.of(page - 1, 5, Sort.by("time").descending());

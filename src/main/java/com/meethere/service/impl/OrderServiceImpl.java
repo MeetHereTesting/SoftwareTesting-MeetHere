@@ -95,24 +95,27 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public void confirmOrder(int orderID) {
         Order order=orderDao.findByOrderID(orderID);
-        if(order == null)
+        if(order == null) {
             throw new RuntimeException("订单不存在");
+        }
         orderDao.updateState(STATE_WAIT,order.getOrderID());
     }
 
     @Override
     public void finishOrder(int orderID) {
         Order order=orderDao.findByOrderID(orderID);
-        if(order == null)
+        if(order == null) {
             throw new RuntimeException("订单不存在");
+        }
         orderDao.updateState(STATE_FINISH,order.getOrderID());
     }
 
     @Override
     public void rejectOrder(int orderID) {
         Order order=orderDao.findByOrderID(orderID);
-        if(order == null)
+        if(order == null) {
             throw new RuntimeException("订单不存在");
+        }
         orderDao.updateState(STATE_REJECT,order.getOrderID());
     }
 

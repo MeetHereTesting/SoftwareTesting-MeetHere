@@ -53,16 +53,18 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void confirmMessage(int messageID) {
         Message message=messageDao.findByMessageID(messageID);
-        if(message==null)
+        if(message==null) {
             throw new RuntimeException("留言不存在");
+        }
         messageDao.updateState(STATE_PASS,message.getMessageID());
     }
 
     @Override
     public void rejectMessage(int messageID) {
         Message message=messageDao.findByMessageID(messageID);
-        if(message==null)
+        if(message==null) {
             throw new RuntimeException("留言不存在");
+        }
         messageDao.updateState(STATE_REJECT,message.getMessageID());
     }
 
