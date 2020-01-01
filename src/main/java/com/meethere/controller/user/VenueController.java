@@ -33,14 +33,6 @@ public class VenueController {
         model.addAttribute("venue", venue);
         return "venue";
     }
-//
-//    @GetMapping("/venue")
-//    public String venue(Model model){
-//        Pageable venue_pageable= PageRequest.of(0,3, Sort.by("venueID").descending());
-//        List<Venue> venue_list=venueService.findAll(venue_pageable).getContent();
-//        model.addAttribute("venue_list",venue_list);
-//        return "venue";
-//    }
 
     /**
      * 分页查看场馆
@@ -51,7 +43,6 @@ public class VenueController {
     public Page<Venue> venue_list(@RequestParam(value = "page",defaultValue = "1")int page){
         System.out.println("success");
         Pageable venue_pageable= PageRequest.of(page-1,5, Sort.by("venueID").ascending());
-//        List<Venue> venue_list=venueService.findAll(venue_pageable).getContent();
         return venueService.findAll(venue_pageable);
     }
 
@@ -61,16 +52,7 @@ public class VenueController {
         List<Venue> venue_list=venueService.findAll(venue_pageable).getContent();
         model.addAttribute("venue_list",venue_list);
         model.addAttribute("total", venueService.findAll(venue_pageable).getTotalPages());
-//        model.addAttribute("total", 2);
         return "venue_list";
     }
-
-//    @GetMapping("/venue_list")
-//    @ResponseBody
-//    public List<Venue> venue_listAll(Model model){
-//        List<Venue> venue_list=venueService.findAll();
-//        model.addAttribute("venue_list",venue_list);
-//        return venue_list;
-//    }
 
 }
