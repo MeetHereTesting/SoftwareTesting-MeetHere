@@ -1,4 +1,4 @@
-package com.meethere.service.exception;
+package com.meethere.exception;
 
 public class LoginException extends RuntimeException {
     public LoginException() {

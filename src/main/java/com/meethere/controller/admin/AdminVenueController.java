@@ -67,7 +67,6 @@ public class AdminVenueController {
         venue.setOpen_time(open_time);
         venue.setClose_time(close_time);
 
-        System.out.println(venueName);
         if(!Objects.equals(picture.getOriginalFilename(), "")){
             venue.setPicture(FileUtil.saveVenueFile(picture));
         }

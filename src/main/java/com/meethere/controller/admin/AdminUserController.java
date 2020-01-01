@@ -59,7 +59,7 @@ public class AdminUserController {
     }
 
     @PostMapping("/modifyUser.do")
-    public void modifyUSer(String userID,String userName, String password, String email, String phone,
+    public void modifyUser(String userID,String userName, String password, String email, String phone,
                         HttpServletRequest request, HttpServletResponse response) throws IOException{
         User user=userService.findByUserID(userID);
         user.setUserID(userID);
@@ -72,7 +72,7 @@ public class AdminUserController {
     }
 
     @PostMapping("/addUser.do")
-    public void addUSer(String userID,String userName, String password, String email, String phone,
+    public void addUser(String userID,String userName, String password, String email, String phone,
                         HttpServletRequest request, HttpServletResponse response) throws IOException{
         User user=new User();
         user.setUserID(userID);
@@ -85,20 +85,9 @@ public class AdminUserController {
         response.sendRedirect("user_manage");
     }
 
-    @PostMapping("/editUser.do")
-    public void editUser(String userID, String userName, String password, String email, String phone,
-                         HttpServletRequest request, HttpServletResponse response) throws Exception {
-        User user=userService.findByUserID(userID);
-        user.setUserName(userName);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setPhone(phone);
-        userService.updateUser(user);
-    }
-
     @PostMapping("/checkUserID.do")
     @ResponseBody
-    public boolean checkUSerID(String userID){
+    public boolean checkUserID(String userID){
         int count=userService.countUserID(userID);
         return count < 1;
     }

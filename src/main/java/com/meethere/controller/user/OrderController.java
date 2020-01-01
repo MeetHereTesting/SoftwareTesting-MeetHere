@@ -8,7 +8,7 @@ import com.meethere.entity.vo.VenueOrder;
 import com.meethere.service.OrderService;
 import com.meethere.service.OrderVoService;
 import com.meethere.service.VenueService;
-import com.meethere.service.exception.LoginException;
+import com.meethere.exception.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -61,7 +61,7 @@ public class OrderController {
 
     @GetMapping("/getOrderList.do")
     @ResponseBody
-    public List<OrderVo> news_list(@RequestParam(value = "page",defaultValue = "1")int page, HttpServletRequest request){
+    public List<OrderVo> order_list(@RequestParam(value = "page",defaultValue = "1")int page, HttpServletRequest request){
         Pageable order_pageable = PageRequest.of(page-1,5, Sort.by("orderTime").descending());
         Object user=request.getSession().getAttribute("user");
         if(user==null)
@@ -91,7 +91,7 @@ public class OrderController {
     }
 
     @GetMapping("/modifyOrder.do")
-    public String modifyOrder(Model model,int orderID){
+    public String editOrder(Model model,int orderID){
         Order order=orderService.findById(orderID);
         Venue venue=venueService.findByVenueID(order.getVenueID());
         model.addAttribute("venue",venue);
@@ -123,7 +123,7 @@ public class OrderController {
 
     @GetMapping("/order/getOrderList.do")
     @ResponseBody
-    public VenueOrder modifyOrder(String venueName,String date){
+    public VenueOrder getOrder(String venueName,String date){
         Venue venue=venueService.findByVenueName(venueName);
         VenueOrder venueOrder=new VenueOrder();
         date=date+" 00:00:00";

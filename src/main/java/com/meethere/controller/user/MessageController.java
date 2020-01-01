@@ -1,12 +1,11 @@
 package com.meethere.controller.user;
 
 import com.meethere.entity.Message;
-import com.meethere.entity.News;
 import com.meethere.entity.User;
 import com.meethere.entity.vo.MessageVo;
 import com.meethere.service.MessageService;
 import com.meethere.service.MessageVoService;
-import com.meethere.service.exception.LoginException;
+import com.meethere.exception.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +29,7 @@ public class MessageController {
     private MessageVoService messageVoService;
 
     @GetMapping("/message_list")
-    public String message_list(Model model,HttpServletRequest request){
+    public String message_list(Model model,HttpServletRequest request)throws Exception{
         Pageable message_pageable= PageRequest.of(0,5, Sort.by("time").descending());
         Page<Message> messages=messageService.findPassState(message_pageable);
         List<MessageVo> message_list=messageVoService.returnVo(messages.getContent());

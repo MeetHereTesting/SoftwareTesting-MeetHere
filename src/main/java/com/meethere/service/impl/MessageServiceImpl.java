@@ -2,21 +2,11 @@ package com.meethere.service.impl;
 
 import com.meethere.dao.MessageDao;
 import com.meethere.entity.Message;
-import com.meethere.entity.User;
 import com.meethere.service.MessageService;
-import com.meethere.service.exception.LoginException;
-import com.mysql.cj.protocol.x.XMessage;
-import org.aspectj.bridge.IMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 @Service
 public class MessageServiceImpl implements MessageService {

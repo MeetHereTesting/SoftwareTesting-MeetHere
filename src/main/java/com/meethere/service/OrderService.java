@@ -26,12 +26,6 @@ public interface OrderService {
      */
     Order findById(int OrderID);
 
-    /**
-     * 分页查看所有订单
-     * @param pageable
-     * @return
-     */
-    Page<Order> findAll(Pageable pageable,int state);
 
     Page<Order> findNoAuditOrder(Pageable pageable);
 
@@ -41,14 +35,6 @@ public interface OrderService {
     List<Order> findDateOrder(int venueID, LocalDateTime startTime, LocalDateTime startTime2);
 
     Page<Order> findUserOrder(String userID,Pageable pageable);
-
-    /**
-     * 更新订单状态
-     *
-     * @param orderID
-     * @param state
-     */
-    void updateStates(int orderID, int state);
 
     void updateOrder(int orderID,String venueName, LocalDateTime startTime, int hours, String userID);
     /**

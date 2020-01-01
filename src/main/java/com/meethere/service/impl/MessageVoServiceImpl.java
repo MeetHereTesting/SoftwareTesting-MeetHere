@@ -6,12 +6,9 @@ import com.meethere.entity.Message;
 import com.meethere.entity.User;
 import com.meethere.entity.vo.MessageVo;
 import com.meethere.service.MessageVoService;
-import com.meethere.service.exception.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Pageable;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
