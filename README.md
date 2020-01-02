@@ -3,7 +3,7 @@
 # 代码
 前端代码在SoftwareTesting-MeetHere/src/main/resources/templates中  <br>
 后端代码在SoftwareTesting-MeetHere/src/main/java/come/meethere中   <br>
-运行入口：TimelineApplication.java
+运行入口：MeetHereApplication.java
 # 测试
 所有的测试代码都在SoftwareTesting-MeetHere/src/test/java/come/meethere中     <br><br>
 controller单元测试代码在SoftwareTesting-MeetHere/src/test/java/come/meethere/controller中  <br>
