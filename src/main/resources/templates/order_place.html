@@ -293,6 +293,9 @@
             }
             console.log(selectedList);
             if(selectedList.length > 0){
+                if($(selectedList[0]).html().length==4)
+                    $("#startTime").attr('value', date+' 0'+$(selectedList[0]).html());
+                else
                 $("#startTime").attr('value', date+' '+$(selectedList[0]).html());
                 $("#hours").attr('value', selectedList.length);
             }
