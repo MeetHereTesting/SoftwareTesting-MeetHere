@@ -59,9 +59,9 @@ public class AdminUserController {
     }
 
     @PostMapping("/modifyUser.do")
-    public void modifyUser(String userID,String userName, String password, String email, String phone,
+    public void modifyUser(String userID,String oldUserID,String userName, String password, String email, String phone,
                         HttpServletRequest request, HttpServletResponse response) throws IOException{
-        User user=userService.findByUserID(userID);
+        User user=userService.findByUserID(oldUserID);
         user.setUserID(userID);
         user.setUserName(userName);
         user.setPassword(password);
