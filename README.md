@@ -1,6 +1,7 @@
 # SoftwareTesting-MeetHere
 软件测试学期项目MeetHere场馆预约电子商务网站<br>
 项目运行入口：SoftwareTesting-MeetHere/src/main/java/come/meethereMeetHereApplication.java<br>
+MySQL数据库创建脚本：meethere_db.sql<br>
 # 代码说明
 前端代码在SoftwareTesting-MeetHere/src/main/resources/templates中<br>
 后端代码在SoftwareTesting-MeetHere/src/main/java/come/meethere中<br>
@@ -14,7 +15,7 @@ service单元测试代码在SoftwareTesting-MeetHere/src/test/java/come/meethere
 所有报告及展示PPT和系统Demo演示视频都在根目录下
 ### 文档清单：
 《MeetHere Demo》<br>
-《展示PPT》<br>
+《MeetHere展示PPT》<br>
 《覆盖度报告》<br>
 《静态分析报告》<br>
 《系统测试计划》<br>
@@ -28,4 +29,3 @@ service单元测试代码在SoftwareTesting-MeetHere/src/test/java/come/meethere
 ### 分工：
 后端开发、单元测试、接口测试：郭晓康<br>
 前端开发、代码静态分析、系统测试、性能测试：徐赞博<br>
-
